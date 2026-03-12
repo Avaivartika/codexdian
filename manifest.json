@@ -1,0 +1,10 @@
+{
+  "id": "codexdian",
+  "name": "Codexdian",
+  "version": "1.3.65",
+  "minAppVersion": "1.4.5",
+  "description": "Embeds Codex CLI as an AI collaborator in your vault. Your vault becomes Codex's working directory, enabling file read/write, search, bash commands, and multi-step workflows.",
+  "author": "Yishen Tu",
+  "authorUrl": "https://github.com/YishenTu",
+  "isDesktopOnly": true
+}

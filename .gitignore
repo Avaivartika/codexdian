@@ -1,0 +1,6 @@
+data.json
+.env
+.env.*
+*.log
+.DS_Store
+*.zip
