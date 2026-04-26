@@ -35,7 +35,8 @@
 }
 
 .codexdian-toolbar-hint--thinking {
-  top: calc(100% + 8px);
+  top: auto;
+  bottom: calc(100% + 8px);
   left: 0;
 }
 
@@ -45,7 +46,12 @@
 }
 
 .codexdian-service-tier-selector:hover > .codexdian-toolbar-hint,
-.codexdian-verbosity-selector:hover > .codexdian-toolbar-hint {
+.codexdian-verbosity-selector:hover > .codexdian-toolbar-hint,
+.codexdian-running-indicator:hover > .codexdian-toolbar-hint,
+.codexdian-permission-toggle:hover > .codexdian-toolbar-hint,
+.codexdian-external-context-selector:hover > .codexdian-toolbar-hint,
+.codexdian-mcp-selector:hover > .codexdian-toolbar-hint,
+.codexdian-context-meter:hover > .codexdian-toolbar-hint {
   opacity: 1;
   transform: translateY(0) scale(1);
 }

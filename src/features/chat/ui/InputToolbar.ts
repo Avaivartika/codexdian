@@ -420,6 +420,12 @@ export class RunningIndicator {
     this.container.createSpan({ cls: 'codexdian-running-dot' });
     this.container.createSpan({ cls: 'codexdian-running-label', text: 'Running' });
     this.container.setAttribute('title', 'Codex is currently running');
+    createToolbarHoverHint(
+      this.container,
+      'Status',
+      'Shows when Codex is still working on your request',
+      'codexdian-toolbar-hint--running',
+    );
     this.update(false);
   }
 
@@ -455,6 +461,12 @@ export class PermissionToggle {
 
     this.labelEl = this.container.createSpan({ cls: 'codexdian-permission-label' });
     this.toggleEl = this.container.createDiv({ cls: 'codexdian-toggle-switch' });
+    createToolbarHoverHint(
+      this.container,
+      'Permissions',
+      'Safe asks before risky actions; YOLO allows edits and commands; Plan avoids edits',
+      'codexdian-toolbar-hint--permission',
+    );
 
     this.updateDisplay();
 
@@ -698,6 +710,12 @@ export class ExternalContextSelector {
 
     this.dropdownEl = this.container.createDiv({ cls: 'codexdian-external-context-dropdown' });
     this.renderDropdown();
+    createToolbarHoverHint(
+      this.container,
+      'Folders',
+      'Add extra folders to the current Codex session',
+      'codexdian-toolbar-hint--external-context',
+    );
   }
 
   private async openFolderPicker() {
@@ -933,6 +951,12 @@ export class McpServerSelector {
 
     this.dropdownEl = this.container.createDiv({ cls: 'codexdian-mcp-selector-dropdown' });
     this.renderDropdown();
+    createToolbarHoverHint(
+      this.container,
+      'MCP',
+      'Enable MCP servers for this chat',
+      'codexdian-toolbar-hint--mcp',
+    );
 
     // Re-render dropdown content on hover (CSS handles visibility)
     this.container.addEventListener('mouseenter', () => {
@@ -1067,6 +1091,12 @@ export class ContextUsageMeter {
   constructor(parentEl: HTMLElement) {
     this.container = parentEl.createDiv({ cls: 'codexdian-context-meter' });
     this.render();
+    createToolbarHoverHint(
+      this.container,
+      'Context',
+      'Current context-window usage for this chat',
+      'codexdian-toolbar-hint--context',
+    );
     // Initially hidden
     this.container.style.display = 'none';
   }
@@ -1208,27 +1238,28 @@ class ToolbarOverflowMenu {
   }
 
   update(): void {
-    const availableWidth = this.parentEl.clientWidth;
-    if (!availableWidth) {
+    if (!this.parentEl.clientWidth) {
       this.container.style.display = 'none';
       return;
     }
 
     this.restoreItems();
-    const candidates = this.items.filter(item => item.canOverflow !== false && this.isRenderable(item.element));
-    const overflowWidth = this.measureElement(this.container) || 34;
-    let usedWidth = this.items
-      .filter(item => this.isRenderable(item.element))
-      .reduce((sum, item) => sum + this.measureElement(item.element), 0);
-
     this.container.style.display = 'none';
     this.hiddenIds.clear();
 
+    if (!this.isToolbarOverflowing()) {
+      this.dropdownEl.empty();
+      this.container.removeClass('open');
+      return;
+    }
+
+    const candidates = this.items.filter(item => item.canOverflow !== false && this.isRenderable(item.element));
+    this.container.style.display = 'flex';
+
     for (const item of [...candidates].reverse()) {
-      if (usedWidth <= availableWidth) break;
+      if (!this.isToolbarOverflowing()) break;
       this.hiddenIds.add(item.id);
-      usedWidth -= this.measureElement(item.element);
-      usedWidth += this.hiddenIds.size === 1 ? overflowWidth : 0;
+      this.renderDropdown();
     }
 
     if (this.hiddenIds.size === 0) {
@@ -1238,7 +1269,6 @@ class ToolbarOverflowMenu {
       return;
     }
 
-    this.container.style.display = 'flex';
     this.renderDropdown();
   }
 
@@ -1267,26 +1297,8 @@ class ToolbarOverflowMenu {
     return element.style.display !== 'none';
   }
 
-  private measureElement(element: HTMLElement): number {
-    const rectWidth = element.getBoundingClientRect?.().width ?? 0;
-    const baseWidth = element.offsetWidth || rectWidth || this.estimateWidth(element);
-    const style = typeof window !== 'undefined' ? window.getComputedStyle?.(element) : null;
-    const marginLeft = style ? parseFloat(style.marginLeft || '0') || 0 : 0;
-    const marginRight = style ? parseFloat(style.marginRight || '0') || 0 : 0;
-    return baseWidth + marginLeft + marginRight;
-  }
-
-  private estimateWidth(element: HTMLElement): number {
-    if (element.hasClass('codexdian-model-selector')) return 142;
-    if (element.hasClass('codexdian-thinking-selector')) return 76;
-    if (element.hasClass('codexdian-service-tier-selector')) return 66;
-    if (element.hasClass('codexdian-verbosity-selector')) return 76;
-    if (element.hasClass('codexdian-context-meter')) return 62;
-    if (element.hasClass('codexdian-external-context-selector')) return 36;
-    if (element.hasClass('codexdian-mcp-selector')) return 36;
-    if (element.hasClass('codexdian-permission-toggle')) return 78;
-    if (element.hasClass('codexdian-running-indicator')) return 82;
-    return 48;
+  private isToolbarOverflowing(): boolean {
+    return this.parentEl.scrollWidth > this.parentEl.clientWidth + 1;
   }
 }
 

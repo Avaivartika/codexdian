@@ -55875,6 +55875,12 @@ var RunningIndicator = class {
     this.container.createSpan({ cls: "codexdian-running-dot" });
     this.container.createSpan({ cls: "codexdian-running-label", text: "Running" });
     this.container.setAttribute("title", "Codex is currently running");
+    createToolbarHoverHint(
+      this.container,
+      "Status",
+      "Shows when Codex is still working on your request",
+      "codexdian-toolbar-hint--running"
+    );
     this.update(false);
   }
   getElement() {
@@ -55901,6 +55907,12 @@ var PermissionToggle = class {
     this.container.setAttribute("title", "Permission mode: Safe asks before risky actions; YOLO allows edits and commands without prompts; PLAN avoids edits.");
     this.labelEl = this.container.createSpan({ cls: "codexdian-permission-label" });
     this.toggleEl = this.container.createDiv({ cls: "codexdian-toggle-switch" });
+    createToolbarHoverHint(
+      this.container,
+      "Permissions",
+      "Safe asks before risky actions; YOLO allows edits and commands; Plan avoids edits",
+      "codexdian-toolbar-hint--permission"
+    );
     this.updateDisplay();
     this.toggleEl.addEventListener("click", () => this.toggle());
   }
@@ -56090,6 +56102,12 @@ var ExternalContextSelector = class {
     });
     this.dropdownEl = this.container.createDiv({ cls: "codexdian-external-context-dropdown" });
     this.renderDropdown();
+    createToolbarHoverHint(
+      this.container,
+      "Folders",
+      "Add extra folders to the current Codex session",
+      "codexdian-toolbar-hint--external-context"
+    );
   }
   async openFolderPicker() {
     var _a3;
@@ -56273,6 +56291,12 @@ var McpServerSelector = class {
     this.updateDisplay();
     this.dropdownEl = this.container.createDiv({ cls: "codexdian-mcp-selector-dropdown" });
     this.renderDropdown();
+    createToolbarHoverHint(
+      this.container,
+      "MCP",
+      "Enable MCP servers for this chat",
+      "codexdian-toolbar-hint--mcp"
+    );
     this.container.addEventListener("mouseenter", () => {
       this.renderDropdown();
     });
@@ -56374,6 +56398,12 @@ var ContextUsageMeter = class {
     this.circumference = 0;
     this.container = parentEl.createDiv({ cls: "codexdian-context-meter" });
     this.render();
+    createToolbarHoverHint(
+      this.container,
+      "Context",
+      "Current context-window usage for this chat",
+      "codexdian-toolbar-hint--context"
+    );
     this.container.style.display = "none";
   }
   getElement() {
@@ -56477,22 +56507,24 @@ var ToolbarOverflowMenu = class {
     });
   }
   update() {
-    const availableWidth = this.parentEl.clientWidth;
-    if (!availableWidth) {
+    if (!this.parentEl.clientWidth) {
       this.container.style.display = "none";
       return;
     }
     this.restoreItems();
-    const candidates = this.items.filter((item) => item.canOverflow !== false && this.isRenderable(item.element));
-    const overflowWidth = this.measureElement(this.container) || 34;
-    let usedWidth = this.items.filter((item) => this.isRenderable(item.element)).reduce((sum, item) => sum + this.measureElement(item.element), 0);
     this.container.style.display = "none";
     this.hiddenIds.clear();
+    if (!this.isToolbarOverflowing()) {
+      this.dropdownEl.empty();
+      this.container.removeClass("open");
+      return;
+    }
+    const candidates = this.items.filter((item) => item.canOverflow !== false && this.isRenderable(item.element));
+    this.container.style.display = "flex";
     for (const item of [...candidates].reverse()) {
-      if (usedWidth <= availableWidth) break;
+      if (!this.isToolbarOverflowing()) break;
       this.hiddenIds.add(item.id);
-      usedWidth -= this.measureElement(item.element);
-      usedWidth += this.hiddenIds.size === 1 ? overflowWidth : 0;
+      this.renderDropdown();
     }
     if (this.hiddenIds.size === 0) {
       this.dropdownEl.empty();
@@ -56500,7 +56532,6 @@ var ToolbarOverflowMenu = class {
       this.container.style.display = "none";
       return;
     }
-    this.container.style.display = "flex";
     this.renderDropdown();
   }
   restoreItems() {
@@ -56524,26 +56555,8 @@ var ToolbarOverflowMenu = class {
   isRenderable(element) {
     return element.style.display !== "none";
   }
-  measureElement(element) {
-    var _a3, _b, _c;
-    const rectWidth = (_b = (_a3 = element.getBoundingClientRect) == null ? void 0 : _a3.call(element).width) != null ? _b : 0;
-    const baseWidth = element.offsetWidth || rectWidth || this.estimateWidth(element);
-    const style = typeof window !== "undefined" ? (_c = window.getComputedStyle) == null ? void 0 : _c.call(window, element) : null;
-    const marginLeft = style ? parseFloat(style.marginLeft || "0") || 0 : 0;
-    const marginRight = style ? parseFloat(style.marginRight || "0") || 0 : 0;
-    return baseWidth + marginLeft + marginRight;
-  }
-  estimateWidth(element) {
-    if (element.hasClass("codexdian-model-selector")) return 142;
-    if (element.hasClass("codexdian-thinking-selector")) return 76;
-    if (element.hasClass("codexdian-service-tier-selector")) return 66;
-    if (element.hasClass("codexdian-verbosity-selector")) return 76;
-    if (element.hasClass("codexdian-context-meter")) return 62;
-    if (element.hasClass("codexdian-external-context-selector")) return 36;
-    if (element.hasClass("codexdian-mcp-selector")) return 36;
-    if (element.hasClass("codexdian-permission-toggle")) return 78;
-    if (element.hasClass("codexdian-running-indicator")) return 82;
-    return 48;
+  isToolbarOverflowing() {
+    return this.parentEl.scrollWidth > this.parentEl.clientWidth + 1;
   }
 };
 function createInputToolbar(parentEl, callbacks) {

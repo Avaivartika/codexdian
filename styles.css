@@ -2207,7 +2207,8 @@ body.theme-light .codexdian-message-content pre {
 
 .codexdian-toolbar-hint {
   position: absolute;
-  top: calc(100% + 8px);
+  top: auto;
+  bottom: calc(100% + 8px);
   left: 0;
   display: flex;
   flex-direction: column;
@@ -2228,8 +2229,8 @@ body.theme-light .codexdian-message-content pre {
   pointer-events: none;
   z-index: 1002;
   opacity: 0;
-  transform: translateY(-2px) scale(0.98);
-  transform-origin: top left;
+  transform: translateY(2px) scale(0.98);
+  transform-origin: bottom left;
   transition: opacity 0.14s ease, transform 0.14s ease;
 }
 
@@ -2347,7 +2348,8 @@ body.theme-light .codexdian-message-content pre {
 }
 
 .codexdian-toolbar-hint--thinking {
-  top: calc(100% + 8px);
+  top: auto;
+  bottom: calc(100% + 8px);
   left: 0;
 }
 
@@ -2357,7 +2359,12 @@ body.theme-light .codexdian-message-content pre {
 }
 
 .codexdian-service-tier-selector:hover > .codexdian-toolbar-hint,
-.codexdian-verbosity-selector:hover > .codexdian-toolbar-hint {
+.codexdian-verbosity-selector:hover > .codexdian-toolbar-hint,
+.codexdian-running-indicator:hover > .codexdian-toolbar-hint,
+.codexdian-permission-toggle:hover > .codexdian-toolbar-hint,
+.codexdian-external-context-selector:hover > .codexdian-toolbar-hint,
+.codexdian-mcp-selector:hover > .codexdian-toolbar-hint,
+.codexdian-context-meter:hover > .codexdian-toolbar-hint {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
