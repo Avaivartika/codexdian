@@ -7,8 +7,10 @@ import type {
   CodexModel,
   EffortLevel,
   PermissionMode,
+  ServiceTierMode,
   ThinkingBudget,
-  UsageInfo
+  UsageInfo,
+  VerbosityLevel
 } from '../../../core/types';
 import {
   DEFAULT_CODEX_MODELS,
@@ -26,6 +28,8 @@ export interface ToolbarSettings {
   model: CodexModel;
   thinkingBudget: ThinkingBudget;
   effortLevel: EffortLevel;
+  serviceTier: ServiceTierMode;
+  verbosity: VerbosityLevel;
   permissionMode: PermissionMode;
   enableGPT54HighContext: boolean;
   enableGPT53CodexHighContext: boolean;
@@ -35,6 +39,8 @@ export interface ToolbarCallbacks {
   onModelChange: (model: CodexModel) => Promise<void>;
   onThinkingBudgetChange: (budget: ThinkingBudget) => Promise<void>;
   onEffortLevelChange: (effort: EffortLevel) => Promise<void>;
+  onServiceTierChange?: (tier: ServiceTierMode) => Promise<void>;
+  onVerbosityChange?: (verbosity: VerbosityLevel) => Promise<void>;
   onPermissionModeChange: (mode: PermissionMode) => Promise<void>;
   getSettings: () => ToolbarSettings;
   getEnvironmentVariables?: () => string;
@@ -260,6 +266,147 @@ export class ThinkingBudgetSelector {
     } else {
       this.renderBudgetGears();
     }
+  }
+}
+
+const SERVICE_TIER_OPTIONS: { value: ServiceTierMode; label: string; title: string }[] = [
+  { value: 'auto', label: 'Auto', title: 'Use Codex default service tier' },
+  { value: 'fast', label: 'Fast', title: 'Prefer lower-latency Codex responses' },
+  { value: 'flex', label: 'Flex', title: 'Use flexible service tier when available' },
+];
+
+const VERBOSITY_OPTIONS: { value: VerbosityLevel; label: string; title: string }[] = [
+  { value: 'low', label: 'Low', title: 'Shorter responses' },
+  { value: 'medium', label: 'Med', title: 'Balanced response detail' },
+  { value: 'high', label: 'High', title: 'More detailed responses' },
+];
+
+export class ServiceTierSelector {
+  private container: HTMLElement;
+  private controlEl: HTMLElement | null = null;
+  private currentEl: HTMLElement | null = null;
+  private optionsEl: HTMLElement | null = null;
+  private callbacks: ToolbarCallbacks;
+
+  constructor(parentEl: HTMLElement, callbacks: ToolbarCallbacks) {
+    this.callbacks = callbacks;
+    this.container = parentEl.createDiv({ cls: 'codexdian-service-tier-selector' });
+    this.render();
+  }
+
+  private render(): void {
+    this.container.empty();
+    this.controlEl = this.container.createDiv({ cls: 'codexdian-service-tier-control' });
+    this.currentEl = this.controlEl.createDiv({ cls: 'codexdian-service-tier-current' });
+    this.optionsEl = this.controlEl.createDiv({ cls: 'codexdian-service-tier-options' });
+    createToolbarHoverHint(
+      this.container,
+      'Mode',
+      'Choose Codex service tier',
+      'codexdian-toolbar-hint--service-tier',
+    );
+    this.updateDisplay();
+  }
+
+  updateDisplay(): void {
+    const current = this.callbacks.getSettings().serviceTier ?? 'auto';
+    const currentOption = SERVICE_TIER_OPTIONS.find(option => option.value === current) ?? SERVICE_TIER_OPTIONS[0];
+    this.container.toggleClass('codexdian-service-tier-fast', current === 'fast');
+    this.container.toggleClass('codexdian-service-tier-flex', current === 'flex');
+    this.currentEl?.setText(currentOption.label);
+    this.currentEl?.setAttribute('title', currentOption.title);
+    this.renderOptions();
+  }
+
+  private renderOptions(): void {
+    if (!this.optionsEl) return;
+    this.optionsEl.empty();
+    const current = this.callbacks.getSettings().serviceTier ?? 'auto';
+    for (const option of SERVICE_TIER_OPTIONS) {
+      const optionEl = this.optionsEl.createDiv({ cls: 'codexdian-service-tier-option' });
+      optionEl.setText(option.label);
+      optionEl.setAttribute('title', option.title);
+      if (option.value === current) {
+        optionEl.addClass('selected');
+      }
+      optionEl.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        await this.callbacks.onServiceTierChange?.(option.value);
+        this.updateDisplay();
+      });
+    }
+  }
+}
+
+export class VerbositySelector {
+  private container: HTMLElement;
+  private controlEl: HTMLElement | null = null;
+  private currentEl: HTMLElement | null = null;
+  private optionsEl: HTMLElement | null = null;
+  private callbacks: ToolbarCallbacks;
+
+  constructor(parentEl: HTMLElement, callbacks: ToolbarCallbacks) {
+    this.callbacks = callbacks;
+    this.container = parentEl.createDiv({ cls: 'codexdian-verbosity-selector' });
+    this.render();
+  }
+
+  private render(): void {
+    this.container.empty();
+    this.controlEl = this.container.createDiv({ cls: 'codexdian-verbosity-control' });
+    this.currentEl = this.controlEl.createDiv({ cls: 'codexdian-verbosity-current' });
+    this.optionsEl = this.controlEl.createDiv({ cls: 'codexdian-verbosity-options' });
+    createToolbarHoverHint(
+      this.container,
+      'Verbosity',
+      'Control response detail',
+      'codexdian-toolbar-hint--verbosity',
+    );
+    this.updateDisplay();
+  }
+
+  updateDisplay(): void {
+    const current = this.callbacks.getSettings().verbosity ?? 'medium';
+    const currentOption = VERBOSITY_OPTIONS.find(option => option.value === current) ?? VERBOSITY_OPTIONS[1];
+    this.currentEl?.setText(currentOption.label);
+    this.currentEl?.setAttribute('title', currentOption.title);
+    this.renderOptions();
+  }
+
+  private renderOptions(): void {
+    if (!this.optionsEl) return;
+    this.optionsEl.empty();
+    const current = this.callbacks.getSettings().verbosity ?? 'medium';
+    for (const option of VERBOSITY_OPTIONS) {
+      const optionEl = this.optionsEl.createDiv({ cls: 'codexdian-verbosity-option' });
+      optionEl.setText(option.label);
+      optionEl.setAttribute('title', option.title);
+      if (option.value === current) {
+        optionEl.addClass('selected');
+      }
+      optionEl.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        await this.callbacks.onVerbosityChange?.(option.value);
+        this.updateDisplay();
+      });
+    }
+  }
+}
+
+export class RunningIndicator {
+  private container: HTMLElement;
+
+  constructor(parentEl: HTMLElement) {
+    this.container = parentEl.createDiv({ cls: 'codexdian-running-indicator' });
+    this.container.createSpan({ cls: 'codexdian-running-dot' });
+    this.container.createSpan({ cls: 'codexdian-running-label', text: 'Running' });
+    this.container.setAttribute('title', 'Codex is currently running');
+    this.update(false);
+  }
+
+  update(isRunning: boolean): void {
+    this.container.toggleClass('active', isRunning);
+    this.container.setAttribute('aria-hidden', isRunning ? 'false' : 'true');
   }
 }
 
@@ -970,6 +1117,9 @@ export function createInputToolbar(
 ): {
   modelSelector: ModelSelector;
   thinkingBudgetSelector: ThinkingBudgetSelector;
+  serviceTierSelector: ServiceTierSelector;
+  verbositySelector: VerbositySelector;
+  runningIndicator: RunningIndicator;
   contextUsageMeter: ContextUsageMeter | null;
   externalContextSelector: ExternalContextSelector;
   mcpServerSelector: McpServerSelector;
@@ -977,10 +1127,23 @@ export function createInputToolbar(
 } {
   const modelSelector = new ModelSelector(parentEl, callbacks);
   const thinkingBudgetSelector = new ThinkingBudgetSelector(parentEl, callbacks);
+  const serviceTierSelector = new ServiceTierSelector(parentEl, callbacks);
+  const verbositySelector = new VerbositySelector(parentEl, callbacks);
+  const runningIndicator = new RunningIndicator(parentEl);
   const contextUsageMeter = new ContextUsageMeter(parentEl);
   const externalContextSelector = new ExternalContextSelector(parentEl, callbacks);
   const mcpServerSelector = new McpServerSelector(parentEl);
   const permissionToggle = new PermissionToggle(parentEl, callbacks);
 
-  return { modelSelector, thinkingBudgetSelector, contextUsageMeter, externalContextSelector, mcpServerSelector, permissionToggle };
+  return {
+    modelSelector,
+    thinkingBudgetSelector,
+    serviceTierSelector,
+    verbositySelector,
+    runningIndicator,
+    contextUsageMeter,
+    externalContextSelector,
+    mcpServerSelector,
+    permissionToggle,
+  };
 }

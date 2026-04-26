@@ -571,36 +571,32 @@ export class CodexdianSettingTab extends PluginSettingTab {
     new Setting(containerEl).setName(t('settings.advanced')).setHeading();
 
     new Setting(containerEl)
-      .setName(t('settings.enableGPT54HighContext.name'))
-      .setDesc(t('settings.enableGPT54HighContext.desc'))
-      .addToggle((toggle) =>
-        toggle
-          .setValue(this.plugin.settings.enableGPT54HighContext ?? false)
+      .setName('Codex service tier')
+      .setDesc('Auto uses Codex defaults. Fast prefers lower latency; Flex uses the flexible service tier when available.')
+      .addDropdown((dropdown) =>
+        dropdown
+          .addOption('auto', 'Auto')
+          .addOption('fast', 'Fast')
+          .addOption('flex', 'Flex')
+          .setValue(this.plugin.settings.serviceTier ?? 'auto')
           .onChange(async (value) => {
-            this.plugin.settings.enableGPT54HighContext = value;
-            this.normalizeModelVariantSettings();
+            this.plugin.settings.serviceTier = value as typeof this.plugin.settings.serviceTier;
             await this.plugin.saveSettings();
-            for (const view of this.plugin.getAllViews()) {
-              view.refreshModelSelector();
-            }
-            this.display();
           })
       );
 
     new Setting(containerEl)
-      .setName(t('settings.enableGPT53CodexHighContext.name'))
-      .setDesc(t('settings.enableGPT53CodexHighContext.desc'))
-      .addToggle((toggle) =>
-        toggle
-          .setValue(this.plugin.settings.enableGPT53CodexHighContext ?? false)
+      .setName('Output verbosity')
+      .setDesc('Controls GPT-5 response detail when supported by the selected Codex model.')
+      .addDropdown((dropdown) =>
+        dropdown
+          .addOption('low', 'Low')
+          .addOption('medium', 'Medium')
+          .addOption('high', 'High')
+          .setValue(this.plugin.settings.verbosity ?? 'medium')
           .onChange(async (value) => {
-            this.plugin.settings.enableGPT53CodexHighContext = value;
-            this.normalizeModelVariantSettings();
+            this.plugin.settings.verbosity = value as typeof this.plugin.settings.verbosity;
             await this.plugin.saveSettings();
-            for (const view of this.plugin.getAllViews()) {
-              view.refreshModelSelector();
-            }
-            this.display();
           })
       );
 

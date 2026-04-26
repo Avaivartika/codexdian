@@ -118,6 +118,9 @@ export function createTab(options: TabCreateOptions): TabData {
       imageContextManager: null,
       modelSelector: null,
       thinkingBudgetSelector: null,
+      serviceTierSelector: null,
+      verbositySelector: null,
+      runningIndicator: null,
       externalContextSelector: null,
       mcpServerSelector: null,
       permissionToggle: null,
@@ -430,6 +433,8 @@ function initializeInputToolbar(tab: TabData, plugin: CodexdianPlugin): void {
       model: plugin.settings.model,
       thinkingBudget: plugin.settings.thinkingBudget,
       effortLevel: plugin.settings.effortLevel,
+      serviceTier: plugin.settings.serviceTier,
+      verbosity: plugin.settings.verbosity,
       permissionMode: plugin.settings.permissionMode,
       enableGPT54HighContext: plugin.settings.enableGPT54HighContext,
       enableGPT53CodexHighContext: plugin.settings.enableGPT53CodexHighContext,
@@ -473,6 +478,14 @@ function initializeInputToolbar(tab: TabData, plugin: CodexdianPlugin): void {
       plugin.settings.effortLevel = effort;
       await plugin.saveSettings();
     },
+    onServiceTierChange: async (tier) => {
+      plugin.settings.serviceTier = tier;
+      await plugin.saveSettings();
+    },
+    onVerbosityChange: async (verbosity) => {
+      plugin.settings.verbosity = verbosity;
+      await plugin.saveSettings();
+    },
     onPermissionModeChange: async (mode) => {
       plugin.settings.permissionMode = mode;
       await plugin.saveSettings();
@@ -482,6 +495,9 @@ function initializeInputToolbar(tab: TabData, plugin: CodexdianPlugin): void {
 
   tab.ui.modelSelector = toolbarComponents.modelSelector;
   tab.ui.thinkingBudgetSelector = toolbarComponents.thinkingBudgetSelector;
+  tab.ui.serviceTierSelector = toolbarComponents.serviceTierSelector;
+  tab.ui.verbositySelector = toolbarComponents.verbositySelector;
+  tab.ui.runningIndicator = toolbarComponents.runningIndicator;
   tab.ui.contextUsageMeter = toolbarComponents.contextUsageMeter;
   tab.ui.externalContextSelector = toolbarComponents.externalContextSelector;
   tab.ui.mcpServerSelector = toolbarComponents.mcpServerSelector;
@@ -565,8 +581,13 @@ export function initializeTabUI(
   initializeInputToolbar(tab, plugin);
 
   // Update ChatState callbacks for UI updates
+  const previousStreamingStateChanged = state.callbacks.onStreamingStateChanged;
   state.callbacks = {
     ...state.callbacks,
+    onStreamingStateChanged: (isStreaming) => {
+      tab.ui.runningIndicator?.update(isStreaming);
+      previousStreamingStateChanged?.(isStreaming);
+    },
     onUsageChanged: (usage) => tab.ui.contextUsageMeter?.update(usage),
     onTodosChanged: (todos) => tab.ui.statusPanel?.updateTodos(todos),
     onAutoScrollChanged: () => tab.ui.navigationSidebar?.updateVisibility(),

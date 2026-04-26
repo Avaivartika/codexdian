@@ -194,9 +194,7 @@ export async function runCodexTextQuery(options: CodexTextQueryOptions): Promise
         threadId = threadResponse.thread.id;
 
         const thinkingBudget = THINKING_BUDGETS.find(entry => entry.value === options.thinkingBudget);
-        const effort = isAdaptiveThinkingModel(options.model)
-          ? (options.effortLevel === 'max' ? 'high' : options.effortLevel)
-          : null;
+        const effort = isAdaptiveThinkingModel(options.model) ? options.effortLevel : null;
 
         const turnResponse = await client.request<{ turn: { id: string } }>({
           method: 'turn/start',

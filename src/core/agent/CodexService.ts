@@ -127,8 +127,7 @@ function mapPermissionModeToApprovalPolicy(mode: PermissionMode) {
   return 'on-request' as const;
 }
 
-function mapEffortLevel(level: 'low' | 'medium' | 'high' | 'max') {
-  if (level === 'max') return 'high' as const;
+function mapEffortLevel(level: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh') {
   return level;
 }
 
@@ -384,6 +383,7 @@ export class CodexService {
 
     const commonConfig = {
       model: this.plugin.settings.model,
+      serviceTier: this.plugin.settings.serviceTier === 'auto' ? null : this.plugin.settings.serviceTier,
       cwd: vaultPath,
       approvalPolicy: mapPermissionModeToApprovalPolicy(this.plugin.settings.permissionMode),
       sandbox: this.plugin.settings.permissionMode === 'yolo' ? 'danger-full-access' : 'workspace-write',
@@ -437,9 +437,10 @@ export class CodexService {
         ephemeral: false,
         experimentalRawEvents: false,
         baseInstructions: null,
-        config: externalContextPaths.length > 0
-          ? { external_context_paths: externalContextPaths }
-          : null,
+        config: {
+          ...(externalContextPaths.length > 0 ? { external_context_paths: externalContextPaths } : {}),
+          model_verbosity: this.plugin.settings.verbosity,
+        },
       },
     });
     return response.thread;
@@ -522,6 +523,7 @@ export class CodexService {
             queryOptions?.externalContextPaths ?? this.currentExternalContextPaths
           ),
           model: selectedModel,
+          serviceTier: this.plugin.settings.serviceTier === 'auto' ? null : this.plugin.settings.serviceTier,
           effort: isAdaptiveThinkingModel(selectedModel) ? mapEffortLevel(this.plugin.settings.effortLevel) : null,
           summary: thinkingBudget && thinkingBudget.tokens > 0 ? 'auto' : null,
         },
@@ -558,6 +560,7 @@ export class CodexService {
             queryOptions?.externalContextPaths ?? this.currentExternalContextPaths
           ),
           model: selectedModel,
+          serviceTier: this.plugin.settings.serviceTier === 'auto' ? null : this.plugin.settings.serviceTier,
           effort: isAdaptiveThinkingModel(selectedModel) ? mapEffortLevel(this.plugin.settings.effortLevel) : null,
           summary: thinkingBudget && thinkingBudget.tokens > 0 ? 'auto' : null,
         },

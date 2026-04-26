@@ -101,6 +101,8 @@ export interface PersistentQueryConfig {
   model: string | null;
   thinkingTokens: number | null;
   effortLevel: EffortLevel | null;
+  serviceTier: string | null;
+  verbosity: string | null;
   permissionMode: PermissionMode | null;
   systemPromptKey: string;
   disallowedToolsKey: string;

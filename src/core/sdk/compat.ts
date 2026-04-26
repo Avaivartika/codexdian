@@ -16,7 +16,7 @@ export interface AgentDefinition {
   tools?: string[];
   disallowedTools?: string[];
   prompt: string;
-  model?: 'gpt-5.3-codex' | 'gpt-5.4' | 'gpt-5.1-codex-mini' | 'inherit';
+  model?: 'gpt-5.5' | 'gpt-5.4' | 'gpt-5.3-codex' | 'gpt-5.2' | 'gpt-5.1-codex-mini' | 'inherit';
   mcpServers?: unknown[];
   skills?: string[];
   maxTurns?: number;
@@ -91,7 +91,9 @@ export interface Options {
   resume?: string;
   maxThinkingTokens?: number;
   thinking?: { type: string; budgetTokens?: number };
-  effort?: 'low' | 'medium' | 'high' | 'max';
+  effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
+  serviceTier?: 'fast' | 'flex' | null;
+  verbosity?: 'low' | 'medium' | 'high';
   canUseTool?: CanUseTool;
   systemPrompt?: string | { content: string; cacheControl?: { type: string } };
   mcpServers?: Record<string, unknown>;
@@ -350,15 +352,20 @@ function mapPermissionModeToApprovalPolicy(permissionMode: PermissionMode | unde
   }
 }
 
-function mapEffort(effort: Options['effort']): 'low' | 'medium' | 'high' | null {
+function mapEffort(effort: Options['effort']): 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | null {
   switch (effort) {
+    case 'none':
+      return 'none';
+    case 'minimal':
+      return 'minimal';
     case 'low':
       return 'low';
     case 'medium':
       return 'medium';
     case 'high':
-    case 'max':
       return 'high';
+    case 'xhigh':
+      return 'xhigh';
     default:
       return null;
   }
@@ -378,6 +385,9 @@ function buildConfigOverrides(options: Options): Record<string, unknown> | null 
   }
   if (options.disallowedTools && options.disallowedTools.length > 0) {
     config.disallowed_tools = options.disallowedTools;
+  }
+  if (options.verbosity) {
+    config.model_verbosity = options.verbosity;
   }
 
   return Object.keys(config).length > 0 ? config : null;
@@ -670,6 +680,7 @@ export function query(input: { prompt: string | AsyncIterable<unknown>; options?
           params: {
             threadId: runtimeOptions.resume,
             model: runtimeOptions.model,
+            serviceTier: runtimeOptions.serviceTier ?? null,
             cwd,
             approvalPolicy,
             sandbox: 'workspace-write',
@@ -681,6 +692,7 @@ export function query(input: { prompt: string | AsyncIterable<unknown>; options?
           method: 'thread/start',
           params: {
             model: runtimeOptions.model,
+            serviceTier: runtimeOptions.serviceTier ?? null,
             cwd,
             approvalPolicy,
             sandbox: 'workspace-write',
@@ -714,6 +726,7 @@ export function query(input: { prompt: string | AsyncIterable<unknown>; options?
           approvalPolicy,
           sandboxPolicy,
           model: runtimeOptions.model,
+          serviceTier: runtimeOptions.serviceTier ?? null,
           effort,
           summary: runtimeOptions.maxThinkingTokens && runtimeOptions.maxThinkingTokens > 0 ? 'auto' : null,
         },

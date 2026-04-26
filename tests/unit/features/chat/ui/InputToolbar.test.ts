@@ -64,7 +64,7 @@ describe('ModelSelector', () => {
   });
 
   it('should display current model label', () => {
-    // Default model is GPT-5.4
+    // Current mocked model is GPT-5.4
     const btn = parentEl.querySelector('.codexdian-model-btn');
     expect(btn).not.toBeNull();
     const label = btn?.querySelector('.codexdian-model-label');
@@ -82,7 +82,7 @@ describe('ModelSelector', () => {
     });
     selector.updateDisplay();
     const label = parentEl.querySelector('.codexdian-model-label');
-    expect(label?.textContent).toBe('GPT-5.4');
+    expect(label?.textContent).toBe('GPT-5.5');
   });
 
   it('should render model options in reverse order', () => {
@@ -90,11 +90,12 @@ describe('ModelSelector', () => {
     expect(dropdown).not.toBeNull();
     // DEFAULT_CODEX_MODELS is reversed in the dropdown.
     const options = dropdown?.children || [];
-    expect(options.length).toBe(4);
+    expect(options.length).toBe(5);
     expect(options[0]?.children[0]?.textContent).toBe('GPT-5.1 Codex Mini');
     expect(options[1]?.children[0]?.textContent).toBe('GPT-5.2');
     expect(options[2]?.children[0]?.textContent).toBe('GPT-5.3 Codex');
     expect(options[3]?.children[0]?.textContent).toBe('GPT-5.4');
+    expect(options[4]?.children[0]?.textContent).toBe('GPT-5.5');
   });
 
   it('should mark current model as selected', () => {

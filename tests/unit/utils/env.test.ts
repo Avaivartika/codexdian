@@ -1095,15 +1095,17 @@ describe('getModelsFromEnvironment', () => {
     expect(result[0].description).toContain('gpt-5.3-codex');
   });
 
-  it('sorts by type priority (model > gpt-5.1-codex-mini > gpt-5.3-codex > gpt-5.4)', () => {
+  it('sorts by type priority (model > latest GPT defaults > older GPT defaults)', () => {
     const result = getModelsFromEnvironment({
+      CODEX_DEFAULT_GPT55_MODEL: 'gpt-5.5-v1',
       CODEX_DEFAULT_GPT54_MODEL: 'gpt-5.4-v1',
       CODEX_MODEL: 'main-model',
       CODEX_DEFAULT_GPT51_MINI_MODEL: 'gpt-5.1-codex-mini-v1',
     });
     expect(result[0].value).toBe('main-model');
-    expect(result[1].value).toBe('gpt-5.1-codex-mini-v1');
+    expect(result[1].value).toBe('gpt-5.5-v1');
     expect(result[2].value).toBe('gpt-5.4-v1');
+    expect(result[3].value).toBe('gpt-5.1-codex-mini-v1');
   });
 
   it('ignores unrelated env vars', () => {
@@ -1152,24 +1154,32 @@ describe('getCurrentModelFromEnvironment', () => {
     })).toBe('main-model');
   });
 
-  it('falls back to CODEX_DEFAULT_GPT51_MINI_MODEL', () => {
+  it('falls back to CODEX_DEFAULT_GPT55_MODEL before older GPT defaults', () => {
+    expect(getCurrentModelFromEnvironment({
+      CODEX_DEFAULT_GPT55_MODEL: 'gpt-5.5-model',
+      CODEX_DEFAULT_GPT54_MODEL: 'gpt-5.4-model',
+      CODEX_DEFAULT_GPT51_MINI_MODEL: 'gpt-5.1-codex-mini-model',
+    })).toBe('gpt-5.5-model');
+  });
+
+  it('falls back to CODEX_DEFAULT_GPT54_MODEL before older GPT defaults', () => {
     expect(getCurrentModelFromEnvironment({
       CODEX_DEFAULT_GPT51_MINI_MODEL: 'gpt-5.1-codex-mini-model',
       CODEX_DEFAULT_GPT53_CODEX_MODEL: 'gpt-5.3-codex-model',
-    })).toBe('gpt-5.1-codex-mini-model');
+      CODEX_DEFAULT_GPT54_MODEL: 'gpt-5.4-model',
+    })).toBe('gpt-5.4-model');
   });
 
-  it('falls back to CODEX_DEFAULT_GPT53_CODEX_MODEL', () => {
+  it('falls back to CODEX_DEFAULT_GPT53_CODEX_MODEL before smaller GPT defaults', () => {
     expect(getCurrentModelFromEnvironment({
       CODEX_DEFAULT_GPT53_CODEX_MODEL: 'gpt-5.3-codex-model',
-      CODEX_DEFAULT_GPT54_MODEL: 'gpt-5.4-model',
     })).toBe('gpt-5.3-codex-model');
   });
 
-  it('falls back to CODEX_DEFAULT_GPT54_MODEL', () => {
+  it('falls back to CODEX_DEFAULT_GPT51_MINI_MODEL', () => {
     expect(getCurrentModelFromEnvironment({
-      CODEX_DEFAULT_GPT54_MODEL: 'gpt-5.4-model',
-    })).toBe('gpt-5.4-model');
+      CODEX_DEFAULT_GPT51_MINI_MODEL: 'gpt-5.1-codex-mini-model',
+    })).toBe('gpt-5.1-codex-mini-model');
   });
 
   it('returns null when only unrelated vars set', () => {

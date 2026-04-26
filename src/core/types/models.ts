@@ -6,6 +6,7 @@
 export type CodexModel = string;
 
 export const DEFAULT_CODEX_MODELS: { value: CodexModel; label: string; description: string }[] = [
+  { value: 'gpt-5.5', label: 'GPT-5.5', description: 'Latest frontier model for complex coding and agentic work' },
   { value: 'gpt-5.4', label: 'GPT-5.4', description: 'Most capable general-purpose model' },
   { value: 'gpt-5.3-codex', label: 'GPT-5.3 Codex', description: 'Strong coding and agentic workflows' },
   { value: 'gpt-5.2', label: 'GPT-5.2', description: 'Balanced reasoning and reliability' },
@@ -23,17 +24,20 @@ export const THINKING_BUDGETS: { value: ThinkingBudget; label: string; tokens: n
 ];
 
 /** Effort levels for adaptive thinking models. */
-export type EffortLevel = 'low' | 'medium' | 'high' | 'max';
+export type EffortLevel = 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
 
 export const EFFORT_LEVELS: { value: EffortLevel; label: string }[] = [
+  { value: 'none', label: 'None' },
+  { value: 'minimal', label: 'Min' },
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Med' },
   { value: 'high', label: 'High' },
-  { value: 'max', label: 'Max' },
+  { value: 'xhigh', label: 'XHigh' },
 ];
 
 /** Default effort level per model tier. */
 export const DEFAULT_EFFORT_LEVEL: Record<string, EffortLevel> = {
+  'gpt-5.5': 'medium',
   'gpt-5.4': 'high',
   'gpt-5.3-codex': 'high',
   'gpt-5.2': 'high',
@@ -42,6 +46,7 @@ export const DEFAULT_EFFORT_LEVEL: Record<string, EffortLevel> = {
 
 /** Default thinking budget per model tier. */
 export const DEFAULT_THINKING_BUDGET: Record<string, ThinkingBudget> = {
+  'gpt-5.5': 'medium',
   'gpt-5.4': 'medium',
   'gpt-5.3-codex': 'medium',
   'gpt-5.2': 'low',
@@ -58,6 +63,9 @@ export function isAdaptiveThinkingModel(model: string): boolean {
 
 export const CONTEXT_WINDOW_STANDARD = 200_000;
 export const CONTEXT_WINDOW_1M = 1_000_000;
+
+export type ServiceTierMode = 'auto' | 'fast' | 'flex';
+export type VerbosityLevel = 'low' | 'medium' | 'high';
 
 export function filterVisibleModelOptions<T extends { value: string }>(
   models: T[],

@@ -24,7 +24,7 @@ export interface AgentDefinition {
   disallowedTools?: string[];
 
   /** Model override. 'inherit' (default) uses parent's model */
-  model?: 'gpt-5.4' | 'gpt-5.3-codex' | 'gpt-5.2' | 'gpt-5.1-codex-mini' | 'inherit';
+  model?: 'gpt-5.5' | 'gpt-5.4' | 'gpt-5.3-codex' | 'gpt-5.2' | 'gpt-5.1-codex-mini' | 'inherit';
 
   source: 'plugin' | 'vault' | 'global' | 'builtin';
 

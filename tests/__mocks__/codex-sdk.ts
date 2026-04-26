@@ -40,7 +40,9 @@ export interface Options {
   resume?: string;
   maxThinkingTokens?: number;
   thinking?: { type: string; budgetTokens?: number };
-  effort?: 'low' | 'medium' | 'high' | 'max';
+  effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
+  serviceTier?: 'fast' | 'flex' | null;
+  verbosity?: 'low' | 'medium' | 'high';
   canUseTool?: CanUseTool;
   systemPrompt?: string | { content: string; cacheControl?: { type: string } };
   mcpServers?: Record<string, unknown>;
@@ -58,7 +60,7 @@ export type AgentDefinition = {
   tools?: string[];
   disallowedTools?: string[];
   prompt: string;
-  model?: 'gpt-5.3-codex' | 'gpt-5.4' | 'gpt-5.1-codex-mini' | 'inherit';
+  model?: 'gpt-5.5' | 'gpt-5.4' | 'gpt-5.3-codex' | 'gpt-5.2' | 'gpt-5.1-codex-mini' | 'inherit';
   mcpServers?: unknown[];
   skills?: string[];
   maxTurns?: number;

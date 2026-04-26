@@ -65,13 +65,14 @@ export function parsePermissionMode(mode?: string): AgentPermissionMode | undefi
   return undefined;
 }
 
-const VALID_MODELS = ['gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini', 'inherit'] as const;
+const VALID_MODELS = ['gpt-5.5', 'gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini', 'inherit'] as const;
+type ValidAgentModel = typeof VALID_MODELS[number];
 
-export function parseModel(model?: string): 'gpt-5.4' | 'gpt-5.3-codex' | 'gpt-5.2' | 'gpt-5.1-codex-mini' | 'inherit' {
+export function parseModel(model?: string): ValidAgentModel {
   if (!model) return 'inherit';
   const normalized = model.toLowerCase().trim();
   if (VALID_MODELS.includes(normalized as typeof VALID_MODELS[number])) {
-    return normalized as 'gpt-5.4' | 'gpt-5.3-codex' | 'gpt-5.2' | 'gpt-5.1-codex-mini' | 'inherit';
+    return normalized as ValidAgentModel;
   }
   return 'inherit';
 }

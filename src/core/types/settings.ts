@@ -3,7 +3,7 @@
  */
 
 import type { Locale } from '../../i18n/types';
-import type { CodexModel, EffortLevel, ThinkingBudget } from './models';
+import type { CodexModel, EffortLevel, ServiceTierMode, ThinkingBudget, VerbosityLevel } from './models';
 
 const UNIX_BLOCKED_COMMANDS = [
   'rm -rf',
@@ -250,6 +250,8 @@ export interface CodexdianSettings {
   model: CodexModel;
   thinkingBudget: ThinkingBudget;  // Legacy token budget for custom models
   effortLevel: EffortLevel;  // Effort level for adaptive thinking models
+  serviceTier: ServiceTierMode;  // Optional Codex service tier override (fast/flex)
+  verbosity: VerbosityLevel;  // GPT-5 output verbosity
   enableAutoTitleGeneration: boolean;
   titleGenerationModel: string;  // Model for auto title generation (empty = auto)
   enableChrome: boolean;  // Enable Chrome extension support (passes --chrome flag)
@@ -317,9 +319,11 @@ export const DEFAULT_SETTINGS: CodexdianSettings = {
   permissionMode: 'normal',
 
   // Model & thinking
-  model: 'gpt-5.4',
+  model: 'gpt-5.5',
   thinkingBudget: 'off',
-  effortLevel: 'high',
+  effortLevel: 'medium',
+  serviceTier: 'auto',
+  verbosity: 'medium',
   enableAutoTitleGeneration: true,
   titleGenerationModel: '',  // Empty = auto
   enableChrome: false,  // Disabled by default
@@ -354,7 +358,7 @@ export const DEFAULT_SETTINGS: CodexdianSettings = {
   codexCliPathsByHost: {},  // Per-device paths keyed by hostname
   loadUserCodexSettings: false,  // Default off for safer vault-local behavior
 
-  lastCodexModel: 'gpt-5.4',
+  lastCodexModel: 'gpt-5.5',
   lastCustomModel: '',
   lastEnvHash: '',
 

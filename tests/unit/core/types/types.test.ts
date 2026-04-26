@@ -86,8 +86,8 @@ describe('types.ts', () => {
       expect(DEFAULT_SETTINGS.envSnippets).toEqual([]);
     });
 
-    it('should have lastCodexModel set to gpt-5.4 by default', () => {
-      expect(DEFAULT_SETTINGS.lastCodexModel).toBe('gpt-5.4');
+    it('should have lastCodexModel set to gpt-5.5 by default', () => {
+      expect(DEFAULT_SETTINGS.lastCodexModel).toBe('gpt-5.5');
     });
 
     it('should have lastCustomModel as empty string by default', () => {
@@ -110,6 +110,8 @@ describe('types.ts', () => {
         enableAutoTitleGeneration: true,
         titleGenerationModel: '',
         thinkingBudget: 'off',
+        serviceTier: 'auto',
+        verbosity: 'medium',
         permissionMode: 'yolo',
         excludedTags: [],
         mediaFolder: '',
@@ -153,6 +155,8 @@ describe('types.ts', () => {
         enableAutoTitleGeneration: true,
         titleGenerationModel: '',
         thinkingBudget: 'medium',
+        serviceTier: 'auto',
+        verbosity: 'medium',
         permissionMode: 'normal',
         excludedTags: ['private'],
         mediaFolder: 'attachments',
@@ -196,6 +200,8 @@ describe('types.ts', () => {
         lastCodexModel: 'gpt-5.4',
         lastCustomModel: 'custom/model',
         thinkingBudget: 'high',
+        serviceTier: 'fast',
+        verbosity: 'high',
         permissionMode: 'yolo',
         excludedTags: [],
         mediaFolder: '',
@@ -835,22 +841,22 @@ describe('types.ts', () => {
     describe('filterVisibleModelOptions', () => {
       it('should keep Codex default models visible when toggles are disabled', () => {
         const models = filterVisibleModelOptions(DEFAULT_CODEX_MODELS, false, false).map((model) => model.value);
-        expect(models).toEqual(['gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
+        expect(models).toEqual(['gpt-5.5', 'gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
       });
 
       it('should keep Codex default models stable when 1M toggles are enabled', () => {
         const models = filterVisibleModelOptions(DEFAULT_CODEX_MODELS, true, true).map((model) => model.value);
-        expect(models).toEqual(['gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
+        expect(models).toEqual(['gpt-5.5', 'gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
       });
 
       it('should not introduce legacy 1M variants when only gpt-5.4 toggle is enabled', () => {
         const models = filterVisibleModelOptions(DEFAULT_CODEX_MODELS, true, false).map((model) => model.value);
-        expect(models).toEqual(['gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
+        expect(models).toEqual(['gpt-5.5', 'gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
       });
 
       it('should not introduce legacy 1M variants when only gpt-5.3-codex toggle is enabled', () => {
         const models = filterVisibleModelOptions(DEFAULT_CODEX_MODELS, false, true).map((model) => model.value);
-        expect(models).toEqual(['gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
+        expect(models).toEqual(['gpt-5.5', 'gpt-5.4', 'gpt-5.3-codex', 'gpt-5.2', 'gpt-5.1-codex-mini']);
       });
     });
 

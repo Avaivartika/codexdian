@@ -27,8 +27,10 @@ export {
   getContextWindowSize,
   isAdaptiveThinkingModel,
   normalizeVisibleModelVariant,
+  type ServiceTierMode,
   THINKING_BUDGETS,
   type ThinkingBudget,
+  type VerbosityLevel,
 } from './models';
 
 // SDK types

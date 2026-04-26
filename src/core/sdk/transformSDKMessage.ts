@@ -27,8 +27,11 @@ function isResultError(message: { type: 'result'; subtype: string }): message is
 
 function getBuiltInModelSignature(
   model: string
-): { family: 'gpt-5.1-codex-mini' | 'gpt-5.2' | 'gpt-5.3-codex' | 'gpt-5.4'; is1M: boolean } | null {
+): { family: 'gpt-5.1-codex-mini' | 'gpt-5.2' | 'gpt-5.3-codex' | 'gpt-5.4' | 'gpt-5.5'; is1M: boolean } | null {
   const normalized = model.trim().toLowerCase();
+  if (normalized === 'gpt-5.5' || normalized === 'gpt-5.5[1m]') {
+    return { family: 'gpt-5.5', is1M: normalized.endsWith('[1m]') };
+  }
   if (normalized === 'gpt-5.1-codex-mini') {
     return { family: 'gpt-5.1-codex-mini', is1M: false };
   }
@@ -46,8 +49,11 @@ function getBuiltInModelSignature(
 
 function getModelUsageSignature(
   model: string
-): { family: 'gpt-5.1-codex-mini' | 'gpt-5.2' | 'gpt-5.3-codex' | 'gpt-5.4'; is1M: boolean } | null {
+): { family: 'gpt-5.1-codex-mini' | 'gpt-5.2' | 'gpt-5.3-codex' | 'gpt-5.4' | 'gpt-5.5'; is1M: boolean } | null {
   const normalized = model.trim().toLowerCase();
+  if (normalized.includes('gpt-5.5')) {
+    return { family: 'gpt-5.5', is1M: normalized.endsWith('[1m]') };
+  }
   if (normalized.includes('gpt-5.1-codex-mini')) {
     return { family: 'gpt-5.1-codex-mini', is1M: false };
   }
@@ -164,7 +170,7 @@ export function* transformSDKMessage(
         const cacheReadInputTokens = usage.cache_read_input_tokens ?? 0;
         const contextTokens = inputTokens + cacheCreationInputTokens + cacheReadInputTokens;
 
-        const model = options?.intendedModel ?? 'gpt-5.3-codex';
+        const model = options?.intendedModel ?? 'gpt-5.5';
         const contextWindow = getContextWindowSize(model, options?.customContextLimits);
         const percentage = Math.min(100, Math.max(0, Math.round((contextTokens / contextWindow) * 100)));
 

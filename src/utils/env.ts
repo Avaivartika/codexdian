@@ -349,6 +349,7 @@ export const CUSTOM_MODEL_ENV_KEYS = [
   'CODEX_MODEL',
   'OPENAI_MODEL',
   'OPENAI_DEFAULT_MODEL',
+  'CODEX_DEFAULT_GPT55_MODEL',
   'CODEX_DEFAULT_GPT54_MODEL',
   'CODEX_DEFAULT_GPT53_CODEX_MODEL',
   'CODEX_DEFAULT_GPT52_MODEL',
@@ -369,6 +370,7 @@ const MODEL_TYPE_BY_ENV_KEY: Record<string, string> = {
   CODEX_MODEL: 'model',
   OPENAI_MODEL: 'model',
   OPENAI_DEFAULT_MODEL: 'default',
+  CODEX_DEFAULT_GPT55_MODEL: 'gpt55',
   CODEX_DEFAULT_GPT54_MODEL: 'gpt54',
   CODEX_DEFAULT_GPT53_CODEX_MODEL: 'gpt53codex',
   CODEX_DEFAULT_GPT52_MODEL: 'gpt52',
@@ -429,19 +431,21 @@ export function getModelsFromEnvironment(envVars: Record<string, string>): { val
 
   const models: { value: string; label: string; description: string }[] = [];
   const typePriority = {
-    model: 6,
-    gpt51mini: 5,
+    model: 7,
+    gpt55: 6,
+    gpt54: 5,
     gpt53codex: 4,
     gpt52: 3,
-    gpt54: 2,
+    gpt51mini: 2,
     default: 1,
   };
   const typeLabel = {
     model: 'model',
-    gpt51mini: 'gpt-5.1-codex-mini',
+    gpt55: 'gpt-5.5',
+    gpt54: 'gpt-5.4',
     gpt53codex: 'gpt-5.3-codex',
     gpt52: 'gpt-5.2',
-    gpt54: 'gpt-5.4',
+    gpt51mini: 'gpt-5.1-codex-mini',
     default: 'default',
   };
 
@@ -473,10 +477,11 @@ export function getCurrentModelFromEnvironment(envVars: Record<string, string>):
     'CODEX_MODEL',
     'OPENAI_MODEL',
     'OPENAI_DEFAULT_MODEL',
-    'CODEX_DEFAULT_GPT51_MINI_MODEL',
+    'CODEX_DEFAULT_GPT55_MODEL',
+    'CODEX_DEFAULT_GPT54_MODEL',
     'CODEX_DEFAULT_GPT53_CODEX_MODEL',
     'CODEX_DEFAULT_GPT52_MODEL',
-    'CODEX_DEFAULT_GPT54_MODEL',
+    'CODEX_DEFAULT_GPT51_MINI_MODEL',
     LEGACY_MODEL_ENV_KEY,
     LEGACY_DEFAULT_TIER_FAST_MODEL_ENV_KEY,
     LEGACY_DEFAULT_TIER_MEDIUM_MODEL_ENV_KEY,

@@ -121,6 +121,8 @@ export class QueryOptionsBuilder {
 
     // Effort level requires restart (no setEffort() on persistent query)
     if (currentConfig.effortLevel !== newConfig.effortLevel) return true;
+    if (currentConfig.serviceTier !== newConfig.serviceTier) return true;
+    if (currentConfig.verbosity !== newConfig.verbosity) return true;
 
     // Export paths affect system prompt
     if (QueryOptionsBuilder.pathsChanged(currentConfig.allowedExportPaths, newConfig.allowedExportPaths)) {
@@ -164,6 +166,8 @@ export class QueryOptionsBuilder {
       model: ctx.settings.model,
       thinkingTokens: thinkingTokens && thinkingTokens > 0 ? thinkingTokens : null,
       effortLevel: isAdaptiveThinkingModel(ctx.settings.model) ? ctx.settings.effortLevel : null,
+      serviceTier: ctx.settings.serviceTier === 'auto' ? null : ctx.settings.serviceTier,
+      verbosity: ctx.settings.verbosity,
       permissionMode: ctx.settings.permissionMode,
       systemPromptKey: computeSystemPromptKey(systemPromptSettings),
       disallowedToolsKey,
@@ -339,6 +343,8 @@ export class QueryOptionsBuilder {
     if (settings.enableChrome) {
       options.extraArgs = { ...options.extraArgs, chrome: null };
     }
+    options.serviceTier = settings.serviceTier === 'auto' ? null : settings.serviceTier;
+    options.verbosity = settings.verbosity;
   }
 
   private static applyThinking(

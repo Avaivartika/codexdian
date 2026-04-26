@@ -470,8 +470,9 @@ describe('utils.ts', () => {
       expect(result[0].label).toBe('trailing-slash/');
     });
 
-    it('should sort models by priority (model > gpt-5.1-codex-mini > gpt-5.3-codex > gpt-5.4)', () => {
+    it('should sort models by priority (model > latest GPT defaults > older GPT defaults)', () => {
       const envVars = {
+        CODEX_DEFAULT_GPT55_MODEL: 'gpt-5.5-model',
         CODEX_DEFAULT_GPT54_MODEL: 'gpt-5.4-model',
         CODEX_MODEL: 'main-model',
         CODEX_DEFAULT_GPT53_CODEX_MODEL: 'gpt-5.3-codex-model',
@@ -479,8 +480,9 @@ describe('utils.ts', () => {
       const result = getModelsFromEnvironment(envVars);
 
       expect(result[0].value).toBe('main-model');
-      expect(result[1].value).toBe('gpt-5.3-codex-model');
+      expect(result[1].value).toBe('gpt-5.5-model');
       expect(result[2].value).toBe('gpt-5.4-model');
+      expect(result[3].value).toBe('gpt-5.3-codex-model');
     });
   });
 
@@ -505,24 +507,25 @@ describe('utils.ts', () => {
       expect(result).toBe('main-model');
     });
 
-    it('should return CODEX_DEFAULT_GPT51_MINI_MODEL if CODEX_MODEL not set', () => {
+    it('should return the latest GPT default if CODEX_MODEL is not set', () => {
       const envVars = {
         CODEX_DEFAULT_GPT51_MINI_MODEL: 'gpt-5.1-codex-mini-model',
         CODEX_DEFAULT_GPT53_CODEX_MODEL: 'gpt-5.3-codex-model',
+        CODEX_DEFAULT_GPT55_MODEL: 'gpt-5.5-model',
       };
       const result = getCurrentModelFromEnvironment(envVars);
 
-      expect(result).toBe('gpt-5.1-codex-mini-model');
+      expect(result).toBe('gpt-5.5-model');
     });
 
-    it('should return CODEX_DEFAULT_GPT53_CODEX_MODEL if higher priority not set', () => {
+    it('should return CODEX_DEFAULT_GPT54_MODEL before older GPT defaults', () => {
       const envVars = {
         CODEX_DEFAULT_GPT53_CODEX_MODEL: 'gpt-5.3-codex-model',
         CODEX_DEFAULT_GPT54_MODEL: 'gpt-5.4-model',
       };
       const result = getCurrentModelFromEnvironment(envVars);
 
-      expect(result).toBe('gpt-5.3-codex-model');
+      expect(result).toBe('gpt-5.4-model');
     });
 
     it('should return CODEX_DEFAULT_GPT51_MINI_MODEL if only that is set', () => {

@@ -280,8 +280,8 @@ describe('StorageService migration', () => {
 
     const saved = JSON.parse(files.get('.codex/codexdian-settings.json') || '{}') as Record<string, unknown>;
     expect(saved.lastEnvHash).toBe('abc123');
-    // lastCodexModel defaults to 'gpt-5.4' (truthy), so migration doesn't overwrite it
-    expect(saved.lastCodexModel).toBe('gpt-5.4');
+    // lastCodexModel defaults to the latest bundled Codex model (truthy), so migration doesn't overwrite it.
+    expect(saved.lastCodexModel).toBe('gpt-5.5');
     expect(saved.lastCustomModel).toBe('custom-model');
   });
 

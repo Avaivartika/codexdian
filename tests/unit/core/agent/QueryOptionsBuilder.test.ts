@@ -72,6 +72,8 @@ function createMockPersistentQueryConfig(
     model: 'gpt-5.3-codex',
     thinkingTokens: null,
     effortLevel: null,
+    serviceTier: null,
+    verbosity: 'medium',
     permissionMode: 'yolo',
     systemPromptKey: 'key1',
     disallowedToolsKey: '',
@@ -221,11 +223,11 @@ describe('QueryOptionsBuilder', () => {
 
     it('includes effortLevel for adaptive model', () => {
       const ctx = createMockContext({
-        settings: createMockSettings({ model: 'gpt-5.3-codex', effortLevel: 'max' }),
+        settings: createMockSettings({ model: 'gpt-5.3-codex', effortLevel: 'xhigh' }),
       });
       const config = QueryOptionsBuilder.buildPersistentQueryConfig(ctx);
 
-      expect(config.effortLevel).toBe('max');
+      expect(config.effortLevel).toBe('xhigh');
     });
 
     it('sets effortLevel to null for custom model', () => {
@@ -321,7 +323,7 @@ describe('QueryOptionsBuilder', () => {
     it('sets adaptive thinking with effort for Codex models', () => {
       const ctx = {
         ...createMockContext({
-          settings: createMockSettings({ model: 'gpt-5.3-codex', effortLevel: 'max' }),
+          settings: createMockSettings({ model: 'gpt-5.3-codex', effortLevel: 'xhigh' }),
         }),
         abortController: new AbortController(),
         hooks: {},
@@ -329,7 +331,7 @@ describe('QueryOptionsBuilder', () => {
       const options = QueryOptionsBuilder.buildPersistentQueryOptions(ctx);
 
       expect(options.thinking).toEqual({ type: 'adaptive' });
-      expect(options.effort).toBe('max');
+      expect(options.effort).toBe('xhigh');
       expect(options.maxThinkingTokens).toBeUndefined();
     });
 
