@@ -1,8 +1,8 @@
 # Codexdian
 
-![GitHub stars](https://img.shields.io/github/stars/epicstockings/codexdian?style=social)
-![GitHub release](https://img.shields.io/github/v/release/epicstockings/codexdian)
-![License](https://img.shields.io/github/license/epicstockings/codexdian)
+![GitHub stars](https://img.shields.io/github/stars/Avaivartika/codexdian?style=social)
+![GitHub release](https://img.shields.io/github/v/release/Avaivartika/codexdian)
+![License](https://img.shields.io/github/license/Avaivartika/codexdian)
 
 ![Preview](Preview.png)
 
@@ -36,7 +36,7 @@ An Obsidian plugin that embeds Codex as an AI collaborator in your vault. Your v
 
 ### From GitHub Release (recommended)
 
-1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/epicstockings/codexdian/releases/latest)
+1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/Avaivartika/codexdian/releases/latest)
 2. Create a folder called `codexdian` in your vault's plugins folder:
    ```
    /path/to/vault/.obsidian/plugins/codexdian/
@@ -52,7 +52,7 @@ An Obsidian plugin that embeds Codex as an AI collaborator in your vault. Your v
 1. Install the BRAT plugin from Obsidian Community Plugins
 2. Enable BRAT in Settings → Community plugins
 3. Open BRAT settings and click "Add Beta plugin"
-4. Enter the repository URL: `https://github.com/epicstockings/codexdian`
+4. Enter the repository URL: `https://github.com/Avaivartika/codexdian`
 5. Click "Add Plugin" and BRAT will install Codexdian automatically
 6. Enable Codexdian in Settings → Community plugins
 
@@ -63,7 +63,7 @@ An Obsidian plugin that embeds Codex as an AI collaborator in your vault. Your v
 1. Clone this repository into your vault's plugins folder:
    ```bash
    cd /path/to/vault/.obsidian/plugins
-   git clone https://github.com/epicstockings/codexdian.git
+   git clone https://github.com/Avaivartika/codexdian.git
    cd codexdian
    ```
 
@@ -209,7 +209,7 @@ If different, GUI apps like Obsidian may not find Node.js.
 1. Install native binary (recommended)
 2. Add Node.js path to Settings → Environment: `PATH=/path/to/node/bin`
 
-**Still having issues?** [Open a GitHub issue](https://github.com/epicstockings/codexdian/issues) with your platform, CLI path, and error message.
+**Still having issues?** [Open a GitHub issue](https://github.com/Avaivartika/codexdian/issues) with your platform, CLI path, and error message.
 
 ## Architecture
 
@@ -265,11 +265,11 @@ Licensed under the [MIT License](LICENSE).
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=YishenTu%2Fcodexdian&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=Avaivartika%2Fcodexdian&type=date&legend=top-left">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=epicstockings/codexdian&type=date&legend=top-left&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=epicstockings/codexdian&type=date&legend=top-left" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=epicstockings/codexdian&type=date&legend=top-left" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Avaivartika/codexdian&type=date&legend=top-left&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Avaivartika/codexdian&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Avaivartika/codexdian&type=date&legend=top-left" />
   </picture>
 </a>
 
