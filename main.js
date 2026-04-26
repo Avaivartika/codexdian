@@ -55746,9 +55746,9 @@ var SERVICE_TIER_OPTIONS = [
   { value: "flex", label: "Flex", title: "Use flexible service tier when available" }
 ];
 var VERBOSITY_OPTIONS = [
-  { value: "low", label: "Low", title: "Shorter responses" },
-  { value: "medium", label: "Med", title: "Balanced response detail" },
-  { value: "high", label: "High", title: "More detailed responses" }
+  { value: "low", label: "Brief", title: "Shorter responses" },
+  { value: "medium", label: "Normal", title: "Balanced response detail" },
+  { value: "high", label: "Detail", title: "More detailed responses" }
 ];
 var ServiceTierSelector = class {
   constructor(parentEl, callbacks) {
@@ -62890,7 +62890,7 @@ var CodexdianSettingTab = class extends import_obsidian36.PluginSettingTab {
     new import_obsidian36.Setting(containerEl).setName("Output verbosity").setDesc("Controls GPT-5 response detail when supported by the selected Codex model.").addDropdown(
       (dropdown) => {
         var _a3;
-        return dropdown.addOption("low", "Low").addOption("medium", "Medium").addOption("high", "High").setValue((_a3 = this.plugin.settings.verbosity) != null ? _a3 : "medium").onChange(async (value) => {
+        return dropdown.addOption("low", "Low").addOption("medium", "Normal").addOption("high", "Detailed").setValue((_a3 = this.plugin.settings.verbosity) != null ? _a3 : "medium").onChange(async (value) => {
           this.plugin.settings.verbosity = value;
           await this.plugin.saveSettings();
         });

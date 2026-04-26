@@ -591,8 +591,8 @@ export class CodexdianSettingTab extends PluginSettingTab {
       .addDropdown((dropdown) =>
         dropdown
           .addOption('low', 'Low')
-          .addOption('medium', 'Medium')
-          .addOption('high', 'High')
+          .addOption('medium', 'Normal')
+          .addOption('high', 'Detailed')
           .setValue(this.plugin.settings.verbosity ?? 'medium')
           .onChange(async (value) => {
             this.plugin.settings.verbosity = value as typeof this.plugin.settings.verbosity;

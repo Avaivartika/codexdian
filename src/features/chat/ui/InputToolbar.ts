@@ -276,9 +276,9 @@ const SERVICE_TIER_OPTIONS: { value: ServiceTierMode; label: string; title: stri
 ];
 
 const VERBOSITY_OPTIONS: { value: VerbosityLevel; label: string; title: string }[] = [
-  { value: 'low', label: 'Low', title: 'Shorter responses' },
-  { value: 'medium', label: 'Med', title: 'Balanced response detail' },
-  { value: 'high', label: 'High', title: 'More detailed responses' },
+  { value: 'low', label: 'Brief', title: 'Shorter responses' },
+  { value: 'medium', label: 'Normal', title: 'Balanced response detail' },
+  { value: 'high', label: 'Detail', title: 'More detailed responses' },
 ];
 
 export class ServiceTierSelector {
