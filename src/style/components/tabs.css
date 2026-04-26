@@ -1,0 +1,73 @@
+.codexdian-tab-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.codexdian-tab-badges {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.codexdian-tab-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+  font-family: var(--codexdian-body-font);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text-muted) 90%, var(--text-normal));
+  background: color-mix(in srgb, var(--codexdian-glass-bg-strong) 74%, transparent);
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.codexdian-tab-badge:hover {
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 78%, transparent);
+  color: var(--text-normal);
+  border-color: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+}
+
+.codexdian-tab-badge-active {
+  border-color: color-mix(in srgb, var(--codexdian-brand) 46%, var(--codexdian-border-strong));
+  color: color-mix(in srgb, var(--codexdian-brand) 54%, var(--text-normal));
+  background: color-mix(in srgb, rgba(var(--codexdian-brand-rgb), 0.25) 36%, var(--codexdian-glass-bg-strong));
+  box-shadow: 0 0 0 1px rgba(var(--codexdian-brand-rgb), 0.14) inset;
+}
+
+.codexdian-tab-badge-streaming {
+  border-color: var(--codexdian-brand);
+  color: var(--codexdian-brand);
+  box-shadow: 0 0 0 1px rgba(var(--codexdian-brand-rgb), 0.12) inset;
+}
+
+.codexdian-tab-badge-attention {
+  border-color: color-mix(in srgb, var(--codexdian-error) 72%, var(--codexdian-border-subtle));
+  color: color-mix(in srgb, var(--codexdian-error) 74%, var(--text-normal));
+}
+
+.codexdian-tab-badge-idle {
+  border-color: color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+}
+
+.codexdian-tab-content-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.codexdian-tab-content {
+  position: relative; /* For scroll-to-bottom button positioning */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}

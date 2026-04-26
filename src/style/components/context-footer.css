@@ -1,0 +1,76 @@
+/* Context usage meter (inline in toolbar) */
+
+.codexdian-context-meter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 8px;
+  cursor: default;
+}
+
+/* Custom tooltip */
+.codexdian-context-meter::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--text-normal);
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+  border-radius: 7px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.codexdian-context-meter:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.codexdian-context-meter-gauge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.codexdian-context-meter-gauge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codexdian-meter-bg {
+  stroke: color-mix(in srgb, var(--codexdian-border-subtle) 86%, transparent);
+}
+
+.codexdian-meter-fill {
+  stroke: var(--codexdian-brand);
+  transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
+}
+
+.codexdian-context-meter-percent {
+  font-size: 11px;
+  color: var(--codexdian-brand);
+  min-width: 24px;
+  text-align: end;
+  transition: color 0.3s ease;
+}
+
+/* Warning state (> 80%) - pale red */
+.codexdian-context-meter.warning .codexdian-meter-fill {
+  stroke: #E57373;
+}
+
+.codexdian-context-meter.warning .codexdian-context-meter-percent {
+  color: #E57373;
+}

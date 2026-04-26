@@ -1,0 +1,59 @@
+/* Navigation Sidebar */
+.codexdian-nav-sidebar {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.codexdian-nav-sidebar.visible {
+    opacity: 0.15;
+    pointer-events: auto;
+}
+
+.codexdian-nav-sidebar.visible:hover {
+    opacity: 1;
+}
+
+.codexdian-nav-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--codexdian-surface-soft) 82%, transparent);
+    border: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(6, 23, 56, 0.14);
+    transition: all 0.2s ease;
+}
+
+.codexdian-nav-btn:hover {
+    background: color-mix(in srgb, var(--codexdian-surface-elevated) 88%, transparent);
+    border-color: color-mix(in srgb, var(--codexdian-border-strong) 88%, transparent);
+    color: var(--text-normal);
+    transform: scale(1.05);
+}
+
+.codexdian-nav-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Specific button spacing/grouping if needed */
+.codexdian-nav-btn-top {
+    margin-bottom: 4px;
+}
+
+.codexdian-nav-btn-bottom {
+    margin-top: 4px;
+}

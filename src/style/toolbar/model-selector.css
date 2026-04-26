@@ -1,0 +1,145 @@
+/* Model selector */
+.codexdian-model-selector {
+  position: relative;
+}
+
+.codexdian-model-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  min-width: 0;
+  max-width: 220px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+  background: color-mix(in srgb, var(--codexdian-glass-bg) 80%, transparent);
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 12px;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.codexdian-model-btn:hover {
+  color: var(--text-normal);
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
+  border-color: color-mix(in srgb, var(--codexdian-border-strong) 80%, transparent);
+}
+
+.codexdian-model-btn.ready {
+  color: var(--codexdian-brand);
+}
+
+.codexdian-model-label {
+  font-weight: 500;
+  min-width: 0;
+  max-width: 176px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codexdian-model-chevron {
+  display: flex;
+  align-items: center;
+}
+
+.codexdian-toolbar-hint {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 10px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--codexdian-glass-bg-strong) 84%, transparent),
+    color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent)
+  );
+  box-shadow: var(--codexdian-shadow-soft);
+  backdrop-filter: blur(15px) saturate(120%);
+  -webkit-backdrop-filter: blur(15px) saturate(120%);
+  min-width: 174px;
+  max-width: 240px;
+  pointer-events: none;
+  z-index: 1002;
+  opacity: 0;
+  transform: translateY(-2px) scale(0.98);
+  transform-origin: top left;
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
+.codexdian-toolbar-hint-title {
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--codexdian-brand) 70%, var(--text-normal));
+  font-weight: 700;
+}
+
+.codexdian-toolbar-hint-desc {
+  font-size: 11px;
+  line-height: 1.25;
+  color: var(--text-muted);
+}
+
+.codexdian-model-btn:hover + .codexdian-toolbar-hint {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.codexdian-model-chevron svg {
+  width: 12px;
+  height: 12px;
+}
+
+.codexdian-model-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
+  border-radius: 10px;
+  box-shadow: var(--codexdian-shadow-soft);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  z-index: 1000;
+  width: max-content;
+  padding: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.codexdian-model-selector:hover .codexdian-model-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.codexdian-model-option {
+  padding: 5px 9px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-radius: 7px;
+  transition: background 0.1s ease, color 0.1s ease;
+  white-space: nowrap;
+}
+
+.codexdian-model-option:hover {
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
+  color: var(--text-normal);
+}
+
+.codexdian-model-option.selected {
+  background: rgba(var(--codexdian-brand-rgb), 0.15);
+  color: var(--codexdian-brand);
+  font-weight: 500;
+}

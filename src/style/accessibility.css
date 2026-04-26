@@ -1,0 +1,40 @@
+/* Accessibility - Focus Visible Styles */
+
+/* outline + offset + border-radius */
+.codexdian-tool-header:focus-visible,
+.codexdian-thinking-header:focus-visible,
+.codexdian-subagent-header:focus-visible,
+.codexdian-header-btn:focus-visible,
+.codexdian-model-btn:focus-visible,
+.codexdian-thinking-current:focus-visible {
+  outline: 2px solid var(--codexdian-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* outline + offset only */
+.codexdian-action-btn:focus-visible,
+.codexdian-toggle-switch:focus-visible,
+.codexdian-file-chip:focus-visible,
+.codexdian-image-chip:focus-visible,
+.codexdian-file-chip-remove:focus-visible,
+.codexdian-image-remove:focus-visible,
+.codexdian-image-modal-close:focus-visible,
+.codexdian-approved-remove-btn:focus-visible,
+.codexdian-save-env-btn:focus-visible,
+.codexdian-restore-snippet-btn:focus-visible,
+.codexdian-edit-snippet-btn:focus-visible,
+.codexdian-delete-snippet-btn:focus-visible,
+.codexdian-cancel-btn:focus-visible,
+.codexdian-save-btn:focus-visible,
+.codexdian-code-lang-label:focus-visible {
+  outline: 2px solid var(--codexdian-brand);
+  outline-offset: 2px;
+}
+
+/* outline + negative offset + border-radius */
+.codexdian-history-item-content:focus-visible {
+  outline: 2px solid var(--codexdian-brand);
+  outline-offset: -2px;
+  border-radius: 4px;
+}

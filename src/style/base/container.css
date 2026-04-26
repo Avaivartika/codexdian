@@ -1,0 +1,16 @@
+.codexdian-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  font-family: var(--codexdian-body-font);
+  background:
+    radial-gradient(980px 340px at 115% -14%, rgba(var(--codexdian-brand-rgb), 0.1), transparent 62%),
+    radial-gradient(760px 280px at -14% -8%, rgba(var(--codexdian-accent-rgb), 0.07), transparent 64%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--background-primary) 92%, var(--background-secondary) 8%) 0%,
+      color-mix(in srgb, var(--background-primary) 96%, var(--background-secondary) 4%) 100%
+    );
+}

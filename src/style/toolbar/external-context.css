@@ -1,0 +1,184 @@
+/* External Context Selector */
+.codexdian-external-context-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.codexdian-external-context-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.codexdian-external-context-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+  background: color-mix(in srgb, var(--codexdian-glass-bg) 80%, transparent);
+  color: var(--text-faint);
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.codexdian-external-context-icon-wrapper:hover .codexdian-external-context-icon {
+  color: var(--text-normal);
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
+  border-color: color-mix(in srgb, var(--codexdian-border-strong) 80%, transparent);
+}
+
+.codexdian-external-context-icon.active {
+  color: var(--codexdian-brand);
+  animation: external-context-glow 2s ease-in-out infinite;
+}
+
+.codexdian-external-context-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codexdian-external-context-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--codexdian-brand);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.codexdian-external-context-badge.visible {
+  opacity: 1;
+}
+
+.codexdian-external-context-dropdown {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100%;
+  margin-bottom: 6px;
+  min-width: 260px;
+  max-width: 320px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
+  border-radius: var(--codexdian-radius-md);
+  box-shadow: var(--codexdian-shadow-soft);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 100;
+}
+
+.codexdian-external-context-selector:hover .codexdian-external-context-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.codexdian-external-context-header {
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
+}
+
+.codexdian-external-context-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.codexdian-external-context-empty {
+  padding: 16px 12px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.codexdian-external-context-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+}
+
+.codexdian-external-context-item:last-child {
+  border-bottom: none;
+}
+
+.codexdian-external-context-text {
+  flex: 1;
+  font-size: 12px;
+  font-family: var(--font-monospace);
+  color: var(--text-normal);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codexdian-external-context-lock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  opacity: 0.4;
+  transition: all 0.15s ease;
+}
+
+.codexdian-external-context-lock:hover {
+  background: var(--background-modifier-hover);
+  opacity: 0.8;
+}
+
+.codexdian-external-context-lock.locked {
+  color: var(--codexdian-brand);
+  opacity: 0.9;
+}
+
+.codexdian-external-context-lock.locked:hover {
+  opacity: 1;
+}
+
+.codexdian-external-context-lock svg {
+  width: 12px;
+  height: 12px;
+}
+
+.codexdian-external-context-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  opacity: 0.6;
+  transition: all 0.15s ease;
+}
+
+.codexdian-external-context-remove:hover {
+  background: rgba(var(--codexdian-error-rgb), 0.15);
+  color: var(--codexdian-error);
+  opacity: 1;
+}
+
+.codexdian-external-context-remove svg {
+  width: 14px;
+  height: 14px;
+}

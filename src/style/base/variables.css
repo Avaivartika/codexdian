@@ -1,0 +1,68 @@
+/* Brand & semantic color tokens */
+.codexdian-container {
+  --codexdian-brand: #2f7dff;
+  --codexdian-brand-rgb: 47, 125, 255;
+  --codexdian-brand-strong: #2d5fb8;
+  --codexdian-accent: #22b8cf;
+  --codexdian-accent-rgb: 34, 184, 207;
+  --codexdian-error: #dc3545;
+  --codexdian-error-rgb: 220, 53, 69;
+  --codexdian-compact: #45a8d1;
+  --codexdian-surface: color-mix(in srgb, var(--background-primary) 80%, var(--background-secondary) 20%);
+  --codexdian-surface-strong: color-mix(in srgb, var(--background-secondary) 86%, var(--background-primary) 14%);
+  --codexdian-surface-elevated: color-mix(in srgb, var(--background-secondary) 74%, rgba(var(--codexdian-brand-rgb), 0.06));
+  --codexdian-surface-soft: color-mix(in srgb, var(--background-primary) 74%, transparent);
+  --codexdian-glass-bg: color-mix(in srgb, var(--background-primary) 76%, transparent);
+  --codexdian-glass-bg-strong: color-mix(in srgb, var(--background-secondary) 82%, transparent);
+  --codexdian-glass-sheen: rgba(255, 255, 255, 0.06);
+  --codexdian-border-subtle: color-mix(in srgb, var(--background-modifier-border) 70%, rgba(255, 255, 255, 0.06));
+  --codexdian-border-strong: color-mix(in srgb, var(--background-modifier-border) 62%, rgba(var(--codexdian-brand-rgb), 0.2));
+  --codexdian-ring: rgba(var(--codexdian-brand-rgb), 0.2);
+  --codexdian-ring-strong: rgba(var(--codexdian-brand-rgb), 0.32);
+  --codexdian-glass-border: color-mix(in srgb, var(--background-modifier-border) 64%, rgba(255, 255, 255, 0.08));
+  --codexdian-shadow-soft: 0 12px 36px rgba(7, 14, 28, 0.18);
+  --codexdian-shadow-deep: 0 20px 50px rgba(5, 12, 24, 0.26);
+  --codexdian-radius-sm: 7px;
+  --codexdian-radius-md: 10px;
+  --codexdian-radius-lg: 14px;
+  --codexdian-heading-font: var(--font-interface);
+  --codexdian-body-font: var(--font-interface);
+}
+
+/* Force dark appearance regardless of Obsidian global theme */
+.codexdian-container.codexdian-theme-dark {
+  color-scheme: dark;
+  --background-primary: #0f141d;
+  --background-secondary: #161e2a;
+  --background-secondary-alt: #1d2735;
+  --background-modifier-hover: #273245;
+  --background-modifier-border: #2f3c53;
+  --background-modifier-border-hover: #3f5070;
+  --background-modifier-border-focus: #486089;
+  --interactive-accent: #3c85ff;
+  --interactive-accent-hover: #5b99ff;
+  --text-normal: #e5ecf7;
+  --text-muted: #a8b4c8;
+  --text-faint: #7f8da4;
+  --text-accent: #70a1ff;
+  --text-error: #ff9191;
+}
+
+/* Force light appearance regardless of Obsidian global theme */
+.codexdian-container.codexdian-theme-light {
+  color-scheme: light;
+  --background-primary: #f4f7fc;
+  --background-secondary: #eaf0f8;
+  --background-secondary-alt: #e1e9f4;
+  --background-modifier-hover: #dde6f3;
+  --background-modifier-border: #c8d3e5;
+  --background-modifier-border-hover: #aebed8;
+  --background-modifier-border-focus: #95a8c7;
+  --interactive-accent: #2b6cf6;
+  --interactive-accent-hover: #4780f7;
+  --text-normal: #1b2635;
+  --text-muted: #5c6c83;
+  --text-faint: #7a879b;
+  --text-accent: #2b6cf6;
+  --text-error: #c73a3a;
+}

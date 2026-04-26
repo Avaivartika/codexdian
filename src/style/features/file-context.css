@@ -1,0 +1,184 @@
+/* @ Mention dropdown */
+.codexdian-mention-dropdown {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  margin-bottom: 4px;
+  background: var(--background-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.codexdian-mention-dropdown.visible {
+  display: block;
+}
+
+/* Fixed positioning for inline editor */
+.codexdian-mention-dropdown-fixed {
+  position: fixed;
+  z-index: 10001;
+}
+
+.codexdian-mention-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.codexdian-mention-item:hover,
+.codexdian-mention-item.selected {
+  background: var(--background-modifier-hover);
+}
+
+.codexdian-mention-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.codexdian-mention-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.codexdian-mention-path {
+  font-size: 13px;
+  color: var(--text-normal);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codexdian-mention-empty {
+  padding: 12px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Scrollbar for mention dropdown */
+.codexdian-mention-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.codexdian-mention-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.codexdian-mention-dropdown::-webkit-scrollbar-thumb {
+  background: var(--background-modifier-border);
+  border-radius: 3px;
+}
+
+/* MCP items in @-mention dropdown */
+.codexdian-mention-item.mcp-server .codexdian-mention-icon {
+  color: var(--interactive-accent);
+}
+
+.codexdian-mention-item.vault-folder .codexdian-mention-icon {
+  color: var(--text-muted);
+}
+
+.codexdian-mention-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.codexdian-mention-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--interactive-accent);
+}
+
+.codexdian-mention-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Context file items in @-mention dropdown */
+.codexdian-mention-item.context-file .codexdian-mention-icon {
+  color: var(--codexdian-brand);
+}
+
+.codexdian-mention-item.context-file .codexdian-mention-text {
+  flex-direction: row;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.codexdian-mention-item.context-file .codexdian-mention-name-context {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* Context folder filter items in @-mention dropdown */
+.codexdian-mention-item.context-folder .codexdian-mention-icon {
+  color: var(--text-muted);
+}
+
+.codexdian-mention-name-folder {
+  color: var(--text-normal);
+  font-weight: 500;
+}
+
+.codexdian-mention-name-context {
+  color: var(--text-normal);
+}
+
+/* Agent folder items in @-mention dropdown */
+.codexdian-mention-item.agent-folder .codexdian-mention-icon {
+  color: var(--link-color);
+}
+
+.codexdian-mention-name-agent-folder {
+  color: var(--link-color);
+  font-weight: 600;
+}
+
+/* Agent items in @-mention dropdown (inside @Agents/) */
+.codexdian-mention-item.agent .codexdian-mention-icon {
+  color: var(--link-color);
+}
+
+.codexdian-mention-item.agent .codexdian-mention-text {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.codexdian-mention-item.agent .codexdian-mention-name-agent {
+  color: var(--text-normal);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.codexdian-mention-item.agent .codexdian-mention-agent-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}

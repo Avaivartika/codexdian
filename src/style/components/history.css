@@ -1,0 +1,189 @@
+.codexdian-history-container {
+  position: relative;
+  isolation: isolate;
+}
+
+/* History dropup menu (opens upward since it's at bottom of view) */
+.codexdian-history-menu {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  inset-inline-end: 0;
+  margin-bottom: 6px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
+  border-radius: var(--codexdian-radius-md);
+  box-shadow: var(--codexdian-shadow-soft);
+  z-index: 1000;
+  max-height: 400px;
+  overflow: hidden;
+  width: 300px;
+}
+
+.codexdian-history-menu.visible {
+  display: block;
+}
+
+/* Header mode: dropdown instead of dropup */
+.codexdian-container--header-mode .codexdian-history-menu {
+  bottom: auto;
+  top: 100%;
+  margin-bottom: 0;
+  margin-top: 6px;
+}
+
+.codexdian-history-header {
+  padding: 10px 12px;
+  font-size: 11px;
+  font-family: var(--codexdian-body-font);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text-muted) 92%, var(--text-normal));
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
+}
+
+.codexdian-history-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.codexdian-history-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.codexdian-history-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.codexdian-history-item-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.codexdian-history-item-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codexdian-history-item:last-child {
+  border-bottom: none;
+}
+
+.codexdian-history-item:hover {
+  background: color-mix(in srgb, var(--codexdian-surface-soft) 74%, transparent);
+}
+
+.codexdian-history-item.active {
+  background: color-mix(in srgb, rgba(var(--codexdian-brand-rgb), 0.23) 34%, var(--codexdian-glass-bg-strong));
+  border-inline-start: 2px solid var(--codexdian-brand);
+  padding-inline-start: 10px;
+}
+
+.codexdian-history-item.active .codexdian-history-item-icon {
+  color: var(--codexdian-brand);
+}
+
+.codexdian-history-item.active .codexdian-history-item-content {
+  cursor: default;
+}
+
+.codexdian-history-item.active .codexdian-history-item-date {
+  color: var(--text-faint);
+}
+
+.codexdian-history-item-content {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.codexdian-history-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-normal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.codexdian-history-item-date {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text-faint) 84%, var(--codexdian-brand) 16%);
+  margin-top: 2px;
+}
+
+.codexdian-history-item-actions {
+  display: flex;
+  gap: 4px;
+  margin-inline-start: 8px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.codexdian-history-item:hover .codexdian-history-item-actions {
+  opacity: 1;
+}
+
+.codexdian-action-btn {
+  background: color-mix(in srgb, var(--codexdian-glass-bg) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 7px;
+  color: var(--text-muted);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.codexdian-action-btn:hover {
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 78%, transparent);
+  border-color: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+  color: var(--text-normal);
+}
+
+.codexdian-action-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.codexdian-delete-btn:hover {
+  color: var(--color-red);
+}
+
+.codexdian-rename-input {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--codexdian-brand);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--codexdian-surface-soft) 90%, transparent);
+  color: var(--text-normal);
+}
+
+.codexdian-rename-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--interactive-accent-hover);
+}
+
+/* Loading indicator for title generation */
+.codexdian-action-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 1s linear infinite;
+  opacity: 0.6;
+  cursor: default;
+}

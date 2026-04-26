@@ -1,0 +1,105 @@
+/* Header - logo, title/tabs slot, and actions */
+.codexdian-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 8px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent), transparent);
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+}
+
+/* Title slot: contains logo + title (or tabs in header mode) */
+.codexdian-title-slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Legacy class for backwards compatibility */
+.codexdian-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.codexdian-title-text {
+  margin: 0;
+  font-family: var(--codexdian-heading-font);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-normal);
+}
+
+.codexdian-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  color: var(--codexdian-brand);
+  background: color-mix(in srgb, var(--codexdian-glass-bg-strong) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 88%, transparent);
+  box-shadow:
+    0 1px 0 var(--codexdian-glass-sheen) inset,
+    0 4px 14px rgba(7, 14, 28, 0.16);
+}
+
+.codexdian-logo svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Header actions (end side - always stays at end via margin-inline-start: auto) */
+.codexdian-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+.codexdian-header-actions-slot {
+  /* No margin-inline-start: auto here; it's set by the base .codexdian-header-actions */
+}
+
+.codexdian-header .codexdian-tab-bar-container {
+  display: flex;
+  gap: 5px;
+}
+
+.codexdian-header-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
+  background: color-mix(in srgb, var(--codexdian-glass-bg-strong) 74%, transparent);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.codexdian-header-btn:hover {
+  color: var(--text-normal);
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 84%, transparent);
+  border-color: color-mix(in srgb, var(--codexdian-border-strong) 86%, transparent);
+}
+
+.codexdian-header-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codexdian-new-tab-btn svg {
+  width: 16.8px;
+  height: 16.8px;
+}

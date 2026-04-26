@@ -1,0 +1,197 @@
+/* Write/Edit Diff Block - Subagent style */
+.codexdian-write-edit-block {
+  margin: 4px 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.codexdian-text-block+.codexdian-write-edit-block {
+  margin-top: 8px;
+}
+
+.codexdian-write-edit-block+.codexdian-text-block {
+  margin-top: 8px;
+}
+
+.codexdian-write-edit-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  overflow: hidden;
+}
+
+.codexdian-write-edit-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+
+.codexdian-write-edit-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Two-part header: name (fixed) + summary (flexible) */
+.codexdian-write-edit-name {
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-normal);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.codexdian-write-edit-summary {
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.codexdian-write-edit-stats {
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.codexdian-write-edit-stats .added {
+  color: var(--color-green);
+}
+
+.codexdian-write-edit-stats .removed {
+  color: var(--color-red);
+  margin-left: 4px;
+}
+
+.codexdian-write-edit-status {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Hide empty status on successful completion so stats align to right edge */
+.codexdian-write-edit-block.done .codexdian-write-edit-status:empty {
+  display: none;
+}
+
+.codexdian-write-edit-status svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codexdian-write-edit-status.status-completed {
+  color: var(--color-green);
+}
+
+.codexdian-write-edit-status.status-error,
+.codexdian-write-edit-status.status-blocked {
+  color: var(--color-red);
+}
+
+.codexdian-write-edit-content {
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.codexdian-write-edit-diff-row {
+  display: flex;
+}
+
+.codexdian-write-edit-diff {
+  flex: 1;
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  line-height: 1.5;
+  background: transparent;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.codexdian-write-edit-loading,
+.codexdian-write-edit-binary,
+.codexdian-write-edit-error,
+.codexdian-write-edit-done-text {
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.codexdian-write-edit-error {
+  color: var(--color-red);
+}
+
+/* Diff line styling */
+.codexdian-diff-hunk {
+  margin-bottom: 4px;
+}
+
+.codexdian-diff-line {
+  display: flex;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.codexdian-diff-prefix {
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.codexdian-diff-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Diff colors - NO strikethrough for Write/Edit blocks */
+.codexdian-diff-equal {
+  color: var(--text-muted);
+}
+
+.codexdian-diff-delete {
+  background: rgba(255, 80, 80, 0.25);
+  color: var(--text-normal);
+}
+
+.codexdian-diff-delete .codexdian-diff-prefix {
+  color: var(--color-red);
+}
+
+.codexdian-diff-insert {
+  background: rgba(80, 200, 80, 0.25);
+  color: var(--text-normal);
+}
+
+.codexdian-diff-insert .codexdian-diff-prefix {
+  color: var(--color-green);
+}
+
+/* Hunk separator */
+.codexdian-diff-separator {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 4px 0;
+  font-style: italic;
+  border-top: 1px dashed var(--background-modifier-border);
+  border-bottom: 1px dashed var(--background-modifier-border);
+  margin: 8px 0;
+  font-size: 11px;
+}
+
+.codexdian-diff-no-changes {
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 8px;
+}

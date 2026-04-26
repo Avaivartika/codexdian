@@ -1,0 +1,315 @@
+/* AskUserQuestion - inline widget rendered in chat panel */
+
+.codexdian-ask-question-inline {
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  outline: none;
+}
+
+.codexdian-ask-inline-title {
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 6px 10px 0;
+}
+
+/* ── Tab bar ─────────────────────────────────── */
+
+.codexdian-ask-tab-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  line-height: 1.4;
+}
+
+.codexdian-ask-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-muted);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.codexdian-ask-tab:hover {
+  color: var(--text-normal);
+}
+
+.codexdian-ask-tab.is-active {
+  background: hsla(55, 30%, 50%, 0.18);
+  color: var(--text-normal);
+}
+
+.codexdian-ask-tab-label {
+  font-weight: 600;
+  max-width: 14ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codexdian-ask-tab-tick {
+  color: var(--color-green);
+  font-weight: 700;
+}
+
+.codexdian-ask-tab-submit-check {
+  color: var(--color-green);
+  white-space: pre;
+}
+
+/* ── Content area ────────────────────────────── */
+
+.codexdian-ask-content {
+  padding: 8px 10px;
+}
+
+.codexdian-ask-question-text {
+  font-weight: 700;
+  color: var(--text-normal);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* ── Item list ───────────────────────────────── */
+
+.codexdian-ask-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.codexdian-ask-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 3px 4px;
+  cursor: pointer;
+  line-height: 1.4;
+  color: var(--text-normal);
+  border-radius: 3px;
+}
+
+.codexdian-ask-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.codexdian-ask-cursor {
+  display: inline-block;
+  width: 2ch;
+  flex-shrink: 0;
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+.codexdian-ask-item-num {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.codexdian-ask-item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.codexdian-ask-label-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.codexdian-ask-item-label {
+  font-weight: 600;
+}
+
+.codexdian-ask-item-desc {
+  color: var(--text-muted);
+  font-weight: 400;
+  line-height: 1.4;
+  margin-top: 1px;
+}
+
+/* Selected items: green text */
+.codexdian-ask-item.is-selected .codexdian-ask-item-label {
+  color: var(--color-green);
+}
+
+/* Disabled items: muted text */
+.codexdian-ask-item.is-disabled .codexdian-ask-item-label {
+  color: var(--text-faint);
+}
+
+/* ── Multi-select brackets ───────────────────── */
+
+.codexdian-ask-check {
+  color: var(--text-faint);
+  flex-shrink: 0;
+  white-space: pre;
+}
+
+.codexdian-ask-check.is-checked {
+  color: var(--color-green);
+}
+
+/* ── Single-select check mark ────────────────── */
+
+.codexdian-ask-check-mark {
+  color: var(--color-green);
+  font-weight: 700;
+}
+
+/* ── Custom input ────────────────────────────── */
+
+.codexdian-ask-item input.codexdian-ask-custom-text,
+.codexdian-ask-item input.codexdian-ask-custom-text:hover,
+.codexdian-ask-item input.codexdian-ask-custom-text:focus {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-monospace);
+  font-size: inherit;
+  color: var(--text-normal);
+  outline: none;
+  padding: 0;
+  width: 0;
+  height: auto;
+  min-height: 0;
+  line-height: 1.4;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.codexdian-ask-custom-text::placeholder {
+  color: var(--text-faint);
+}
+
+/* ── Submit review tab ───────────────────────── */
+
+.codexdian-ask-review-title {
+  font-weight: 700;
+  color: var(--text-normal);
+  margin-bottom: 6px;
+}
+
+.codexdian-ask-review {
+  font-family: var(--font-monospace);
+  margin-bottom: 16px;
+}
+
+.codexdian-tool-content .codexdian-ask-review {
+  font-size: 12px;
+}
+
+.codexdian-ask-review:last-child {
+  margin-bottom: 0;
+}
+
+.codexdian-ask-review-pair {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.codexdian-ask-review-pair:last-child {
+  margin-bottom: 0;
+}
+
+.codexdian-ask-review-num {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.codexdian-ask-review-body {
+  min-width: 0;
+}
+
+.codexdian-ask-review-q-text {
+  color: var(--text-muted);
+}
+
+.codexdian-ask-review-a-text {
+  color: var(--text-normal);
+}
+
+.codexdian-ask-review-empty {
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.codexdian-ask-review-prompt {
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* ── Hints ───────────────────────────────────── */
+
+.codexdian-ask-hints {
+  color: var(--text-faint);
+  padding-top: 6px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+/* ── Approval header (inline permission request) ── */
+
+.codexdian-ask-approval-info {
+  padding: 8px 10px;
+}
+
+.codexdian-ask-approval-tool {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.codexdian-ask-approval-icon {
+  color: var(--codexdian-brand);
+}
+
+.codexdian-ask-approval-tool-name {
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.codexdian-ask-approval-reason {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.codexdian-ask-approval-blocked-path {
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 3px 6px;
+  background: var(--background-primary-alt);
+  border-radius: 4px;
+  margin-bottom: 6px;
+  word-break: break-all;
+}
+
+.codexdian-ask-approval-agent {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.codexdian-ask-approval-desc {
+  padding: 8px 10px;
+  background: var(--background-primary-alt);
+  border-radius: 6px;
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  color: var(--text-normal);
+  word-break: break-all;
+}

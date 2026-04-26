@@ -1,0 +1,58 @@
+/* Permission Mode Toggle */
+.codexdian-permission-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding-left: 12px;
+  padding-right: 8px;
+}
+
+.codexdian-permission-label {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text-muted) 84%, var(--codexdian-brand) 16%);
+  min-width: 28px;
+}
+
+.codexdian-permission-label.plan-active {
+  color: rgb(92, 148, 140);
+  font-weight: 600;
+}
+
+.codexdian-toggle-switch {
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--codexdian-surface-strong) 86%, transparent);
+  border: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 84%, transparent);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.codexdian-toggle-switch::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text-muted) 82%, var(--background-primary));
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.codexdian-toggle-switch:hover {
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 88%, transparent);
+  border-color: color-mix(in srgb, var(--codexdian-border-strong) 90%, transparent);
+}
+
+.codexdian-toggle-switch.active {
+  background: rgba(var(--codexdian-brand-rgb), 0.3);
+}
+
+.codexdian-toggle-switch.active::after {
+  transform: translateX(14px);
+  background: var(--codexdian-brand);
+}

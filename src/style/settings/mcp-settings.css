@@ -1,0 +1,484 @@
+/* MCP server settings */
+.codexdian-mcp-settings-desc {
+  margin-bottom: 12px;
+}
+
+.codexdian-mcp-container {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
+}
+
+.codexdian-mcp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.codexdian-mcp-label {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.codexdian-mcp-add-container {
+  position: relative;
+}
+
+.codexdian-mcp-add-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  display: none;
+  min-width: 220px;
+  padding: 5px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 90%, var(--background-secondary));
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+  z-index: 100;
+}
+
+.codexdian-mcp-add-dropdown.is-visible {
+  display: block;
+}
+
+.codexdian-mcp-add-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-normal);
+  transition: background 0.14s ease;
+}
+
+.codexdian-mcp-add-option:hover {
+  background: color-mix(in srgb, var(--background-modifier-hover) 72%, var(--background-secondary));
+}
+
+.codexdian-mcp-add-option-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+.codexdian-mcp-add-option-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.codexdian-mcp-empty {
+  margin-top: 8px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 66%, transparent);
+}
+
+.codexdian-mcp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.codexdian-mcp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 72%, var(--background-secondary));
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.codexdian-mcp-item:hover {
+  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
+  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+}
+
+.codexdian-mcp-item-disabled {
+  opacity: 0.62;
+}
+
+.codexdian-mcp-status {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.codexdian-mcp-status-enabled {
+  background: var(--color-green);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-green) 22%, transparent);
+}
+
+.codexdian-mcp-status-disabled {
+  background: var(--text-muted);
+}
+
+.codexdian-mcp-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.codexdian-mcp-name-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.codexdian-mcp-name {
+  font-weight: 600;
+  font-family: var(--font-monospace);
+}
+
+.codexdian-mcp-type-badge,
+.codexdian-mcp-context-saving-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.codexdian-mcp-type-badge {
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 82%, var(--background-secondary));
+  color: var(--text-muted);
+}
+
+.codexdian-mcp-context-saving-badge {
+  border: 1px solid color-mix(in srgb, var(--codexdian-brand) 44%, transparent);
+  background: color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
+  color: color-mix(in srgb, var(--codexdian-brand) 74%, var(--text-normal));
+  font-weight: 700;
+}
+
+.codexdian-mcp-preview {
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.codexdian-mcp-actions {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.codexdian-mcp-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--background-primary) 78%, var(--background-secondary));
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.codexdian-mcp-action-btn:hover {
+  border-color: color-mix(in srgb, var(--codexdian-brand) 28%, var(--background-modifier-border-hover));
+  background: color-mix(in srgb, var(--background-modifier-hover) 72%, var(--background-secondary));
+  color: var(--text-normal);
+}
+
+.codexdian-mcp-action-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.codexdian-mcp-delete-btn:hover {
+  color: var(--text-error);
+}
+
+/* Add/edit MCP modal */
+.codexdian-mcp-modal .modal-content {
+  width: min(680px, calc(100vw - 52px));
+  max-width: 680px;
+}
+
+.codexdian-mcp-type-fields {
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
+}
+
+.codexdian-mcp-cmd-setting,
+.codexdian-mcp-env-setting {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.codexdian-mcp-cmd-setting .setting-item-control,
+.codexdian-mcp-env-setting .setting-item-control {
+  width: 100%;
+}
+
+.codexdian-mcp-cmd-textarea,
+.codexdian-mcp-env-textarea {
+  width: 100%;
+  min-width: 100%;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  line-height: 1.35;
+  resize: vertical;
+}
+
+.codexdian-mcp-cmd-textarea:focus,
+.codexdian-mcp-env-textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--codexdian-brand) 56%, var(--background-modifier-border-hover));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
+}
+
+.codexdian-mcp-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* MCP verify modal */
+.codexdian-mcp-test-modal .modal-content {
+  width: min(720px, calc(100vw - 52px));
+  max-width: 720px;
+}
+
+.codexdian-mcp-test-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
+}
+
+.codexdian-mcp-test-spinner {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  animation: codexdian-mcp-spin 1s linear infinite;
+}
+
+.codexdian-mcp-test-spinner svg {
+  width: 18px;
+  height: 18px;
+}
+
+.codexdian-mcp-test-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.codexdian-mcp-test-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.codexdian-mcp-test-icon.success {
+  color: var(--color-green);
+}
+
+.codexdian-mcp-test-icon.error {
+  color: var(--text-error);
+}
+
+.codexdian-mcp-test-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.codexdian-mcp-test-error {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  border: 1px solid color-mix(in srgb, var(--text-error) 40%, transparent);
+  background: color-mix(in srgb, var(--text-error) 14%, transparent);
+  color: var(--text-error);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.codexdian-mcp-test-tools {
+  margin-top: 10px;
+}
+
+.codexdian-mcp-test-tools-header {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.codexdian-mcp-test-tools-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.codexdian-mcp-test-no-tools {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.codexdian-mcp-test-tool {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
+  transition: border-color 0.14s ease;
+}
+
+.codexdian-mcp-test-tool-disabled {
+  opacity: 0.62;
+}
+
+.codexdian-mcp-test-tool-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.codexdian-mcp-test-tool-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+.codexdian-mcp-test-tool-name {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  color: var(--text-normal);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codexdian-mcp-test-tool-toggle {
+  margin-left: 8px;
+}
+
+.codexdian-mcp-test-tool-toggle .checkbox-container {
+  display: inline-flex;
+  width: 34px;
+  height: 20px;
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  background: color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
+  cursor: pointer;
+  transition: background 0.14s ease, border-color 0.14s ease;
+}
+
+.codexdian-mcp-test-tool-toggle .checkbox-container::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--background-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateX(0);
+  transition: transform 0.14s ease;
+}
+
+.codexdian-mcp-test-tool-toggle .checkbox-container.is-enabled {
+  border-color: color-mix(in srgb, var(--codexdian-brand) 52%, transparent);
+  background: color-mix(in srgb, var(--codexdian-brand) 68%, var(--interactive-accent));
+}
+
+.codexdian-mcp-test-tool-toggle .checkbox-container.is-enabled::after {
+  transform: translateX(14px);
+}
+
+.codexdian-mcp-test-tool-toggle .checkbox-container input {
+  display: none;
+}
+
+.codexdian-mcp-test-tool-desc {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.codexdian-mcp-test-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.codexdian-mcp-toggle-all-btn {
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  border-radius: 9px;
+  padding: 6px 12px;
+  background: color-mix(in srgb, var(--background-secondary) 82%, var(--background-primary));
+  color: var(--text-normal);
+  cursor: pointer;
+}
+
+.codexdian-mcp-toggle-all-btn:hover:not(:disabled) {
+  background: var(--background-modifier-hover);
+}
+
+.codexdian-mcp-toggle-all-btn.is-destructive {
+  border-color: color-mix(in srgb, var(--text-error) 46%, transparent);
+  color: var(--text-error);
+  background: color-mix(in srgb, var(--text-error) 10%, transparent);
+}
+
+.codexdian-mcp-toggle-all-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@keyframes codexdian-mcp-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

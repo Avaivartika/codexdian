@@ -1,0 +1,21 @@
+/* Slash command settings */
+.codexdian-slash-item-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-monospace);
+  opacity: 0.9;
+}
+
+.codexdian-slash-item-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--codexdian-brand) 42%, transparent);
+  background: color-mix(in srgb, var(--codexdian-brand) 18%, transparent);
+  color: color-mix(in srgb, var(--codexdian-brand) 76%, var(--text-normal));
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}

@@ -1,0 +1,533 @@
+/**
+ * StorageService - Main coordinator for distributed storage system.
+ *
+ * Manages:
+ * - CC settings in .codex/settings.json (CC-compatible, shareable)
+ * - Codexdian settings in .codex/codexdian-settings.json (Codexdian-specific)
+ * - Slash commands in .codex/commands/*.md
+ * - Chat sessions in .codex/sessions/*.jsonl
+ * - MCP configs in .codex/mcp.json
+ *
+ * Handles migration from legacy formats:
+ * - Old settings.json with Codexdian fields → split into CC + Codexdian files
+ * - Old permissions array → CC permissions object
+ * - data.json state → codexdian-settings.json
+ */
+
+import type { App, Plugin } from 'obsidian';
+import { Notice } from 'obsidian';
+
+import type {
+  CCPermissions,
+  CCSettings,
+  CodexModel,
+  Conversation,
+  LegacyPermission,
+  SlashCommand,
+} from '../types';
+import {
+  createPermissionRule,
+  DEFAULT_CC_PERMISSIONS,
+  DEFAULT_SETTINGS,
+  legacyPermissionsToCCPermissions,
+} from '../types';
+import { AGENTS_PATH, AgentVaultStorage } from './AgentVaultStorage';
+import { CC_SETTINGS_PATH, CCSettingsStorage, isLegacyPermissionsFormat } from './CCSettingsStorage';
+import {
+  CodexdianSettingsStorage,
+  normalizeBlockedCommands,
+  type StoredCodexdianSettings,
+} from './CodexdianSettingsStorage';
+import { McpStorage } from './McpStorage';
+import {
+  CODEXDIAN_ONLY_FIELDS,
+  convertEnvObjectToString,
+  mergeEnvironmentVariables,
+} from './migrationConstants';
+import { SESSIONS_PATH, SessionStorage } from './SessionStorage';
+import { SKILLS_PATH, SkillStorage } from './SkillStorage';
+import { COMMANDS_PATH, SlashCommandStorage } from './SlashCommandStorage';
+import { VaultFileAdapter } from './VaultFileAdapter';
+
+/** Base path for all Codexdian storage. */
+export const CODEX_PATH = '.codex';
+
+/** Legacy settings path (now CC settings). */
+export const SETTINGS_PATH = CC_SETTINGS_PATH;
+
+/**
+ * Combined settings for the application.
+ * Merges CC settings (permissions) with Codexdian settings.
+ */
+export interface CombinedSettings {
+  /** CC-compatible settings (permissions, etc.) */
+  cc: CCSettings;
+  /** Codexdian-specific settings */
+  codexdian: StoredCodexdianSettings;
+}
+
+/** Legacy data format (pre-split migration). */
+interface LegacySettingsJson {
+  // Old Codexdian fields that were in settings.json
+  userName?: string;
+  enableBlocklist?: boolean;
+  allowExternalAccess?: boolean;
+  blockedCommands?: unknown;
+  model?: string;
+  thinkingBudget?: string;
+  permissionMode?: string;
+  lastNonPlanPermissionMode?: string;
+  permissions?: LegacyPermission[];
+  excludedTags?: string[];
+  mediaFolder?: string;
+  environmentVariables?: string;
+  envSnippets?: unknown[];
+  systemPrompt?: string;
+  allowedExportPaths?: string[];
+  keyboardNavigation?: unknown;
+  codexCliPath?: string;
+  legacyCodexCliPaths?: unknown;
+  loadUserCodexSettings?: boolean;
+  enableAutoTitleGeneration?: boolean;
+  titleGenerationModel?: string;
+
+  // CC fields
+  $schema?: string;
+  env?: Record<string, string>;
+}
+
+/** Legacy data.json format. */
+interface LegacyDataJson {
+  activeConversationId?: string | null;
+  lastEnvHash?: string;
+  lastCodexModel?: CodexModel;
+  lastCustomModel?: CodexModel;
+  conversations?: Conversation[];
+  slashCommands?: SlashCommand[];
+  migrationVersion?: number;
+  // May also contain old settings if not yet migrated
+  [key: string]: unknown;
+}
+
+// CODEXDIAN_ONLY_FIELDS is imported from ./migrationConstants
+
+export class StorageService {
+  readonly ccSettings: CCSettingsStorage;
+  readonly codexdianSettings: CodexdianSettingsStorage;
+  readonly commands: SlashCommandStorage;
+  readonly skills: SkillStorage;
+  readonly sessions: SessionStorage;
+  readonly mcp: McpStorage;
+  readonly agents: AgentVaultStorage;
+
+  private adapter: VaultFileAdapter;
+  private plugin: Plugin;
+  private app: App;
+
+  constructor(plugin: Plugin) {
+    this.plugin = plugin;
+    this.app = plugin.app;
+    this.adapter = new VaultFileAdapter(this.app);
+    this.ccSettings = new CCSettingsStorage(this.adapter);
+    this.codexdianSettings = new CodexdianSettingsStorage(this.adapter);
+    this.commands = new SlashCommandStorage(this.adapter);
+    this.skills = new SkillStorage(this.adapter);
+    this.sessions = new SessionStorage(this.adapter);
+    this.mcp = new McpStorage(this.adapter);
+    this.agents = new AgentVaultStorage(this.adapter);
+  }
+
+  async initialize(): Promise<CombinedSettings> {
+    await this.ensureDirectories();
+    await this.runMigrations();
+
+    const cc = await this.ccSettings.load();
+    const codexdian = await this.codexdianSettings.load();
+
+    return { cc, codexdian };
+  }
+
+  private async runMigrations(): Promise<void> {
+    const ccExists = await this.ccSettings.exists();
+    const codexdianExists = await this.codexdianSettings.exists();
+    const dataJson = await this.loadDataJson();
+
+    // Check if old settings.json has Codexdian fields that need migration
+    if (ccExists && !codexdianExists) {
+      await this.migrateFromOldSettingsJson();
+    }
+
+    if (dataJson) {
+      const hasState = this.hasStateToMigrate(dataJson);
+      const hasLegacyContent = this.hasLegacyContentToMigrate(dataJson);
+
+      // Migrate data.json state to codexdian-settings.json
+      if (hasState) {
+        await this.migrateFromDataJson(dataJson);
+      }
+
+      // Migrate slash commands and conversations from data.json
+      let legacyContentHadErrors = false;
+      if (hasLegacyContent) {
+        const result = await this.migrateLegacyDataJsonContent(dataJson);
+        legacyContentHadErrors = result.hadErrors;
+      }
+
+      // Clear legacy data.json only after successful migrations
+      if ((hasState || hasLegacyContent) && !legacyContentHadErrors) {
+        await this.clearLegacyDataJson();
+      }
+    }
+  }
+
+  private hasStateToMigrate(data: LegacyDataJson): boolean {
+    return (
+      data.lastEnvHash !== undefined ||
+      data.lastCodexModel !== undefined ||
+      data.lastCustomModel !== undefined
+    );
+  }
+
+  private hasLegacyContentToMigrate(data: LegacyDataJson): boolean {
+    return (
+      (data.slashCommands?.length ?? 0) > 0 ||
+      (data.conversations?.length ?? 0) > 0
+    );
+  }
+
+  /**
+   * Migrate from old settings.json (with Codexdian fields) to split format.
+   *
+   * Handles:
+   * - Legacy Codexdian fields (userName, model, etc.) → codexdian-settings.json
+   * - Legacy permissions array → CC permissions object
+   * - CC env object → Codexdian environmentVariables string
+   * - Preserves existing CC permissions if already in CC format
+   */
+  private async migrateFromOldSettingsJson(): Promise<void> {
+    const content = await this.adapter.read(CC_SETTINGS_PATH);
+    const oldSettings = JSON.parse(content) as LegacySettingsJson;
+
+    const hasCodexdianFields = Array.from(CODEXDIAN_ONLY_FIELDS).some(
+      field => (oldSettings as Record<string, unknown>)[field] !== undefined
+    );
+
+    if (!hasCodexdianFields) {
+      return;
+    }
+
+    // Handle environment variables: merge Codexdian string format with CC object format
+    let environmentVariables = oldSettings.environmentVariables ?? '';
+    if (oldSettings.env && typeof oldSettings.env === 'object') {
+      const envFromCC = convertEnvObjectToString(oldSettings.env);
+      if (envFromCC) {
+        environmentVariables = mergeEnvironmentVariables(environmentVariables, envFromCC);
+      }
+    }
+
+    const codexdianFields: Partial<StoredCodexdianSettings> = {
+      userName: oldSettings.userName ?? DEFAULT_SETTINGS.userName,
+      enableBlocklist: oldSettings.enableBlocklist ?? DEFAULT_SETTINGS.enableBlocklist,
+      allowExternalAccess: oldSettings.allowExternalAccess ?? DEFAULT_SETTINGS.allowExternalAccess,
+      blockedCommands: normalizeBlockedCommands(oldSettings.blockedCommands),
+      model: (oldSettings.model as CodexModel) ?? DEFAULT_SETTINGS.model,
+      thinkingBudget: (oldSettings.thinkingBudget as StoredCodexdianSettings['thinkingBudget']) ?? DEFAULT_SETTINGS.thinkingBudget,
+      permissionMode: (oldSettings.permissionMode as StoredCodexdianSettings['permissionMode']) ?? DEFAULT_SETTINGS.permissionMode,
+      excludedTags: oldSettings.excludedTags ?? DEFAULT_SETTINGS.excludedTags,
+      mediaFolder: oldSettings.mediaFolder ?? DEFAULT_SETTINGS.mediaFolder,
+      environmentVariables, // Merged from both sources
+      envSnippets: oldSettings.envSnippets as StoredCodexdianSettings['envSnippets'] ?? DEFAULT_SETTINGS.envSnippets,
+      systemPrompt: oldSettings.systemPrompt ?? DEFAULT_SETTINGS.systemPrompt,
+      allowedExportPaths: oldSettings.allowedExportPaths ?? DEFAULT_SETTINGS.allowedExportPaths,
+      persistentExternalContextPaths: DEFAULT_SETTINGS.persistentExternalContextPaths,
+      keyboardNavigation: oldSettings.keyboardNavigation as StoredCodexdianSettings['keyboardNavigation'] ?? DEFAULT_SETTINGS.keyboardNavigation,
+      codexCliPath: oldSettings.codexCliPath ?? DEFAULT_SETTINGS.codexCliPath,
+      codexCliPathsByHost: DEFAULT_SETTINGS.codexCliPathsByHost,  // Migration to hostname-based handled in main.ts
+      loadUserCodexSettings: oldSettings.loadUserCodexSettings ?? DEFAULT_SETTINGS.loadUserCodexSettings,
+      enableAutoTitleGeneration: oldSettings.enableAutoTitleGeneration ?? DEFAULT_SETTINGS.enableAutoTitleGeneration,
+      titleGenerationModel: oldSettings.titleGenerationModel ?? DEFAULT_SETTINGS.titleGenerationModel,
+      lastCodexModel: DEFAULT_SETTINGS.lastCodexModel,
+      lastCustomModel: DEFAULT_SETTINGS.lastCustomModel,
+      lastEnvHash: DEFAULT_SETTINGS.lastEnvHash,
+    };
+
+    // Save Codexdian settings FIRST (before stripping from settings.json)
+    await this.codexdianSettings.save(codexdianFields as StoredCodexdianSettings);
+
+    // Verify Codexdian settings were saved
+    const savedCodexdian = await this.codexdianSettings.load();
+    if (!savedCodexdian || savedCodexdian.userName === undefined) {
+      throw new Error('Failed to verify codexdian-settings.json was saved correctly');
+    }
+
+    // Handle permissions: convert legacy format OR preserve existing CC format
+    let ccPermissions: CCPermissions;
+    if (isLegacyPermissionsFormat(oldSettings)) {
+      ccPermissions = legacyPermissionsToCCPermissions(oldSettings.permissions);
+    } else if (oldSettings.permissions && typeof oldSettings.permissions === 'object' && !Array.isArray(oldSettings.permissions)) {
+      // Already in CC format - preserve it including defaultMode and additionalDirectories
+      const existingPerms = oldSettings.permissions as unknown as CCPermissions;
+      ccPermissions = {
+        allow: existingPerms.allow ?? [],
+        deny: existingPerms.deny ?? [],
+        ask: existingPerms.ask ?? [],
+        defaultMode: existingPerms.defaultMode,
+        additionalDirectories: existingPerms.additionalDirectories,
+      };
+    } else {
+      ccPermissions = { ...DEFAULT_CC_PERMISSIONS };
+    }
+
+    // Rewrite settings.json with only CC fields
+    const ccSettings: CCSettings = {
+      $schema: 'https://json.schemastore.org/codex-settings.json',
+      permissions: ccPermissions,
+    };
+
+    // Pass true to strip Codexdian-only fields during migration
+    await this.ccSettings.save(ccSettings, true);
+  }
+
+  private async migrateFromDataJson(dataJson: LegacyDataJson): Promise<void> {
+    const codexdian = await this.codexdianSettings.load();
+
+    // Only migrate if not already set (codexdian-settings.json takes precedence)
+    if (dataJson.lastEnvHash !== undefined && !codexdian.lastEnvHash) {
+      codexdian.lastEnvHash = dataJson.lastEnvHash;
+    }
+    if (dataJson.lastCodexModel !== undefined && !codexdian.lastCodexModel) {
+      codexdian.lastCodexModel = dataJson.lastCodexModel;
+    }
+    if (dataJson.lastCustomModel !== undefined && !codexdian.lastCustomModel) {
+      codexdian.lastCustomModel = dataJson.lastCustomModel;
+    }
+
+    await this.codexdianSettings.save(codexdian);
+  }
+
+  private async migrateLegacyDataJsonContent(dataJson: LegacyDataJson): Promise<{ hadErrors: boolean }> {
+    let hadErrors = false;
+
+    if (dataJson.slashCommands && dataJson.slashCommands.length > 0) {
+      for (const command of dataJson.slashCommands) {
+        try {
+          const filePath = this.commands.getFilePath(command);
+          if (await this.adapter.exists(filePath)) {
+            continue;
+          }
+          await this.commands.save(command);
+        } catch {
+          hadErrors = true;
+        }
+      }
+    }
+
+    if (dataJson.conversations && dataJson.conversations.length > 0) {
+      for (const conversation of dataJson.conversations) {
+        try {
+          const filePath = this.sessions.getFilePath(conversation.id);
+          if (await this.adapter.exists(filePath)) {
+            continue;
+          }
+          await this.sessions.saveConversation(conversation);
+        } catch {
+          hadErrors = true;
+        }
+      }
+    }
+
+    return { hadErrors };
+  }
+
+  private async clearLegacyDataJson(): Promise<void> {
+    const dataJson = await this.loadDataJson();
+    if (!dataJson) {
+      return;
+    }
+
+    const cleaned: Record<string, unknown> = { ...dataJson };
+    delete cleaned.lastEnvHash;
+    delete cleaned.lastCodexModel;
+    delete cleaned.lastCustomModel;
+    delete cleaned.conversations;
+    delete cleaned.slashCommands;
+    delete cleaned.migrationVersion;
+
+    if (Object.keys(cleaned).length === 0) {
+      await this.plugin.saveData({});
+      return;
+    }
+
+    await this.plugin.saveData(cleaned);
+  }
+
+  private async loadDataJson(): Promise<LegacyDataJson | null> {
+    try {
+      const data = await this.plugin.loadData();
+      return data || null;
+    } catch {
+      // data.json may not exist on fresh installs
+      return null;
+    }
+  }
+
+  async ensureDirectories(): Promise<void> {
+    await this.adapter.ensureFolder(CODEX_PATH);
+    await this.adapter.ensureFolder(COMMANDS_PATH);
+    await this.adapter.ensureFolder(SKILLS_PATH);
+    await this.adapter.ensureFolder(SESSIONS_PATH);
+    await this.adapter.ensureFolder(AGENTS_PATH);
+  }
+
+  async loadAllSlashCommands(): Promise<SlashCommand[]> {
+    const commands = await this.commands.loadAll();
+    const skills = await this.skills.loadAll();
+    return [...commands, ...skills];
+  }
+
+  getAdapter(): VaultFileAdapter {
+    return this.adapter;
+  }
+
+  async getPermissions(): Promise<CCPermissions> {
+    return this.ccSettings.getPermissions();
+  }
+
+  async updatePermissions(permissions: CCPermissions): Promise<void> {
+    return this.ccSettings.updatePermissions(permissions);
+  }
+
+  async addAllowRule(rule: string): Promise<void> {
+    return this.ccSettings.addAllowRule(createPermissionRule(rule));
+  }
+
+  async addDenyRule(rule: string): Promise<void> {
+    return this.ccSettings.addDenyRule(createPermissionRule(rule));
+  }
+
+  /**
+   * Remove a permission rule from all lists.
+   */
+  async removePermissionRule(rule: string): Promise<void> {
+    return this.ccSettings.removeRule(createPermissionRule(rule));
+  }
+
+  async updateCodexdianSettings(updates: Partial<StoredCodexdianSettings>): Promise<void> {
+    return this.codexdianSettings.update(updates);
+  }
+
+  async saveCodexdianSettings(settings: StoredCodexdianSettings): Promise<void> {
+    return this.codexdianSettings.save(settings);
+  }
+
+  async loadCodexdianSettings(): Promise<StoredCodexdianSettings> {
+    return this.codexdianSettings.load();
+  }
+
+  /**
+   * Get legacy activeConversationId from storage (codexdian-settings.json or data.json).
+   */
+  async getLegacyActiveConversationId(): Promise<string | null> {
+    const fromSettings = await this.codexdianSettings.getLegacyActiveConversationId();
+    if (fromSettings) {
+      return fromSettings;
+    }
+
+    const dataJson = await this.loadDataJson();
+    if (dataJson && typeof dataJson.activeConversationId === 'string') {
+      return dataJson.activeConversationId;
+    }
+
+    return null;
+  }
+
+  /**
+   * Remove legacy activeConversationId from storage after migration.
+   */
+  async clearLegacyActiveConversationId(): Promise<void> {
+    await this.codexdianSettings.clearLegacyActiveConversationId();
+
+    const dataJson = await this.loadDataJson();
+    if (!dataJson || !('activeConversationId' in dataJson)) {
+      return;
+    }
+
+    const cleaned: Record<string, unknown> = { ...dataJson };
+    delete cleaned.activeConversationId;
+    await this.plugin.saveData(cleaned);
+  }
+
+  /**
+   * Get tab manager state from data.json with runtime validation.
+   */
+  async getTabManagerState(): Promise<TabManagerPersistedState | null> {
+    try {
+      const data = await this.plugin.loadData();
+      if (data?.tabManagerState) {
+        return this.validateTabManagerState(data.tabManagerState);
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Validates and sanitizes tab manager state from storage.
+   * Returns null if the data is invalid or corrupted.
+   */
+  private validateTabManagerState(data: unknown): TabManagerPersistedState | null {
+    if (!data || typeof data !== 'object') {
+      return null;
+    }
+
+    const state = data as Record<string, unknown>;
+
+    if (!Array.isArray(state.openTabs)) {
+      return null;
+    }
+
+    const validatedTabs: Array<{ tabId: string; conversationId: string | null }> = [];
+    for (const tab of state.openTabs) {
+      if (!tab || typeof tab !== 'object') {
+        continue; // Skip invalid entries
+      }
+      const tabObj = tab as Record<string, unknown>;
+      if (typeof tabObj.tabId !== 'string') {
+        continue; // Skip entries without valid tabId
+      }
+      validatedTabs.push({
+        tabId: tabObj.tabId,
+        conversationId:
+          typeof tabObj.conversationId === 'string' ? tabObj.conversationId : null,
+      });
+    }
+
+    const activeTabId =
+      typeof state.activeTabId === 'string' ? state.activeTabId : null;
+
+    return {
+      openTabs: validatedTabs,
+      activeTabId,
+    };
+  }
+
+  async setTabManagerState(state: TabManagerPersistedState): Promise<void> {
+    try {
+      const data = (await this.plugin.loadData()) || {};
+      data.tabManagerState = state;
+      await this.plugin.saveData(data);
+    } catch {
+      new Notice('Failed to save tab layout');
+    }
+  }
+}
+
+/**
+ * Persisted state for the tab manager.
+ * Stored in data.json (machine-specific, not shared).
+ */
+export interface TabManagerPersistedState {
+  openTabs: Array<{ tabId: string; conversationId: string | null }>;
+  activeTabId: string | null;
+}

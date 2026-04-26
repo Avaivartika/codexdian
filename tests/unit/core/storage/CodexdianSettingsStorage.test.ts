@@ -1,0 +1,398 @@
+import {
+  CODEXDIAN_SETTINGS_PATH,
+  CodexdianSettingsStorage,
+  normalizeBlockedCommands,
+} from '@/core/storage/CodexdianSettingsStorage';
+import type { VaultFileAdapter } from '@/core/storage/VaultFileAdapter';
+import { DEFAULT_SETTINGS, getDefaultBlockedCommands } from '@/core/types';
+
+const mockAdapter = {
+  exists: jest.fn(),
+  read: jest.fn(),
+  write: jest.fn(),
+} as unknown as jest.Mocked<VaultFileAdapter>;
+
+describe('CodexdianSettingsStorage', () => {
+  let storage: CodexdianSettingsStorage;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    // Reset mock implementations to default resolved values
+    mockAdapter.exists.mockResolvedValue(false);
+    mockAdapter.read.mockResolvedValue('{}');
+    mockAdapter.write.mockResolvedValue(undefined);
+    storage = new CodexdianSettingsStorage(mockAdapter);
+  });
+
+  describe('load', () => {
+    it('should return defaults when file does not exist', async () => {
+      mockAdapter.exists.mockResolvedValue(false);
+
+      const result = await storage.load();
+
+      expect(result.model).toBe(DEFAULT_SETTINGS.model);
+      expect(result.thinkingBudget).toBe(DEFAULT_SETTINGS.thinkingBudget);
+      expect(result.permissionMode).toBe(DEFAULT_SETTINGS.permissionMode);
+      expect(mockAdapter.read).not.toHaveBeenCalled();
+    });
+
+    it('should parse valid JSON and merge with defaults', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        model: 'gpt-5.4',
+        userName: 'TestUser',
+      }));
+
+      const result = await storage.load();
+
+      expect(result.model).toBe('gpt-5.4');
+      expect(result.userName).toBe('TestUser');
+      // Defaults should still be present for unspecified fields
+      expect(result.thinkingBudget).toBe(DEFAULT_SETTINGS.thinkingBudget);
+    });
+
+    it('should normalize blockedCommands from loaded data', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        blockedCommands: {
+          unix: ['custom-unix-cmd'],
+          windows: ['custom-win-cmd'],
+        },
+      }));
+
+      const result = await storage.load();
+
+      expect(result.blockedCommands.unix).toContain('custom-unix-cmd');
+      expect(result.blockedCommands.windows).toContain('custom-win-cmd');
+    });
+
+    it('should normalize codexCliPathsByHost from loaded data', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        codexCliPathsByHost: {
+          'host-a': '/custom/path-a',
+          'host-b': '/custom/path-b',
+        },
+      }));
+
+      const result = await storage.load();
+
+      expect(result.codexCliPathsByHost['host-a']).toBe('/custom/path-a');
+      expect(result.codexCliPathsByHost['host-b']).toBe('/custom/path-b');
+    });
+
+    it('should preserve legacy codexCliPath field', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        codexCliPath: '/legacy/path',
+      }));
+
+      const result = await storage.load();
+
+      expect(result.codexCliPath).toBe('/legacy/path');
+    });
+
+    it('should remove legacy show1MModel from the stored file', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        model: 'gpt-5.3-codex',
+        show1MModel: true,
+      }));
+
+      const result = await storage.load();
+
+      expect(result.enableGPT53CodexHighContext).toBe(DEFAULT_SETTINGS.enableGPT53CodexHighContext);
+      expect(mockAdapter.write).toHaveBeenCalledWith(
+        CODEXDIAN_SETTINGS_PATH,
+        JSON.stringify({ model: 'gpt-5.3-codex' }, null, 2)
+      );
+    });
+
+    it('should throw on JSON parse error', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue('invalid json');
+
+      await expect(storage.load()).rejects.toThrow();
+    });
+
+    it('should throw on read error', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockRejectedValue(new Error('Read failed'));
+
+      await expect(storage.load()).rejects.toThrow('Read failed');
+    });
+  });
+
+  describe('save', () => {
+    it('should write settings to file', async () => {
+      const settings = {
+        ...DEFAULT_SETTINGS,
+        model: 'gpt-5.4' as const,
+      };
+      // Remove slashCommands as it's stored separately
+      const { slashCommands: _, ...storedSettings } = settings;
+
+      await storage.save(storedSettings);
+
+      expect(mockAdapter.write).toHaveBeenCalledWith(
+        CODEXDIAN_SETTINGS_PATH,
+        expect.any(String)
+      );
+      const writtenContent = JSON.parse(mockAdapter.write.mock.calls[0][1]);
+      expect(writtenContent.model).toBe('gpt-5.4');
+    });
+
+    it('should throw on write error', async () => {
+      mockAdapter.write.mockRejectedValue(new Error('Write failed'));
+
+      const settings = {
+        ...DEFAULT_SETTINGS,
+      };
+      const { slashCommands: _, ...storedSettings } = settings;
+
+      await expect(storage.save(storedSettings)).rejects.toThrow('Write failed');
+    });
+  });
+
+  describe('exists', () => {
+    it('should return true when file exists', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+
+      const result = await storage.exists();
+
+      expect(result).toBe(true);
+      expect(mockAdapter.exists).toHaveBeenCalledWith(CODEXDIAN_SETTINGS_PATH);
+    });
+
+    it('should return false when file does not exist', async () => {
+      mockAdapter.exists.mockResolvedValue(false);
+
+      const result = await storage.exists();
+
+      expect(result).toBe(false);
+    });
+  });
+
+  describe('update', () => {
+    it('should merge updates with existing settings', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        model: 'gpt-5.1-codex-mini',
+        userName: 'ExistingUser',
+      }));
+
+      await storage.update({ model: 'gpt-5.4' });
+
+      const writeCall = mockAdapter.write.mock.calls[0];
+      const writtenContent = JSON.parse(writeCall[1]);
+      expect(writtenContent.model).toBe('gpt-5.4');
+      expect(writtenContent.userName).toBe('ExistingUser');
+    });
+  });
+
+  describe('legacy activeConversationId', () => {
+    it('should read legacy activeConversationId when present', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        activeConversationId: 'conv-123',
+      }));
+
+      const legacyId = await storage.getLegacyActiveConversationId();
+
+      expect(legacyId).toBe('conv-123');
+    });
+
+    it('should return null when legacy activeConversationId is missing', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        model: 'gpt-5.1-codex-mini',
+      }));
+
+      const legacyId = await storage.getLegacyActiveConversationId();
+
+      expect(legacyId).toBeNull();
+    });
+
+    it('should clear legacy activeConversationId from file', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        activeConversationId: 'conv-123',
+        model: 'gpt-5.1-codex-mini',
+      }));
+
+      await storage.clearLegacyActiveConversationId();
+
+      const writeCall = mockAdapter.write.mock.calls[0];
+      const writtenContent = JSON.parse(writeCall[1]);
+      expect(writtenContent.activeConversationId).toBeUndefined();
+      expect(writtenContent.model).toBe('gpt-5.1-codex-mini');
+    });
+  });
+
+  describe('getLegacyActiveConversationId - file missing', () => {
+    it('should return null when file does not exist', async () => {
+      mockAdapter.exists.mockResolvedValue(false);
+
+      const result = await storage.getLegacyActiveConversationId();
+
+      expect(result).toBeNull();
+      expect(mockAdapter.read).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('clearLegacyActiveConversationId - file missing', () => {
+    it('should return early when file does not exist', async () => {
+      mockAdapter.exists.mockResolvedValue(false);
+
+      await storage.clearLegacyActiveConversationId();
+
+      expect(mockAdapter.read).not.toHaveBeenCalled();
+      expect(mockAdapter.write).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('clearLegacyActiveConversationId - no key present', () => {
+    it('should not write when activeConversationId key is absent', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({
+        model: 'gpt-5.1-codex-mini',
+      }));
+
+      await storage.clearLegacyActiveConversationId();
+
+      expect(mockAdapter.write).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('setLastModel', () => {
+    it('should update lastCodexModel for non-custom models', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({}));
+
+      await storage.setLastModel('gpt-5.3-codex', false);
+
+      const writeCall = mockAdapter.write.mock.calls[0];
+      const writtenContent = JSON.parse(writeCall[1]);
+      expect(writtenContent.lastCodexModel).toBe('gpt-5.3-codex');
+      // lastCustomModel keeps its default value (empty string)
+    });
+
+    it('should update lastCustomModel for custom models', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({}));
+
+      await storage.setLastModel('custom-model-id', true);
+
+      const writeCall = mockAdapter.write.mock.calls[0];
+      const writtenContent = JSON.parse(writeCall[1]);
+      expect(writtenContent.lastCustomModel).toBe('custom-model-id');
+      // lastCodexModel keeps its default value
+    });
+  });
+
+  describe('setLastEnvHash', () => {
+    it('should update environment hash', async () => {
+      mockAdapter.exists.mockResolvedValue(true);
+      mockAdapter.read.mockResolvedValue(JSON.stringify({}));
+
+      await storage.setLastEnvHash('abc123');
+
+      const writeCall = mockAdapter.write.mock.calls[0];
+      const writtenContent = JSON.parse(writeCall[1]);
+      expect(writtenContent.lastEnvHash).toBe('abc123');
+    });
+  });
+});
+
+describe('normalizeBlockedCommands', () => {
+  const defaults = getDefaultBlockedCommands();
+
+  it('should return defaults for null input', () => {
+    const result = normalizeBlockedCommands(null);
+
+    expect(result.unix).toEqual(defaults.unix);
+    expect(result.windows).toEqual(defaults.windows);
+  });
+
+  it('should return defaults for undefined input', () => {
+    const result = normalizeBlockedCommands(undefined);
+
+    expect(result.unix).toEqual(defaults.unix);
+    expect(result.windows).toEqual(defaults.windows);
+  });
+
+  it('should migrate old string[] format to platform-keyed structure', () => {
+    const oldFormat = ['custom-cmd-1', 'custom-cmd-2'];
+
+    const result = normalizeBlockedCommands(oldFormat);
+
+    expect(result.unix).toEqual(['custom-cmd-1', 'custom-cmd-2']);
+    expect(result.windows).toEqual(defaults.windows);
+  });
+
+  it('should normalize valid platform-keyed object', () => {
+    const input = {
+      unix: ['unix-cmd'],
+      windows: ['windows-cmd'],
+    };
+
+    const result = normalizeBlockedCommands(input);
+
+    expect(result.unix).toEqual(['unix-cmd']);
+    expect(result.windows).toEqual(['windows-cmd']);
+  });
+
+  it('should filter out non-string entries', () => {
+    const input = {
+      unix: ['valid', 123, null, 'also-valid'] as unknown[],
+      windows: [true, 'windows-cmd', {}] as unknown[],
+    };
+
+    const result = normalizeBlockedCommands(input);
+
+    expect(result.unix).toEqual(['valid', 'also-valid']);
+    expect(result.windows).toEqual(['windows-cmd']);
+  });
+
+  it('should trim whitespace from commands', () => {
+    const input = {
+      unix: ['  cmd1  ', 'cmd2  '],
+      windows: ['  win-cmd  '],
+    };
+
+    const result = normalizeBlockedCommands(input);
+
+    expect(result.unix).toEqual(['cmd1', 'cmd2']);
+    expect(result.windows).toEqual(['win-cmd']);
+  });
+
+  it('should filter out empty strings after trimming', () => {
+    const input = {
+      unix: ['cmd1', '   ', '', 'cmd2'],
+      windows: ['', 'win-cmd'],
+    };
+
+    const result = normalizeBlockedCommands(input);
+
+    expect(result.unix).toEqual(['cmd1', 'cmd2']);
+    expect(result.windows).toEqual(['win-cmd']);
+  });
+
+  it('should use defaults for missing platform keys', () => {
+    const input = {
+      unix: ['custom-unix'],
+      // windows is missing
+    };
+
+    const result = normalizeBlockedCommands(input);
+
+    expect(result.unix).toEqual(['custom-unix']);
+    expect(result.windows).toEqual(defaults.windows);
+  });
+
+  it('should handle non-object, non-array input', () => {
+    expect(normalizeBlockedCommands('string')).toEqual(defaults);
+    expect(normalizeBlockedCommands(123)).toEqual(defaults);
+    expect(normalizeBlockedCommands(true)).toEqual(defaults);
+  });
+});

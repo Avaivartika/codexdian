@@ -1,0 +1,289 @@
+/* Context limits */
+.codexdian-context-limits-container {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
+}
+
+.codexdian-context-limits-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px 0 8px;
+}
+
+.codexdian-context-limits-label {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.codexdian-context-limits-desc {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.codexdian-context-limits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.codexdian-context-limits-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 11px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 72%, var(--background-secondary));
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.codexdian-context-limits-item:hover {
+  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
+  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+}
+
+.codexdian-context-limits-model {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  color: var(--text-normal);
+  word-break: break-all;
+}
+
+.codexdian-context-limits-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.codexdian-context-limits-input {
+  width: 88px;
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
+  color: var(--text-normal);
+}
+
+.codexdian-context-limits-input:focus {
+  border-color: color-mix(in srgb, var(--codexdian-brand) 58%, var(--background-modifier-border-hover));
+  outline: none;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
+}
+
+.codexdian-context-limits-input.codexdian-input-error {
+  border-color: var(--text-error);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--text-error) 24%, transparent);
+}
+
+.codexdian-context-limit-validation {
+  display: none;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-error);
+}
+
+/* Environment snippets */
+.codexdian-env-snippets-container {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
+}
+
+.codexdian-snippet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.codexdian-snippet-label {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.codexdian-snippet-empty {
+  margin-top: 8px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 66%, transparent);
+}
+
+.codexdian-snippet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.codexdian-snippet-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 72%, var(--background-secondary));
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.codexdian-snippet-item:hover {
+  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
+  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+}
+
+.codexdian-snippet-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.codexdian-snippet-name {
+  margin-bottom: 3px;
+  font-weight: 600;
+  font-family: var(--font-monospace);
+  color: var(--text-normal);
+  word-break: break-word;
+}
+
+.codexdian-snippet-description {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.codexdian-snippet-actions {
+  display: flex;
+  gap: 5px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* Env snippet modal */
+.codexdian-env-snippet-modal .modal-content {
+  width: min(620px, calc(100vw - 52px));
+  max-width: 620px;
+}
+
+.codexdian-env-snippet-modal .setting-item {
+  margin: 8px 0;
+  padding: 10px 0;
+  border-top: none;
+}
+
+.codexdian-env-snippet-modal .setting-item-info {
+  margin-bottom: 4px;
+}
+
+.codexdian-env-snippet-setting {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.codexdian-env-snippet-setting .setting-item-info {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.codexdian-env-snippet-control {
+  width: 100%;
+}
+
+.codexdian-env-snippet-control textarea {
+  width: 100%;
+  min-width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  resize: vertical;
+}
+
+.codexdian-env-snippet-control textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--codexdian-brand) 56%, var(--background-modifier-border-hover));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
+}
+
+.codexdian-snippet-preview {
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 84%, var(--background-primary));
+}
+
+.codexdian-env-preview {
+  margin: 0;
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 8px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--background-primary) 90%, var(--background-secondary));
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--text-muted);
+}
+
+.codexdian-snippet-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* Context limits section in snippet modal */
+.codexdian-snippet-context-limits {
+  margin-top: 1em;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
+  background: color-mix(in srgb, var(--background-secondary) 78%, var(--background-primary));
+}
+
+.codexdian-snippet-context-limits .setting-item-description {
+  margin-bottom: 0.5em;
+}
+
+.codexdian-snippet-limit-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+.codexdian-snippet-limit-model {
+  font-family: var(--font-monospace);
+  font-size: 12px;
+}
+
+.codexdian-snippet-limit-spacer {
+  flex: 1;
+}
+
+.codexdian-snippet-limit-input {
+  width: 84px;
+}
