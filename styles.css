@@ -1,4 +1,4 @@
-/* Codexdian Plugin Styles */
+/* Claudian Plugin Styles */
 /* Built from src/style/ modules */
 
 
@@ -6,93 +6,24 @@
    base/variables.css
    ============================================ */
 /* Brand & semantic color tokens */
-.codexdian-container {
-  --codexdian-brand: #2f7dff;
-  --codexdian-brand-rgb: 47, 125, 255;
-  --codexdian-brand-strong: #2d5fb8;
-  --codexdian-accent: #22b8cf;
-  --codexdian-accent-rgb: 34, 184, 207;
-  --codexdian-error: #dc3545;
-  --codexdian-error-rgb: 220, 53, 69;
-  --codexdian-compact: #45a8d1;
-  --codexdian-surface: color-mix(in srgb, var(--background-primary) 80%, var(--background-secondary) 20%);
-  --codexdian-surface-strong: color-mix(in srgb, var(--background-secondary) 86%, var(--background-primary) 14%);
-  --codexdian-surface-elevated: color-mix(in srgb, var(--background-secondary) 74%, rgba(var(--codexdian-brand-rgb), 0.06));
-  --codexdian-surface-soft: color-mix(in srgb, var(--background-primary) 74%, transparent);
-  --codexdian-glass-bg: color-mix(in srgb, var(--background-primary) 76%, transparent);
-  --codexdian-glass-bg-strong: color-mix(in srgb, var(--background-secondary) 82%, transparent);
-  --codexdian-glass-sheen: rgba(255, 255, 255, 0.06);
-  --codexdian-border-subtle: color-mix(in srgb, var(--background-modifier-border) 70%, rgba(255, 255, 255, 0.06));
-  --codexdian-border-strong: color-mix(in srgb, var(--background-modifier-border) 62%, rgba(var(--codexdian-brand-rgb), 0.2));
-  --codexdian-ring: rgba(var(--codexdian-brand-rgb), 0.2);
-  --codexdian-ring-strong: rgba(var(--codexdian-brand-rgb), 0.32);
-  --codexdian-glass-border: color-mix(in srgb, var(--background-modifier-border) 64%, rgba(255, 255, 255, 0.08));
-  --codexdian-shadow-soft: 0 12px 36px rgba(7, 14, 28, 0.18);
-  --codexdian-shadow-deep: 0 20px 50px rgba(5, 12, 24, 0.26);
-  --codexdian-radius-sm: 7px;
-  --codexdian-radius-md: 10px;
-  --codexdian-radius-lg: 14px;
-  --codexdian-heading-font: var(--font-interface);
-  --codexdian-body-font: var(--font-interface);
-}
-
-/* Force dark appearance regardless of Obsidian global theme */
-.codexdian-container.codexdian-theme-dark {
-  color-scheme: dark;
-  --background-primary: #0f141d;
-  --background-secondary: #161e2a;
-  --background-secondary-alt: #1d2735;
-  --background-modifier-hover: #273245;
-  --background-modifier-border: #2f3c53;
-  --background-modifier-border-hover: #3f5070;
-  --background-modifier-border-focus: #486089;
-  --interactive-accent: #3c85ff;
-  --interactive-accent-hover: #5b99ff;
-  --text-normal: #e5ecf7;
-  --text-muted: #a8b4c8;
-  --text-faint: #7f8da4;
-  --text-accent: #70a1ff;
-  --text-error: #ff9191;
-}
-
-/* Force light appearance regardless of Obsidian global theme */
-.codexdian-container.codexdian-theme-light {
-  color-scheme: light;
-  --background-primary: #f4f7fc;
-  --background-secondary: #eaf0f8;
-  --background-secondary-alt: #e1e9f4;
-  --background-modifier-hover: #dde6f3;
-  --background-modifier-border: #c8d3e5;
-  --background-modifier-border-hover: #aebed8;
-  --background-modifier-border-focus: #95a8c7;
-  --interactive-accent: #2b6cf6;
-  --interactive-accent-hover: #4780f7;
-  --text-normal: #1b2635;
-  --text-muted: #5c6c83;
-  --text-faint: #7a879b;
-  --text-accent: #2b6cf6;
-  --text-error: #c73a3a;
+.claudian-container {
+  --claudian-brand: #D97757;
+  --claudian-brand-rgb: 217, 119, 87;
+  --claudian-error: #dc3545;
+  --claudian-error-rgb: 220, 53, 69;
+  --claudian-compact: #5bc0de;
 }
 
 
 /* ============================================
    base/container.css
    ============================================ */
-.codexdian-container {
+.claudian-container {
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 0;
   overflow: hidden;
-  font-family: var(--codexdian-body-font);
-  background:
-    radial-gradient(980px 340px at 115% -14%, rgba(var(--codexdian-brand-rgb), 0.1), transparent 62%),
-    radial-gradient(760px 280px at -14% -8%, rgba(var(--codexdian-accent-rgb), 0.07), transparent 64%),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--background-primary) 92%, var(--background-secondary) 8%) 0%,
-      color-mix(in srgb, var(--background-primary) 96%, var(--background-secondary) 4%) 100%
-    );
 }
 
 
@@ -119,26 +50,26 @@
 @keyframes external-context-glow {
   0%,
   100% {
-    filter: drop-shadow(0 0 2px rgba(var(--codexdian-brand-rgb), 0.4));
+    filter: drop-shadow(0 0 2px rgba(var(--claudian-brand-rgb), 0.4));
   }
 
   50% {
-    filter: drop-shadow(0 0 6px rgba(var(--codexdian-brand-rgb), 0.8));
+    filter: drop-shadow(0 0 6px rgba(var(--claudian-brand-rgb), 0.8));
   }
 }
 
 @keyframes mcp-glow {
   0%,
   100% {
-    filter: drop-shadow(0 0 2px rgba(var(--codexdian-accent-rgb), 0.25));
+    filter: drop-shadow(0 0 2px rgba(124, 58, 237, 0.4));
   }
 
   50% {
-    filter: drop-shadow(0 0 6px rgba(var(--codexdian-accent-rgb), 0.48));
+    filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.9));
   }
 }
 
-@keyframes codexdian-spin {
+@keyframes claudian-spin {
   to {
     transform: rotate(360deg);
   }
@@ -149,107 +80,77 @@
    components/header.css
    ============================================ */
 /* Header - logo, title/tabs slot, and actions */
-.codexdian-header {
+.claudian-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 10px 8px 10px;
-  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent), transparent);
-  backdrop-filter: blur(14px) saturate(125%);
-  -webkit-backdrop-filter: blur(14px) saturate(125%);
+  padding: 0 12px 12px 12px;
 }
 
 /* Title slot: contains logo + title (or tabs in header mode) */
-.codexdian-title-slot {
+.claudian-title-slot {
   display: flex;
   align-items: center;
   gap: 8px;
   flex: 1;
-  min-width: 0;
+  min-width: 0;  /* Allow flex item to shrink below content size */
 }
 
 /* Legacy class for backwards compatibility */
-.codexdian-title {
+.claudian-title {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
 }
 
-.codexdian-title-text {
+.claudian-title-text {
   margin: 0;
-  font-family: var(--codexdian-heading-font);
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--text-normal);
 }
 
-.codexdian-logo {
+.claudian-logo {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 8px;
-  color: var(--codexdian-brand);
-  background: color-mix(in srgb, var(--codexdian-glass-bg-strong) 80%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 88%, transparent);
-  box-shadow:
-    0 1px 0 var(--codexdian-glass-sheen) inset,
-    0 4px 14px rgba(7, 14, 28, 0.16);
-}
-
-.codexdian-logo svg {
-  width: 14px;
-  height: 14px;
 }
 
 /* Header actions (end side - always stays at end via margin-inline-start: auto) */
-.codexdian-header-actions {
+.claudian-header-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
   flex-shrink: 0;
   margin-inline-start: auto;
 }
 
-.codexdian-header-actions-slot {
-  /* No margin-inline-start: auto here; it's set by the base .codexdian-header-actions */
+.claudian-header-actions-slot {
+  /* No margin-inline-start: auto here; it's set by the base .claudian-header-actions */
 }
 
-.codexdian-header .codexdian-tab-bar-container {
+.claudian-header .claudian-tab-bar-container {
   display: flex;
-  gap: 5px;
+  gap: 4px;
 }
 
-.codexdian-header-btn {
+.claudian-header-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
-  background: color-mix(in srgb, var(--codexdian-glass-bg-strong) 74%, transparent);
   cursor: pointer;
-  color: var(--text-muted);
-  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  color: var(--text-faint);
+  transition: color 0.15s ease;
 }
 
-.codexdian-header-btn:hover {
+.claudian-header-btn:hover {
   color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 84%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 86%, transparent);
 }
 
-.codexdian-header-btn svg {
+.claudian-header-btn svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-new-tab-btn svg {
+.claudian-new-tab-btn svg {
   width: 16.8px;
   height: 16.8px;
 }
@@ -257,64 +158,57 @@
 /* ============================================
    components/tabs.css
    ============================================ */
-.codexdian-tab-bar-container {
+.claudian-tab-bar-container {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
-.codexdian-tab-badges {
+.claudian-tab-badges {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
-.codexdian-tab-badge {
+.claudian-tab-badge {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  font-family: var(--codexdian-body-font);
-  font-size: 10px;
-  font-weight: 700;
+  border-radius: 4px;
+  border: 2px solid var(--background-modifier-border);
+  font-size: 12px;
+  font-weight: 500;
   cursor: pointer;
-  color: color-mix(in srgb, var(--text-muted) 90%, var(--text-normal));
-  background: color-mix(in srgb, var(--codexdian-glass-bg-strong) 74%, transparent);
+  color: var(--text-muted);
+  background: var(--background-primary);
   transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
-.codexdian-tab-badge:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 78%, transparent);
+.claudian-tab-badge:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
 }
 
-.codexdian-tab-badge-active {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 46%, var(--codexdian-border-strong));
-  color: color-mix(in srgb, var(--codexdian-brand) 54%, var(--text-normal));
-  background: color-mix(in srgb, rgba(var(--codexdian-brand-rgb), 0.25) 36%, var(--codexdian-glass-bg-strong));
-  box-shadow: 0 0 0 1px rgba(var(--codexdian-brand-rgb), 0.14) inset;
+.claudian-tab-badge-active {
+  border-color: var(--interactive-accent);
+  color: var(--text-normal);
 }
 
-.codexdian-tab-badge-streaming {
-  border-color: var(--codexdian-brand);
-  color: var(--codexdian-brand);
-  box-shadow: 0 0 0 1px rgba(var(--codexdian-brand-rgb), 0.12) inset;
+.claudian-tab-badge-streaming {
+  border-color: var(--claudian-brand, #da7756);
 }
 
-.codexdian-tab-badge-attention {
-  border-color: color-mix(in srgb, var(--codexdian-error) 72%, var(--codexdian-border-subtle));
-  color: color-mix(in srgb, var(--codexdian-error) 74%, var(--text-normal));
+.claudian-tab-badge-attention {
+  border-color: var(--text-error);
 }
 
-.codexdian-tab-badge-idle {
-  border-color: color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+.claudian-tab-badge-idle {
+  border-color: var(--background-modifier-border);
 }
 
-.codexdian-tab-content-container {
+.claudian-tab-content-container {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -322,7 +216,7 @@
   overflow: hidden;
 }
 
-.codexdian-tab-content {
+.claudian-tab-content {
   position: relative; /* For scroll-to-bottom button positioning */
   display: flex;
   flex-direction: column;
@@ -335,119 +229,118 @@
 /* ============================================
    components/history.css
    ============================================ */
-.codexdian-history-container {
+.claudian-history-container {
   position: relative;
-  isolation: isolate;
 }
 
 /* History dropup menu (opens upward since it's at bottom of view) */
-.codexdian-history-menu {
+.claudian-history-menu {
   display: none;
   position: absolute;
   bottom: 100%;
   inset-inline-end: 0;
-  margin-bottom: 6px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
-  backdrop-filter: blur(18px) saturate(130%);
-  -webkit-backdrop-filter: blur(18px) saturate(130%);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
-  border-radius: var(--codexdian-radius-md);
-  box-shadow: var(--codexdian-shadow-soft);
+  margin-bottom: 4px;
+  background: var(--background-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
   z-index: 1000;
   max-height: 400px;
   overflow: hidden;
-  width: 300px;
+  width: 280px;
 }
 
-.codexdian-history-menu.visible {
+.claudian-history-menu.visible {
   display: block;
 }
 
 /* Header mode: dropdown instead of dropup */
-.codexdian-container--header-mode .codexdian-history-menu {
+.claudian-container--header-mode .claudian-history-menu {
   bottom: auto;
   top: 100%;
   margin-bottom: 0;
-  margin-top: 6px;
+  margin-top: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.codexdian-history-header {
-  padding: 10px 12px;
-  font-size: 11px;
-  font-family: var(--codexdian-body-font);
+.claudian-history-header {
+  padding: 8px 12px;
+  font-size: 12px;
   font-weight: 600;
-  color: color-mix(in srgb, var(--text-muted) 92%, var(--text-normal));
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.codexdian-history-list {
+.claudian-history-list {
   max-height: 350px;
   overflow-y: auto;
 }
 
-.codexdian-history-empty {
+.claudian-history-empty {
   padding: 16px;
   text-align: center;
   color: var(--text-muted);
   font-size: 13px;
 }
 
-.codexdian-history-item {
+.claudian-history-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 12px;
-  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  transition: background 0.15s ease, border-color 0.15s ease;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  transition: background 0.15s ease;
 }
 
-.codexdian-history-item-icon {
+.claudian-history-item-icon {
   display: flex;
   align-items: center;
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.codexdian-history-item-icon svg {
+.claudian-history-item-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-history-item:last-child {
+.claudian-history-item:last-child {
   border-bottom: none;
 }
 
-.codexdian-history-item:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-soft) 74%, transparent);
+.claudian-history-item:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-history-item.active {
-  background: color-mix(in srgb, rgba(var(--codexdian-brand-rgb), 0.23) 34%, var(--codexdian-glass-bg-strong));
-  border-inline-start: 2px solid var(--codexdian-brand);
+.claudian-history-item.active {
+  background: var(--background-secondary);
+  border-inline-start: 2px solid var(--interactive-accent);
   padding-inline-start: 10px;
 }
 
-.codexdian-history-item.active .codexdian-history-item-icon {
-  color: var(--codexdian-brand);
+.claudian-history-item.active .claudian-history-item-icon {
+  color: var(--interactive-accent);
 }
 
-.codexdian-history-item.active .codexdian-history-item-content {
+.claudian-history-item.active .claudian-history-item-content {
   cursor: default;
 }
 
-.codexdian-history-item.active .codexdian-history-item-date {
+.claudian-history-item.active .claudian-history-item-date {
   color: var(--text-faint);
 }
 
-.codexdian-history-item-content {
+.claudian-history-item-content {
   flex: 1;
   min-width: 0;
   cursor: pointer;
 }
 
-.codexdian-history-item-title {
+.claudian-history-item-title {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-normal);
@@ -456,13 +349,13 @@
   text-overflow: ellipsis;
 }
 
-.codexdian-history-item-date {
+.claudian-history-item-date {
   font-size: 11px;
-  color: color-mix(in srgb, var(--text-faint) 84%, var(--codexdian-brand) 16%);
+  color: var(--text-faint);
   margin-top: 2px;
 }
 
-.codexdian-history-item-actions {
+.claudian-history-item-actions {
   display: flex;
   gap: 4px;
   margin-inline-start: 8px;
@@ -470,53 +363,52 @@
   transition: opacity 0.15s ease;
 }
 
-.codexdian-history-item:hover .codexdian-history-item-actions {
+.claudian-history-item:hover .claudian-history-item-actions {
   opacity: 1;
 }
 
-.codexdian-action-btn {
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 82%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+.claudian-action-btn {
+  background: transparent;
+  border: none;
   cursor: pointer;
   padding: 4px;
-  border-radius: 7px;
+  border-radius: 4px;
   color: var(--text-muted);
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.codexdian-action-btn:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 78%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+.claudian-action-btn:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.codexdian-action-btn svg {
+.claudian-action-btn svg {
   width: 14px;
   height: 14px;
 }
 
-.codexdian-delete-btn:hover {
+.claudian-delete-btn:hover {
   color: var(--color-red);
 }
 
-.codexdian-rename-input {
+.claudian-rename-input {
   width: 100%;
-  padding: 4px 6px;
+  padding: 2px 4px;
   font-size: 13px;
   font-weight: 500;
-  border: 1px solid var(--codexdian-brand);
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--codexdian-surface-soft) 90%, transparent);
+  border: 1px solid var(--interactive-accent);
+  border-radius: 4px;
+  background: var(--background-primary);
   color: var(--text-normal);
 }
 
-.codexdian-rename-input:focus {
+.claudian-rename-input:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--interactive-accent-hover);
 }
 
 /* Loading indicator for title generation */
-.codexdian-action-loading {
+.claudian-action-loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -530,7 +422,7 @@
    components/messages.css
    ============================================ */
 /* Messages wrapper (for scroll-to-bottom button positioning) */
-.codexdian-messages-wrapper {
+.claudian-messages-wrapper {
   position: relative;
   flex: 1;
   min-height: 0;
@@ -539,23 +431,22 @@
   overflow: hidden;
 }
 
-.codexdian-messages {
+.claudian-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 10px 0 10px 0;
+  padding: 12px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  scroll-behavior: smooth;
+  gap: 12px;
 }
 
 /* Focusable messages panel for vim-style navigation */
-.codexdian-messages-focusable:focus {
+.claudian-messages-focusable:focus {
   outline: none;
 }
 
-/* Welcome message */
-.codexdian-welcome {
+/* Welcome message - claude.ai style */
+.claudian-welcome {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -566,43 +457,36 @@
   min-height: 200px;
 }
 
-.codexdian-welcome-greeting {
-  font-family: var(--codexdian-heading-font);
-  font-size: clamp(20px, 4vw, 28px);
-  font-weight: 550;
+.claudian-welcome-greeting {
+  font-family: 'Copernicus', 'Tiempos Headline', 'Tiempos', Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--text-muted);
   letter-spacing: -0.01em;
-  line-height: 1.2;
-  color: color-mix(in srgb, var(--text-normal) 82%, var(--text-muted) 18%);
 }
 
-.codexdian-message {
-  padding: 10px 12px;
-  border-radius: var(--codexdian-radius-md);
-  max-width: 94%;
+.claudian-message {
+  padding: 10px 14px;
+  border-radius: 8px;
+  max-width: 95%;
   word-wrap: break-word;
 }
 
-.codexdian-message-user {
+.claudian-message-user {
   position: relative;
-  background: color-mix(in srgb, rgba(var(--codexdian-brand-rgb), 0.2) 36%, var(--codexdian-glass-bg-strong));
-  border: 1px solid color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+  background: rgba(0, 0, 0, 0.3);
   align-self: flex-end;
   border-end-end-radius: 4px;
-  box-shadow: 0 8px 22px rgba(7, 14, 28, 0.18);
 }
 
 /* Text selection in user messages - visible highlight */
-.codexdian-message-user ::selection {
+.claudian-message-user ::selection {
   background: rgba(255, 255, 255, 0.35);
   color: inherit;
 }
 
-.codexdian-message-assistant {
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 82%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  border-radius: var(--codexdian-radius-md);
-  backdrop-filter: blur(14px) saturate(120%);
-  -webkit-backdrop-filter: blur(14px) saturate(120%);
+.claudian-message-assistant {
+  background: transparent;
   align-self: stretch;
   width: 100%;
   max-width: 100%;
@@ -610,134 +494,128 @@
   text-align: start;
 }
 
-.codexdian-message-content {
-  line-height: 1.52;
+.claudian-message-content {
+  line-height: 1.5;
   user-select: text;
   -webkit-user-select: text;
   unicode-bidi: plaintext; /* Proper BiDi text handling for mixed RTL/LTR */
 }
 
-.codexdian-interrupted {
-  color: color-mix(in srgb, var(--codexdian-error) 86%, var(--text-normal));
+.claudian-interrupted {
+  color: #d45d5d;
 }
 
-.codexdian-interrupted-hint {
+.claudian-interrupted-hint {
   color: var(--text-muted);
 }
 
-.codexdian-text-block {
+.claudian-text-block {
   position: relative;
   margin: 0;
 }
 
-.codexdian-text-copy-btn {
+.claudian-text-copy-btn {
   position: absolute;
-  bottom: -4px;
+  bottom: 0;
   inset-inline-end: 0;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  border-radius: 999px;
-  padding: 2px 8px;
-  background: color-mix(in srgb, var(--codexdian-glass-bg-strong) 82%, transparent);
-  color: var(--text-muted);
+  border: none;
+  color: var(--text-faint);
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  transition: opacity 0.15s ease, color 0.15s ease;
   z-index: 2;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.codexdian-text-copy-btn svg {
+.claudian-text-copy-btn svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-text-block:hover .codexdian-text-copy-btn {
+.claudian-text-block:hover .claudian-text-copy-btn {
   opacity: 1;
 }
 
-.codexdian-text-copy-btn:hover {
+.claudian-text-copy-btn:hover {
   color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 80%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 84%, transparent);
 }
 
-.codexdian-text-copy-btn.copied {
+.claudian-text-copy-btn.copied {
   color: var(--text-accent);
   font-size: 11px;
   font-family: var(--font-monospace);
 }
 
-.codexdian-text-block+.codexdian-tool-call {
+.claudian-text-block+.claudian-tool-call {
   margin-top: 8px;
 }
 
-.codexdian-tool-call+.codexdian-text-block {
+.claudian-tool-call+.claudian-text-block {
   margin-top: 8px;
 }
 
-.codexdian-message-content p {
+.claudian-message-content p {
   margin: 0 0 8px 0;
 }
 
-.codexdian-message-content p:last-child {
+.claudian-message-content p:last-child {
   margin-bottom: 0;
 }
 
-.codexdian-message-content ul,
-.codexdian-message-content ol {
+.claudian-message-content ul,
+.claudian-message-content ol {
   margin: 8px 0;
   padding-inline-start: 20px;
 }
 
 /* Full-width tables */
-.codexdian-message-content table {
+.claudian-message-content table {
   width: 100%;
   border-collapse: collapse;
   margin: 8px 0;
 }
 
-.codexdian-message-content th,
-.codexdian-message-content td {
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+.claudian-message-content th,
+.claudian-message-content td {
+  border: 1px solid var(--background-modifier-border);
   padding: 6px 10px;
   text-align: start;
 }
 
-.codexdian-message-content th {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 78%, transparent);
+.claudian-message-content th {
+  background: var(--background-secondary);
   font-weight: 600;
 }
 
-.codexdian-message-content tr:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-soft) 82%, transparent);
+.claudian-message-content tr:hover {
+  background: var(--background-secondary-alt);
 }
 
-.codexdian-messages::-webkit-scrollbar {
+.claudian-messages::-webkit-scrollbar {
   width: 6px;
 }
 
-.codexdian-messages::-webkit-scrollbar-track {
+.claudian-messages::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.codexdian-messages::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--codexdian-border-subtle) 78%, transparent);
+.claudian-messages::-webkit-scrollbar-thumb {
+  background: var(--background-modifier-border);
   border-radius: 3px;
 }
 
-.codexdian-messages::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+.claudian-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--background-modifier-border-hover);
 }
 
 /* Response duration footer - styled as another line of content */
-.codexdian-response-footer {
+.claudian-response-footer {
   margin-top: 8px;
-  opacity: 0.88;
 }
 
-.codexdian-baked-duration {
+.claudian-baked-duration {
   color: var(--text-muted);
   font-size: 12px;
   font-weight: 500;
@@ -745,7 +623,7 @@
 }
 
 /* Action buttons toolbar below user messages */
-.codexdian-user-msg-actions {
+.claudian-user-msg-actions {
   position: absolute;
   bottom: -20px;
   right: 0;
@@ -756,55 +634,51 @@
   z-index: 1;
 }
 
-.codexdian-message-user:hover .codexdian-user-msg-actions {
+.claudian-message-user:hover .claudian-user-msg-actions {
   opacity: 1;
 }
 
-.codexdian-user-msg-actions span {
+.claudian-user-msg-actions span {
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
   color: var(--text-faint);
-  transition: color 0.15s, background 0.15s;
+  transition: color 0.15s;
 }
 
-.codexdian-user-msg-actions span svg {
+.claudian-user-msg-actions span svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-user-msg-actions span:hover {
+.claudian-user-msg-actions span:hover {
   color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-soft) 76%, transparent);
 }
 
-.codexdian-user-msg-actions span.copied {
+.claudian-user-msg-actions span.copied {
   color: var(--text-accent);
   font-size: 11px;
   font-family: var(--font-monospace);
 }
 
 /* Compact boundary indicator */
-.codexdian-compact-boundary {
+.claudian-compact-boundary {
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 12px 0;
 }
 
-.codexdian-compact-boundary::before,
-.codexdian-compact-boundary::after {
+.claudian-compact-boundary::before,
+.claudian-compact-boundary::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+  background: var(--background-modifier-border);
 }
 
-.codexdian-compact-boundary-label {
+.claudian-compact-boundary-label {
   color: var(--text-muted);
   font-size: 11px;
   white-space: nowrap;
@@ -815,7 +689,7 @@
    components/nav-sidebar.css
    ============================================ */
 /* Navigation Sidebar */
-.codexdian-nav-sidebar {
+.claudian-nav-sidebar {
     position: absolute;
     right: 2px;
     top: 50%;
@@ -829,48 +703,47 @@
     transition: opacity 0.2s ease;
 }
 
-.codexdian-nav-sidebar.visible {
+.claudian-nav-sidebar.visible {
     opacity: 0.15;
     pointer-events: auto;
 }
 
-.codexdian-nav-sidebar.visible:hover {
+.claudian-nav-sidebar.visible:hover {
     opacity: 1;
 }
 
-.codexdian-nav-btn {
+.claudian-nav-btn {
     width: 32px;
     height: 32px;
     border-radius: 16px;
-    background: color-mix(in srgb, var(--codexdian-surface-soft) 82%, transparent);
-    border: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+    background: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
     color: var(--text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 6px 16px rgba(6, 23, 56, 0.14);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
 }
 
-.codexdian-nav-btn:hover {
-    background: color-mix(in srgb, var(--codexdian-surface-elevated) 88%, transparent);
-    border-color: color-mix(in srgb, var(--codexdian-border-strong) 88%, transparent);
+.claudian-nav-btn:hover {
+    background: var(--background-secondary);
     color: var(--text-normal);
     transform: scale(1.05);
 }
 
-.codexdian-nav-btn svg {
+.claudian-nav-btn svg {
     width: 18px;
     height: 18px;
 }
 
 /* Specific button spacing/grouping if needed */
-.codexdian-nav-btn-top {
+.claudian-nav-btn-top {
     margin-bottom: 4px;
 }
 
-.codexdian-nav-btn-bottom {
+.claudian-nav-btn-bottom {
     margin-top: 4px;
 }
 
@@ -879,47 +752,46 @@
    components/code.css
    ============================================ */
 /* Code block wrapper - contains pre + button outside scroll area */
-.codexdian-code-wrapper {
+.claudian-code-wrapper {
   position: relative;
   margin: 8px 0;
 }
 
 /* Code blocks in chat messages */
-.codexdian-code-wrapper pre,
-.codexdian-message-content pre {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 84%, rgba(var(--codexdian-brand-rgb), 0.06));
-  border: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 80%, transparent);
-  padding: 9px 12px;
-  border-radius: 10px;
+.claudian-code-wrapper pre,
+.claudian-message-content pre {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  border-radius: 6px;
   overflow-x: auto;
   margin: 0;
 }
 
 /* Light mode: use a lighter background so hljs comment colors stay readable */
-body.theme-light .codexdian-code-wrapper pre,
-body.theme-light .codexdian-message-content pre {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 88%, rgba(var(--codexdian-brand-rgb), 0.04));
+body.theme-light .claudian-code-wrapper pre,
+body.theme-light .claudian-message-content pre {
+  background: rgba(0, 0, 0, 0.08);
 }
 
 /* Code blocks without language - wrap content */
-.codexdian-code-wrapper:not(.has-language) pre {
+.claudian-code-wrapper:not(.has-language) pre {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-x: hidden;
 }
 
 /* Unwrapped pre still needs margin */
-.codexdian-message-content>pre {
+.claudian-message-content>pre {
   margin: 8px 0;
 }
 
-.codexdian-message-content code {
+.claudian-message-content code {
   font-family: var(--font-monospace);
   font-size: 13px;
 }
 
 /* Clickable language label - positioned outside scroll area */
-.codexdian-code-wrapper .codexdian-code-lang-label {
+.claudian-code-wrapper .claudian-code-lang-label {
   position: absolute;
   top: 6px;
   inset-inline-end: 6px;
@@ -927,100 +799,98 @@ body.theme-light .codexdian-message-content pre {
   font-size: 12px;
   font-family: var(--font-monospace);
   color: var(--text-faint);
-  background: color-mix(in srgb, var(--codexdian-surface-soft) 88%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
-  border-radius: 999px;
+  background: var(--background-primary);
+  border-radius: 3px;
   cursor: pointer;
   z-index: 2;
   transition: color 0.15s ease, background 0.15s ease;
 }
 
-.codexdian-code-wrapper .codexdian-code-lang-label:hover {
+.claudian-code-wrapper .claudian-code-lang-label:hover {
   color: var(--text-normal);
   background: var(--background-modifier-hover);
 }
 
 /* Hide default copy button when language label exists */
-.codexdian-code-wrapper.has-language .copy-code-button {
+.claudian-code-wrapper.has-language .copy-code-button {
   display: none;
 }
 
 /* Copy button - positioned outside scroll area */
-.codexdian-code-wrapper .copy-code-button {
+.claudian-code-wrapper .copy-code-button {
   position: absolute;
   top: 6px;
   inset-inline-end: 6px;
   padding: 4px 8px;
   font-size: 11px;
-  background: color-mix(in srgb, var(--codexdian-surface-soft) 88%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+  background: var(--background-primary);
   border: none;
   color: var(--text-muted);
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
-  border-radius: 999px;
+  border-radius: 3px;
   z-index: 2;
 }
 
 /* If copy button uses an icon (svg) */
-.codexdian-code-wrapper .copy-code-button svg {
+.claudian-code-wrapper .copy-code-button svg {
   width: 14px;
   height: 14px;
 }
 
 /* Show copy button on hover */
-.codexdian-code-wrapper:not(.has-language):hover .copy-code-button {
+.claudian-code-wrapper:not(.has-language):hover .copy-code-button {
   opacity: 1;
 }
 
-.codexdian-code-wrapper .copy-code-button:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 88%, transparent);
+.claudian-code-wrapper .copy-code-button:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
 /* ============================================
    components/thinking.css
    ============================================ */
-.codexdian-thinking {
-  color: var(--codexdian-brand);
+.claudian-thinking {
+  color: var(--claudian-brand);
   font-style: italic;
   padding: 4px 0;
   text-align: start;
   animation: thinking-pulse 1.5s ease-in-out infinite;
 }
 
-.codexdian-thinking.codexdian-thinking--compact {
-  color: var(--codexdian-compact);
+.claudian-thinking.claudian-thinking--compact {
+  color: var(--claudian-compact);
 }
 
-.codexdian-thinking-hint {
+.claudian-thinking-hint {
   color: var(--text-muted);
   font-style: normal;
   font-variant-numeric: tabular-nums;
 }
 
-.codexdian-thinking-block {
+.claudian-thinking-block {
   margin: 8px 0;
 }
 
-.codexdian-text-block+.codexdian-thinking-block {
+.claudian-text-block+.claudian-thinking-block {
   margin-top: 8px;
 }
 
-.codexdian-thinking-block+.codexdian-text-block {
+.claudian-thinking-block+.claudian-text-block {
   margin-top: 8px;
 }
 
-.codexdian-thinking-block+.codexdian-tool-call {
+.claudian-thinking-block+.claudian-tool-call {
   margin-top: 8px;
 }
 
-.codexdian-tool-call+.codexdian-thinking-block {
+.claudian-tool-call+.claudian-thinking-block {
   margin-top: 8px;
 }
 
-.codexdian-thinking-header {
+.claudian-thinking-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1029,15 +899,15 @@ body.theme-light .codexdian-message-content pre {
   overflow: hidden;
 }
 
-.codexdian-thinking-label {
+.claudian-thinking-label {
   flex: 1;
   font-size: 13px;
   font-weight: 500;
-  color: var(--codexdian-brand);
+  color: var(--claudian-brand);
 }
 
 /* Thinking block content - tree-branch style */
-.codexdian-thinking-content {
+.claudian-thinking-content {
   padding: 4px 0;
   padding-inline-start: 24px;
   font-size: 13px;
@@ -1049,24 +919,24 @@ body.theme-light .codexdian-message-content pre {
   margin-inline-start: 7px;
 }
 
-.codexdian-thinking-content p {
+.claudian-thinking-content p {
   margin: 0 0 8px 0;
 }
 
-.codexdian-thinking-content p:last-child {
+.claudian-thinking-content p:last-child {
   margin-bottom: 0;
 }
 
-.codexdian-thinking-content .codexdian-code-wrapper {
+.claudian-thinking-content .claudian-code-wrapper {
   margin: 8px 0;
 }
 
-.codexdian-thinking-content .codexdian-code-wrapper pre {
+.claudian-thinking-content .claudian-code-wrapper pre {
   padding: 8px 10px;
   border-radius: 4px;
 }
 
-.codexdian-thinking-content code {
+.claudian-thinking-content code {
   font-family: var(--font-monospace);
   font-size: 12px;
 }
@@ -1075,11 +945,11 @@ body.theme-light .codexdian-message-content pre {
 /* ============================================
    components/toolcalls.css
    ============================================ */
-.codexdian-tool-call {
+.claudian-tool-call {
   margin: 8px 0;
 }
 
-.codexdian-tool-header {
+.claudian-tool-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1088,23 +958,23 @@ body.theme-light .codexdian-message-content pre {
   overflow: hidden;
 }
 
-.codexdian-tool-header:hover {
+.claudian-tool-header:hover {
   opacity: 0.85;
 }
 
-.codexdian-tool-icon {
+.claudian-tool-icon {
   display: flex;
   align-items: center;
   color: var(--text-accent);
   flex-shrink: 0;
 }
 
-.codexdian-tool-icon svg {
+.claudian-tool-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-tool-name {
+.claudian-tool-name {
   font-family: var(--font-monospace);
   font-size: 13px;
   font-weight: 400;
@@ -1113,7 +983,7 @@ body.theme-light .codexdian-message-content pre {
   flex-shrink: 0;
 }
 
-.codexdian-tool-summary {
+.claudian-tool-summary {
   font-family: var(--font-monospace);
   font-size: 13px;
   color: var(--text-muted);
@@ -1124,12 +994,12 @@ body.theme-light .codexdian-message-content pre {
   min-width: 0;
 }
 
-.codexdian-tool-summary:empty {
+.claudian-tool-summary:empty {
   display: none;
 }
 
-/* Legacy: StatusPanel bash entries still use codexdian-tool-label */
-.codexdian-tool-label {
+/* Legacy: StatusPanel bash entries still use claudian-tool-label */
+.claudian-tool-label {
   font-family: var(--font-monospace);
   font-size: 13px;
   font-weight: 400;
@@ -1139,47 +1009,47 @@ body.theme-light .codexdian-message-content pre {
   text-overflow: ellipsis;
 }
 
-.codexdian-tool-current {
+.claudian-tool-current {
   font-family: var(--font-monospace);
   font-size: 13px;
   color: var(--text-muted);
   white-space: nowrap;
 }
 
-.codexdian-tool-current:empty {
+.claudian-tool-current:empty {
   display: none;
 }
 
-.codexdian-tool-status {
+.claudian-tool-status {
   display: flex;
   align-items: center;
   flex-shrink: 0;
   margin-left: auto;
 }
 
-.codexdian-tool-status svg {
+.claudian-tool-status svg {
   width: 14px;
   height: 14px;
 }
 
-.codexdian-tool-status.status-running {
+.claudian-tool-status.status-running {
   color: var(--text-accent);
 }
 
-.codexdian-tool-status.status-completed {
+.claudian-tool-status.status-completed {
   color: var(--color-green);
 }
 
-.codexdian-tool-status.status-error {
+.claudian-tool-status.status-error {
   color: var(--color-red);
 }
 
-.codexdian-tool-status.status-blocked {
+.claudian-tool-status.status-blocked {
   color: var(--color-orange);
 }
 
 /* Tool call content - border style (like thinking block) */
-.codexdian-tool-content {
+.claudian-tool-content {
   padding: 4px 0;
   padding-inline-start: 16px;
   margin-inline-start: 7px;
@@ -1187,34 +1057,34 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Tool content variants that render inline widgets instead of bordered results */
-.codexdian-tool-content-todo,
-.codexdian-tool-content-ask {
+.claudian-tool-content-todo,
+.claudian-tool-content-ask {
   border-inline-start: none;
   margin-inline-start: 0;
   padding-inline-start: 0;
 }
 
 /* Expanded content: per-line rendering */
-.codexdian-tool-lines {
+.claudian-tool-lines {
   font-family: var(--font-monospace);
   font-size: 12px;
   line-height: 1.4;
   overflow-x: auto;
 }
 
-.codexdian-tool-line {
+.claudian-tool-line {
   padding: 1px 0;
   color: var(--text-muted);
   white-space: pre;
 }
 
 /* Hover highlight for file search results */
-.codexdian-tool-line.hoverable:hover {
+.claudian-tool-line.hoverable:hover {
   background: var(--background-modifier-hover);
 }
 
 /* Truncation indicator: "... N more lines" */
-.codexdian-tool-truncated {
+.claudian-tool-truncated {
   color: var(--text-faint);
   font-style: italic;
   padding: 4px 0;
@@ -1222,33 +1092,8 @@ body.theme-light .codexdian-message-content pre {
   font-size: 12px;
 }
 
-/* ToolSearch expanded: icon + tool name rows */
-.codexdian-tool-search-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 0;
-  font-family: var(--font-monospace);
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.codexdian-tool-search-icon {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  width: 14px;
-  height: 14px;
-  color: var(--text-faint);
-}
-
-.codexdian-tool-search-icon svg {
-  width: 14px;
-  height: 14px;
-}
-
 /* Web search links */
-.codexdian-tool-link {
+.claudian-tool-link {
   display: flex;
   align-items: flex-start;
   gap: 6px;
@@ -1261,11 +1106,11 @@ body.theme-light .codexdian-message-content pre {
   line-height: 1.4;
 }
 
-.codexdian-tool-link:hover {
+.claudian-tool-link:hover {
   color: var(--text-accent);
 }
 
-.codexdian-tool-link-icon {
+.claudian-tool-link-icon {
   flex-shrink: 0;
   width: 12px;
   height: 12px;
@@ -1273,19 +1118,19 @@ body.theme-light .codexdian-message-content pre {
   color: var(--text-faint);
 }
 
-.codexdian-tool-link-icon svg {
+.claudian-tool-link-icon svg {
   width: 12px;
   height: 12px;
 }
 
-.codexdian-tool-link-title {
+.claudian-tool-link-title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 /* Web search summary section */
-.codexdian-tool-web-summary {
+.claudian-tool-web-summary {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-muted);
@@ -1299,7 +1144,7 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Empty state for file search */
-.codexdian-tool-empty {
+.claudian-tool-empty {
   color: var(--text-faint);
   font-style: italic;
   font-family: var(--font-monospace);
@@ -1307,12 +1152,12 @@ body.theme-light .codexdian-message-content pre {
   padding: 4px 0;
 }
 
-.codexdian-tool-result-row {
+.claudian-tool-result-row {
   display: flex;
   align-items: flex-start;
 }
 
-.codexdian-tool-result-text {
+.claudian-tool-result-text {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-muted);
@@ -1322,12 +1167,12 @@ body.theme-light .codexdian-message-content pre {
   flex: 1;
 }
 
-.codexdian-tool-result-item {
+.claudian-tool-result-item {
   display: block;
   margin-bottom: 2px;
 }
 
-.codexdian-tool-result-item:last-child {
+.claudian-tool-result-item:last-child {
   margin-bottom: 0;
 }
 
@@ -1338,111 +1183,108 @@ body.theme-light .codexdian-message-content pre {
    ============================================ */
 /* Status Panel - persistent bottom panel for async subagents and todos */
 
-.codexdian-status-panel-container {
+.claudian-status-panel-container {
   flex-shrink: 0;
   padding: 0 14px;
 }
 
-.codexdian-status-panel {
+.claudian-status-panel {
   padding-top: 12px;
-  border-top: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 76%, transparent);
 }
 
 /* Async Subagent Section */
 
-.codexdian-status-panel-subagents {
+.claudian-status-panel-subagents {
   margin-bottom: 4px;
 }
 
-.codexdian-status-panel-done-row {
+.claudian-status-panel-done-row {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 2px 0;
 }
 
-.codexdian-status-panel-combined-row {
+.claudian-status-panel-combined-row {
   justify-content: flex-start;
 }
 
-.codexdian-status-panel-combined-row .codexdian-status-panel-done-text {
+.claudian-status-panel-combined-row .claudian-status-panel-done-text {
   flex: 1;
 }
 
-.codexdian-status-panel-icon.codexdian-status-panel-done-icon {
+.claudian-status-panel-icon.claudian-status-panel-done-icon {
   color: var(--color-green);
 }
 
-.codexdian-status-panel-icon.codexdian-status-panel-bot-icon {
-  color: var(--codexdian-brand);
+.claudian-status-panel-icon.claudian-status-panel-bot-icon {
+  color: var(--interactive-accent);
 }
 
-.codexdian-status-panel-done-text {
+.claudian-status-panel-done-text {
   font-family: var(--font-monospace);
   font-size: 13px;
   color: var(--text-normal);
 }
 
-.codexdian-status-panel-running-row {
+.claudian-status-panel-running-row {
   display: flex;
   justify-content: flex-end;
   padding: 2px 0;
 }
 
-.codexdian-status-panel-running-text {
+.claudian-status-panel-running-text {
   font-family: var(--font-monospace);
   font-size: 13px;
-  color: color-mix(in srgb, var(--codexdian-accent) 84%, var(--text-normal));
+  color: var(--color-cyan);
 }
 
 /* Todo Section */
 
-.codexdian-status-panel-todos {
+.claudian-status-panel-todos {
   margin-top: 4px;
 }
 
-.codexdian-status-panel-header {
+.claudian-status-panel-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 7px;
+  padding: 4px 0;
   cursor: pointer;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  border-radius: 4px;
+  transition: background 0.15s ease;
   overflow: hidden;
 }
 
-.codexdian-status-panel-header:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-soft) 80%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-subtle) 82%, transparent);
+.claudian-status-panel-header:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-status-panel-header:focus-visible {
+.claudian-status-panel-header:focus-visible {
   outline: 2px solid var(--interactive-accent);
   outline-offset: 2px;
 }
 
-.codexdian-status-panel-icon {
+.claudian-status-panel-icon {
   display: flex;
   align-items: center;
   color: var(--text-accent);
   flex-shrink: 0;
 }
 
-.codexdian-status-panel-icon svg {
+.claudian-status-panel-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-status-panel-label {
+.claudian-status-panel-label {
   font-family: var(--font-monospace);
   font-size: 13px;
   font-weight: 500;
   color: var(--text-normal);
 }
 
-.codexdian-status-panel-current {
+.claudian-status-panel-current {
   flex: 1;
   font-family: var(--font-monospace);
   font-size: 13px;
@@ -1452,44 +1294,44 @@ body.theme-light .codexdian-message-content pre {
   white-space: nowrap;
 }
 
-.codexdian-status-panel-status {
+.claudian-status-panel-status {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
-.codexdian-status-panel-status svg {
+.claudian-status-panel-status svg {
   width: 14px;
   height: 14px;
 }
 
-.codexdian-status-panel-status.status-completed {
+.claudian-status-panel-status.status-completed {
   color: var(--color-green);
 }
 
-.codexdian-status-panel-content {
+.claudian-status-panel-content {
   padding: 2px 0;
 }
 
-/* Individual todo item - shared by status panel and inline tool via .codexdian-todo-list-container */
-.codexdian-todo-list-container .codexdian-todo-item {
+/* Individual todo item - shared by status panel and inline tool via .claudian-todo-list-container */
+.claudian-todo-list-container .claudian-todo-item {
   display: flex;
   align-items: flex-start;
   padding: 1px 0;
 }
 
-.codexdian-todo-list-container .codexdian-todo-status-icon {
+.claudian-todo-list-container .claudian-todo-status-icon {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
-.codexdian-todo-list-container .codexdian-todo-status-icon svg {
+.claudian-todo-list-container .claudian-todo-status-icon svg {
   width: 12px;
   height: 12px;
 }
 
-.codexdian-todo-list-container .codexdian-todo-text {
+.claudian-todo-list-container .claudian-todo-text {
   font-family: var(--font-monospace);
   font-size: 12px;
   line-height: 1.4;
@@ -1497,55 +1339,55 @@ body.theme-light .codexdian-message-content pre {
   padding-left: 12px;
 }
 
-.codexdian-todo-list-container .codexdian-todo-pending .codexdian-todo-status-icon {
+.claudian-todo-list-container .claudian-todo-pending .claudian-todo-status-icon {
   color: var(--text-normal);
 }
 
-.codexdian-todo-list-container .codexdian-todo-pending .codexdian-todo-status-icon svg {
+.claudian-todo-list-container .claudian-todo-pending .claudian-todo-status-icon svg {
   transform: scale(2);
 }
 
-.codexdian-todo-list-container .codexdian-todo-pending .codexdian-todo-text {
+.claudian-todo-list-container .claudian-todo-pending .claudian-todo-text {
   color: var(--text-normal);
 }
 
-.codexdian-todo-list-container .codexdian-todo-in_progress .codexdian-todo-status-icon {
+.claudian-todo-list-container .claudian-todo-in_progress .claudian-todo-status-icon {
   color: var(--interactive-accent);
 }
 
-.codexdian-todo-list-container .codexdian-todo-in_progress .codexdian-todo-status-icon svg {
+.claudian-todo-list-container .claudian-todo-in_progress .claudian-todo-status-icon svg {
   transform: scale(2);
 }
 
-.codexdian-todo-list-container .codexdian-todo-in_progress .codexdian-todo-text {
+.claudian-todo-list-container .claudian-todo-in_progress .claudian-todo-text {
   color: var(--text-normal);
 }
 
-.codexdian-todo-list-container .codexdian-todo-completed .codexdian-todo-status-icon {
+.claudian-todo-list-container .claudian-todo-completed .claudian-todo-status-icon {
   color: var(--color-green);
 }
 
-.codexdian-todo-list-container .codexdian-todo-completed .codexdian-todo-text {
+.claudian-todo-list-container .claudian-todo-completed .claudian-todo-text {
   color: var(--text-muted);
 }
 
 /* Bash Output Section */
 
-.codexdian-status-panel-bash {
+.claudian-status-panel-bash {
   margin-bottom: 4px;
 }
 
-.codexdian-status-panel-bash-header {
+.claudian-status-panel-bash-header {
   padding: 4px 0;
 }
 
-.codexdian-status-panel-bash-actions {
+.claudian-status-panel-bash-actions {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.codexdian-status-panel-bash-action {
+.claudian-status-panel-bash-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1555,12 +1397,12 @@ body.theme-light .codexdian-message-content pre {
   color: var(--text-muted);
 }
 
-.codexdian-status-panel-bash-action:hover {
+.claudian-status-panel-bash-action:hover {
   background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.codexdian-status-panel-bash-content {
+.claudian-status-panel-bash-content {
   padding-top: 2px;
   max-height: 320px;
   max-height: min(40vh, 320px);
@@ -1568,23 +1410,23 @@ body.theme-light .codexdian-message-content pre {
   overscroll-behavior: contain;
 }
 
-.codexdian-status-panel-bash-entry {
+.claudian-status-panel-bash-entry {
   margin: 4px 0;
 }
 
-.codexdian-status-panel-bash-entry .codexdian-tool-icon svg {
+.claudian-status-panel-bash-entry .claudian-tool-icon svg {
   width: 14px;
   height: 14px;
   position: relative;
   top: -1px;
 }
 
-.codexdian-status-panel-bash-entry .codexdian-tool-call {
+.claudian-status-panel-bash-entry .claudian-tool-call {
   margin: 0;
 }
 
 /* Keep bash output blocks from growing without bound */
-.codexdian-status-panel-bash-entry .codexdian-tool-result-text {
+.claudian-status-panel-bash-entry .claudian-tool-result-text {
   max-height: 200px;
   overflow-y: auto;
   word-break: break-word;
@@ -1594,27 +1436,27 @@ body.theme-light .codexdian-message-content pre {
 /* ============================================
    components/subagent.css
    ============================================ */
-.codexdian-subagent-list {
+.claudian-subagent-list {
   margin: 8px 0;
 }
 
-.codexdian-text-block+.codexdian-subagent-list {
+.claudian-text-block+.claudian-subagent-list {
   margin-top: 8px;
 }
 
-.codexdian-subagent-list+.codexdian-text-block {
+.claudian-subagent-list+.claudian-text-block {
   margin-top: 8px;
 }
 
-.codexdian-tool-call+.codexdian-subagent-list {
+.claudian-tool-call+.claudian-subagent-list {
   margin-top: 8px;
 }
 
-.codexdian-subagent-list+.codexdian-tool-call {
+.claudian-subagent-list+.claudian-tool-call {
   margin-top: 8px;
 }
 
-.codexdian-subagent-header {
+.claudian-subagent-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1623,19 +1465,19 @@ body.theme-light .codexdian-message-content pre {
   overflow: hidden;
 }
 
-.codexdian-subagent-icon {
+.claudian-subagent-icon {
   display: flex;
   align-items: center;
   color: var(--interactive-accent);
   flex-shrink: 0;
 }
 
-.codexdian-subagent-icon svg {
+.claudian-subagent-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-subagent-label {
+.claudian-subagent-label {
   flex: 1;
   font-family: var(--font-monospace);
   font-size: 13px;
@@ -1643,47 +1485,47 @@ body.theme-light .codexdian-message-content pre {
   color: var(--text-normal);
 }
 
-.codexdian-subagent-count {
+.claudian-subagent-count {
   font-size: 11px;
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.codexdian-subagent-status {
+.claudian-subagent-status {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
-.codexdian-subagent-status svg {
+.claudian-subagent-status svg {
   width: 14px;
   height: 14px;
 }
 
-.codexdian-subagent-status.status-running {
+.claudian-subagent-status.status-running {
   color: var(--text-accent);
 }
 
-.codexdian-subagent-status.status-completed {
+.claudian-subagent-status.status-completed {
   color: var(--color-green);
 }
 
-.codexdian-subagent-status.status-error {
+.claudian-subagent-status.status-error {
   color: var(--color-red);
 }
 
-.codexdian-subagent-content {
+.claudian-subagent-content {
   padding: 4px 0;
   padding-inline-start: 16px;
   margin-inline-start: 7px;
   border-inline-start: 2px solid var(--background-modifier-border);
 }
 
-.codexdian-subagent-section {
+.claudian-subagent-section {
   margin: 2px 0 6px;
 }
 
-.codexdian-subagent-section-header {
+.claudian-subagent-section-header {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1695,21 +1537,21 @@ body.theme-light .codexdian-message-content pre {
   padding: 2px 0;
 }
 
-.codexdian-subagent-section-header:hover {
+.claudian-subagent-section-header:hover {
   color: var(--text-normal);
 }
 
-.codexdian-subagent-section-title {
+.claudian-subagent-section-title {
   flex: 1;
   min-width: 0;
 }
 
-.codexdian-subagent-section-body {
+.claudian-subagent-section-body {
   padding-inline-start: 6px;
 }
 
-.codexdian-subagent-prompt-text,
-.codexdian-subagent-result-output {
+.claudian-subagent-prompt-text,
+.claudian-subagent-result-output {
   font-family: var(--font-monospace);
   font-size: 12px;
   line-height: 1.4;
@@ -1718,22 +1560,22 @@ body.theme-light .codexdian-message-content pre {
   word-break: break-word;
 }
 
-.codexdian-subagent-result-output {
+.claudian-subagent-result-output {
   max-height: 220px;
   overflow-y: auto;
 }
 
-.codexdian-subagent-tools {
+.claudian-subagent-tools {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.codexdian-subagent-tool-item {
+.claudian-subagent-tool-item {
   display: block;
 }
 
-.codexdian-subagent-tool-header {
+.claudian-subagent-tool-header {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1742,23 +1584,23 @@ body.theme-light .codexdian-message-content pre {
   padding: 2px 0;
 }
 
-.codexdian-subagent-tool-header:hover {
+.claudian-subagent-tool-header:hover {
   opacity: 0.85;
 }
 
-.codexdian-subagent-tool-icon {
+.claudian-subagent-tool-icon {
   display: flex;
   align-items: center;
   color: var(--text-accent);
   flex-shrink: 0;
 }
 
-.codexdian-subagent-tool-icon svg {
+.claudian-subagent-tool-icon svg {
   width: 13px;
   height: 13px;
 }
 
-.codexdian-subagent-tool-name {
+.claudian-subagent-tool-name {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-normal);
@@ -1766,7 +1608,7 @@ body.theme-light .codexdian-message-content pre {
   flex-shrink: 0;
 }
 
-.codexdian-subagent-tool-summary {
+.claudian-subagent-tool-summary {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-muted);
@@ -1777,35 +1619,35 @@ body.theme-light .codexdian-message-content pre {
   min-width: 0;
 }
 
-.codexdian-subagent-tool-status {
+.claudian-subagent-tool-status {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
-.codexdian-subagent-tool-status svg {
+.claudian-subagent-tool-status svg {
   width: 12px;
   height: 12px;
 }
 
-.codexdian-subagent-tool-status.status-running {
+.claudian-subagent-tool-status.status-running {
   color: var(--text-accent);
 }
 
-.codexdian-subagent-tool-status.status-completed {
+.claudian-subagent-tool-status.status-completed {
   color: var(--color-green);
 }
 
-.codexdian-subagent-tool-status.status-error,
-.codexdian-subagent-tool-status.status-blocked {
+.claudian-subagent-tool-status.status-error,
+.claudian-subagent-tool-status.status-blocked {
   color: var(--color-red);
 }
 
-.codexdian-subagent-tool-content {
+.claudian-subagent-tool-content {
   padding: 2px 0 2px 16px;
 }
 
-.codexdian-subagent-tool-empty {
+.claudian-subagent-tool-empty {
   color: var(--text-faint);
   font-style: italic;
   font-family: var(--font-monospace);
@@ -1813,7 +1655,7 @@ body.theme-light .codexdian-message-content pre {
   padding: 2px 0;
 }
 
-.codexdian-subagent-status-text {
+.claudian-subagent-status-text {
   font-size: 11px;
   font-family: var(--font-monospace);
   color: var(--text-muted);
@@ -1821,31 +1663,31 @@ body.theme-light .codexdian-message-content pre {
   padding-inline-start: 8px;
 }
 
-.codexdian-subagent-list.async .codexdian-subagent-icon {
+.claudian-subagent-list.async .claudian-subagent-icon {
   color: var(--interactive-accent);
 }
 
-.codexdian-subagent-list.async.pending .codexdian-subagent-status-text {
+.claudian-subagent-list.async.pending .claudian-subagent-status-text {
   color: var(--text-muted);
 }
 
-.codexdian-subagent-list.async.running .codexdian-subagent-status-text {
+.claudian-subagent-list.async.running .claudian-subagent-status-text {
   color: var(--text-accent);
 }
 
-.codexdian-subagent-list.async.awaiting .codexdian-subagent-status-text {
+.claudian-subagent-list.async.awaiting .claudian-subagent-status-text {
   color: var(--color-yellow);
 }
 
-.codexdian-subagent-list.async.completed .codexdian-subagent-status-text {
+.claudian-subagent-list.async.completed .claudian-subagent-status-text {
   color: var(--color-green);
 }
 
-.codexdian-subagent-list.async.error .codexdian-subagent-status-text {
+.claudian-subagent-list.async.error .claudian-subagent-status-text {
   color: var(--color-red);
 }
 
-.codexdian-subagent-list.async.orphaned .codexdian-subagent-status-text {
+.claudian-subagent-list.async.orphaned .claudian-subagent-status-text {
   color: var(--color-orange);
 }
 
@@ -1854,173 +1696,152 @@ body.theme-light .codexdian-message-content pre {
    components/input.css
    ============================================ */
 /* Input area */
-.codexdian-input-container {
+.claudian-input-container {
   position: relative;
-  padding: 10px 0 2px 0;
+  padding: 12px 0 0 0;
 }
 
 /* Input wrapper (border container) - flex column so textarea expands when no chips */
 /* Height calculation: context row (36px) + textarea min (60px) + toolbar (38px) + border (2px) = 136px */
-.codexdian-input-wrapper {
+.claudian-input-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   min-height: 140px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 88%, transparent);
-  border-radius: var(--codexdian-radius-lg);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 84%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 88%, transparent));
-  backdrop-filter: blur(18px) saturate(128%);
-  -webkit-backdrop-filter: blur(18px) saturate(128%);
-  box-shadow:
-    0 1px 0 var(--codexdian-glass-sheen) inset,
-    var(--codexdian-shadow-soft);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-.codexdian-input-wrapper:focus-within {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 42%, var(--codexdian-border-strong));
-  box-shadow:
-    0 0 0 1px var(--codexdian-ring),
-    var(--codexdian-shadow-deep);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-primary);
 }
 
 /* Context row (file chip start, selection indicator end) - inside input wrapper at top */
 /* Collapsed by default; expanded via .has-content class; textarea fills remaining space */
-.codexdian-context-row {
+.claudian-context-row {
   display: none;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-shrink: 0;
-  padding: 8px 10px 0 10px;
+  padding: 6px 10px 0 10px;
   gap: 8px;
 }
 
 /* Show context row when it has visible content */
-.codexdian-context-row.has-content {
+.claudian-context-row.has-content {
   display: flex;
 }
 
 /* Nav row (tab badges start, header icons end) - above input wrapper */
-.codexdian-input-nav-row {
+.claudian-input-nav-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2px 6px 2px;
+  padding: 0 0 8px 0;
   min-height: 0;
 }
 
 /* Header mode: hide nav row above input (content moved to header) */
-.codexdian-container--header-mode .codexdian-input-nav-row {
+.claudian-container--header-mode .claudian-input-nav-row {
   display: none;
 }
 
 /* Selection indicator (shown when text is selected in editor) */
 /* Match file chip height (24px): chip has 16px remove button + 6px padding + 2px border */
 /* Indicator: 12px text + 10px padding (5+5) + 2px border = 24px */
-.codexdian-selection-indicator,
-.codexdian-browser-selection-indicator,
-.codexdian-canvas-indicator {
-  color: color-mix(in srgb, var(--codexdian-brand) 56%, var(--text-normal));
+.claudian-selection-indicator,
+.claudian-canvas-indicator {
+  color: #7abaff;
   font-size: 12px;
   line-height: 1;
   opacity: 0.9;
   pointer-events: none;
   white-space: nowrap;
   padding: 5px 6px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 82%, transparent);
+  border: 1px solid transparent;
+  border-radius: 4px;
   margin-inline-start: auto;
   flex-shrink: 0;
-  order: 4;
-  max-width: min(100%, clamp(220px, 64vw, 560px));
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.codexdian-input {
+.claudian-input {
   width: 100%;
   flex: 1 1 0;
   min-height: 60px;
   /* max-height dynamically set by JS: max(150px, 55% of view height) */
   resize: none;
-  padding: 9px 10px 10px 10px;
+  padding: 8px 10px 10px 10px;
   border: none !important;
   border-radius: 6px;
   background: transparent !important;
   color: var(--text-normal);
-  font-family: var(--codexdian-body-font);
-  font-size: 13px;
-  line-height: 1.5;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
   box-shadow: none !important;
   overflow-y: auto;
   unicode-bidi: plaintext; /* Proper BiDi text handling for mixed RTL/LTR */
 }
 
-.codexdian-input:hover,
-.codexdian-input:focus {
+.claudian-input:hover,
+.claudian-input:focus {
   outline: none !important;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
-.codexdian-input::placeholder {
-  color: color-mix(in srgb, var(--text-muted) 92%, var(--text-normal));
+.claudian-input::placeholder {
+  color: var(--text-muted);
 }
 
 /* Input toolbar */
-.codexdian-input-toolbar {
+.claudian-input-toolbar {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  padding: 8px 10px 10px 10px;
-  border-top: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 82%, transparent);
+  padding: 4px 6px 6px 6px;
 }
 
 /* File indicator (attached files) */
-.codexdian-file-indicator {
+.claudian-file-indicator {
   display: none;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.codexdian-file-chip {
+.claudian-file-chip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 7px 4px 8px;
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 84%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  border-radius: 999px;
+  padding: 3px 6px 3px 8px;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 12px;
   font-size: 12px;
   line-height: 1;
   max-width: 200px;
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.codexdian-file-chip-icon {
+.claudian-file-chip-icon {
   display: flex;
   align-items: center;
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.codexdian-file-chip-icon svg {
+.claudian-file-chip-icon svg {
   width: 12px;
   height: 12px;
 }
 
-.codexdian-file-chip-name {
+.claudian-file-chip-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--text-normal);
 }
 
-.codexdian-file-chip-remove {
+.claudian-file-chip-remove {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2034,18 +1855,17 @@ body.theme-light .codexdian-message-content pre {
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.codexdian-file-chip-remove:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 82%, transparent);
+.claudian-file-chip-remove:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.codexdian-file-chip:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 80%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+.claudian-file-chip:hover {
+  background: var(--background-modifier-hover);
 }
 
 /* Message Queue Indicator (shown below flavor text in thinking indicator) */
-.codexdian-queue-indicator {
+.claudian-queue-indicator {
   display: none;
   font-size: 12px;
   color: var(--text-muted);
@@ -2057,19 +1877,19 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Light blue border when instruction mode is active */
-.codexdian-input-instruction-mode {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 56%, var(--codexdian-border-strong)) !important;
-  box-shadow: 0 0 0 1px var(--codexdian-ring-strong);
+.claudian-input-instruction-mode {
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 0 1px #60a5fa;
 }
 
 /* Pink border when bash mode is active */
-.codexdian-input-bang-bash-mode {
-  border-color: color-mix(in srgb, var(--codexdian-accent) 62%, var(--codexdian-border-strong)) !important;
-  box-shadow: 0 0 0 1px rgba(var(--codexdian-accent-rgb), 0.34);
+.claudian-input-bang-bash-mode {
+  border-color: #f472b6 !important;
+  box-shadow: 0 0 0 1px #f472b6;
 }
 
 /* Monospace input while in bash mode */
-.codexdian-input-wrapper.codexdian-input-bang-bash-mode .codexdian-input {
+.claudian-input-wrapper.claudian-input-bang-bash-mode .claudian-input {
   font-family: var(--font-monospace);
 }
 
@@ -2079,7 +1899,7 @@ body.theme-light .codexdian-message-content pre {
    ============================================ */
 /* Context usage meter (inline in toolbar) */
 
-.codexdian-context-meter {
+.claudian-context-meter {
   position: relative;
   display: flex;
   align-items: center;
@@ -2089,7 +1909,7 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Custom tooltip */
-.codexdian-context-meter::after {
+.claudian-context-meter::after {
   content: attr(data-tooltip);
   position: absolute;
   bottom: 100%;
@@ -2099,9 +1919,9 @@ body.theme-light .codexdian-message-content pre {
   padding: 4px 8px;
   font-size: 11px;
   color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 92%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
-  border-radius: 7px;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
@@ -2110,12 +1930,12 @@ body.theme-light .codexdian-message-content pre {
   z-index: 100;
 }
 
-.codexdian-context-meter:hover::after {
+.claudian-context-meter:hover::after {
   opacity: 1;
   visibility: visible;
 }
 
-.codexdian-context-meter-gauge {
+.claudian-context-meter-gauge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2123,34 +1943,34 @@ body.theme-light .codexdian-message-content pre {
   height: 24px;
 }
 
-.codexdian-context-meter-gauge svg {
+.claudian-context-meter-gauge svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-meter-bg {
-  stroke: color-mix(in srgb, var(--codexdian-border-subtle) 86%, transparent);
+.claudian-meter-bg {
+  stroke: var(--background-modifier-border);
 }
 
-.codexdian-meter-fill {
-  stroke: var(--codexdian-brand);
+.claudian-meter-fill {
+  stroke: var(--claudian-brand);
   transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
 }
 
-.codexdian-context-meter-percent {
+.claudian-context-meter-percent {
   font-size: 11px;
-  color: var(--codexdian-brand);
+  color: var(--claudian-brand);
   min-width: 24px;
   text-align: end;
   transition: color 0.3s ease;
 }
 
 /* Warning state (> 80%) - pale red */
-.codexdian-context-meter.warning .codexdian-meter-fill {
+.claudian-context-meter.warning .claudian-meter-fill {
   stroke: #E57373;
 }
 
-.codexdian-context-meter.warning .codexdian-context-meter-percent {
+.claudian-context-meter.warning .claudian-context-meter-percent {
   color: #E57373;
 }
 
@@ -2159,148 +1979,83 @@ body.theme-light .codexdian-message-content pre {
    toolbar/model-selector.css
    ============================================ */
 /* Model selector */
-.codexdian-model-selector {
+.claudian-model-selector {
   position: relative;
 }
 
-.codexdian-model-btn {
+.claudian-model-btn {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 9px;
-  min-width: 0;
-  max-width: 220px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 80%, transparent);
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
   cursor: pointer;
   color: var(--text-muted);
   font-size: 12px;
-  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.codexdian-model-btn:hover {
-  color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 80%, transparent);
+.claudian-model-btn.ready {
+  color: var(--claudian-brand);
 }
 
-.codexdian-model-btn.ready {
-  color: var(--codexdian-brand);
-}
-
-.codexdian-model-label {
+.claudian-model-label {
   font-weight: 500;
-  min-width: 0;
-  max-width: 176px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.codexdian-model-chevron {
+.claudian-model-chevron {
   display: flex;
   align-items: center;
 }
 
-.codexdian-toolbar-hint {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 7px 10px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--codexdian-glass-bg-strong) 84%, transparent),
-    color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent)
-  );
-  box-shadow: var(--codexdian-shadow-soft);
-  backdrop-filter: blur(15px) saturate(120%);
-  -webkit-backdrop-filter: blur(15px) saturate(120%);
-  min-width: 174px;
-  max-width: 240px;
-  pointer-events: none;
-  z-index: 1002;
-  opacity: 0;
-  transform: translateY(-2px) scale(0.98);
-  transform-origin: top left;
-  transition: opacity 0.14s ease, transform 0.14s ease;
-}
-
-.codexdian-toolbar-hint-title {
-  font-size: 10px;
-  line-height: 1.2;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--codexdian-brand) 70%, var(--text-normal));
-  font-weight: 700;
-}
-
-.codexdian-toolbar-hint-desc {
-  font-size: 11px;
-  line-height: 1.25;
-  color: var(--text-muted);
-}
-
-.codexdian-model-btn:hover + .codexdian-toolbar-hint {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.codexdian-model-chevron svg {
+.claudian-model-chevron svg {
   width: 12px;
   height: 12px;
 }
 
-.codexdian-model-dropdown {
+.claudian-model-dropdown {
   position: absolute;
   bottom: 100%;
   left: 0;
-  margin-bottom: 6px;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
-  border-radius: 10px;
-  box-shadow: var(--codexdian-shadow-soft);
-  backdrop-filter: blur(16px) saturate(125%);
-  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   width: max-content;
-  padding: 6px;
+  padding: 4px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.15s ease, visibility 0.15s ease;
 }
 
-.codexdian-model-selector:hover .codexdian-model-dropdown {
+.claudian-model-selector:hover .claudian-model-dropdown {
   opacity: 1;
   visibility: visible;
 }
 
-.codexdian-model-option {
-  padding: 5px 9px;
+.claudian-model-option {
+  padding: 4px 8px;
   cursor: pointer;
   font-size: 12px;
   color: var(--text-muted);
-  border-radius: 7px;
+  border-radius: 3px;
   transition: background 0.1s ease, color 0.1s ease;
   white-space: nowrap;
 }
 
-.codexdian-model-option:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
+.claudian-model-option:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.codexdian-model-option.selected {
-  background: rgba(var(--codexdian-brand-rgb), 0.15);
-  color: var(--codexdian-brand);
+.claudian-model-option.selected {
+  background: rgba(var(--claudian-brand-rgb), 0.15);
+  color: var(--claudian-brand);
   font-weight: 500;
 }
 
@@ -2308,117 +2063,80 @@ body.theme-light .codexdian-message-content pre {
 /* ============================================
    toolbar/thinking-selector.css
    ============================================ */
-/* Thinking selector (effort for adaptive models, token budget for custom) */
-.codexdian-thinking-selector {
+/* Thinking budget selector */
+.claudian-thinking-selector {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  margin-left: 12px;
 }
 
-/* Effort / budget container (shared layout) */
-.codexdian-thinking-effort,
-.codexdian-thinking-budget {
+.claudian-thinking-label-text {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.claudian-thinking-gears {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.codexdian-thinking-label-text {
-  font-size: 10px;
-  color: color-mix(in srgb, var(--text-muted) 94%, var(--text-normal));
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.codexdian-thinking-label-text--effort {
-  color: color-mix(in srgb, var(--text-muted) 90%, var(--text-normal));
-}
-
-.codexdian-thinking-gears {
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-radius: 999px;
-}
-
-.codexdian-toolbar-hint--thinking {
-  top: calc(100% + 8px);
-  left: 0;
-}
-
-.codexdian-thinking-gears:hover + .codexdian-toolbar-hint--thinking {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  border-radius: 4px;
 }
 
 /* Current selection (visible when collapsed) */
-.codexdian-thinking-current {
-  padding: 4px 9px;
+.claudian-thinking-current {
+  padding: 3px 8px;
   font-size: 11px;
-  color: color-mix(in srgb, var(--codexdian-brand) 58%, var(--text-normal));
-  font-weight: 600;
+  color: var(--claudian-brand);
+  font-weight: 500;
   cursor: pointer;
-  border-radius: 999px;
+  border-radius: 3px;
   white-space: nowrap;
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 84%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
-  line-height: 1.1;
-  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
-}
-
-.codexdian-thinking-current:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 78%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+  background: transparent;
 }
 
 /* Options container - expands vertically upward */
-.codexdian-thinking-options {
+.claudian-thinking-options {
   position: absolute;
   left: 0;
   bottom: 100%;
-  margin-bottom: 6px;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
-  border-radius: 10px;
-  padding: 5px;
-  box-shadow: var(--codexdian-shadow-soft);
-  backdrop-filter: blur(16px) saturate(125%);
-  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 4px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.15s ease, visibility 0.15s ease;
 }
 
 /* Expand on hover */
-.codexdian-thinking-gears:hover .codexdian-thinking-options {
+.claudian-thinking-gears:hover .claudian-thinking-options {
   opacity: 1;
   visibility: visible;
 }
 
-.codexdian-thinking-gear {
-  padding: 6px 10px;
+.claudian-thinking-gear {
+  padding: 3px 8px;
   font-size: 11px;
   color: var(--text-muted);
   cursor: pointer;
-  border-radius: 7px;
+  border-radius: 3px;
   transition: background 0.1s ease, color 0.1s ease;
   white-space: nowrap;
 }
 
-.codexdian-thinking-gear:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
+.claudian-thinking-gear:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.codexdian-thinking-gear.selected {
-  background: rgba(var(--codexdian-brand-rgb), 0.15);
-  color: var(--codexdian-brand);
+.claudian-thinking-gear.selected {
+  background: rgba(var(--claudian-brand-rgb), 0.15);
+  color: var(--claudian-brand);
   font-weight: 500;
 }
 
@@ -2427,7 +2145,7 @@ body.theme-light .codexdian-message-content pre {
    toolbar/permission-toggle.css
    ============================================ */
 /* Permission Mode Toggle */
-.codexdian-permission-toggle {
+.claudian-permission-toggle {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -2436,53 +2154,51 @@ body.theme-light .codexdian-message-content pre {
   padding-right: 8px;
 }
 
-.codexdian-permission-label {
+.claudian-permission-label {
   font-size: 11px;
-  color: color-mix(in srgb, var(--text-muted) 84%, var(--codexdian-brand) 16%);
+  color: var(--text-muted);
   min-width: 28px;
 }
 
-.codexdian-permission-label.plan-active {
+.claudian-permission-label.plan-active {
   color: rgb(92, 148, 140);
   font-weight: 600;
 }
 
-.codexdian-toggle-switch {
+.claudian-toggle-switch {
   width: 32px;
   height: 18px;
   border-radius: 9px;
-  background: color-mix(in srgb, var(--codexdian-surface-strong) 86%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-border-subtle) 84%, transparent);
+  background: var(--background-modifier-border);
   cursor: pointer;
   position: relative;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease;
   flex-shrink: 0;
 }
 
-.codexdian-toggle-switch::after {
+.claudian-toggle-switch::after {
   content: '';
   position: absolute;
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--text-muted) 82%, var(--background-primary));
+  background: var(--text-muted);
   top: 2px;
   left: 2px;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.codexdian-toggle-switch:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 88%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 90%, transparent);
+.claudian-toggle-switch:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-toggle-switch.active {
-  background: rgba(var(--codexdian-brand-rgb), 0.3);
+.claudian-toggle-switch.active {
+  background: rgba(var(--claudian-brand-rgb), 0.3);
 }
 
-.codexdian-toggle-switch.active::after {
+.claudian-toggle-switch.active::after {
   transform: translateX(14px);
-  background: var(--codexdian-brand);
+  background: var(--claudian-brand);
 }
 
 
@@ -2490,14 +2206,14 @@ body.theme-light .codexdian-message-content pre {
    toolbar/external-context.css
    ============================================ */
 /* External Context Selector */
-.codexdian-external-context-selector {
+.claudian-external-context-selector {
   position: relative;
   display: flex;
   align-items: center;
   margin-left: 8px;
 }
 
-.codexdian-external-context-icon-wrapper {
+.claudian-external-context-icon-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -2505,90 +2221,83 @@ body.theme-light .codexdian-message-content pre {
   cursor: pointer;
 }
 
-.codexdian-external-context-icon {
+.claudian-external-context-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 80%, transparent);
   color: var(--text-faint);
-  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease;
 }
 
-.codexdian-external-context-icon-wrapper:hover .codexdian-external-context-icon {
+.claudian-external-context-icon-wrapper:hover .claudian-external-context-icon {
   color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 80%, transparent);
 }
 
-.codexdian-external-context-icon.active {
-  color: var(--codexdian-brand);
+.claudian-external-context-icon.active {
+  color: var(--claudian-brand);
   animation: external-context-glow 2s ease-in-out infinite;
 }
 
-.codexdian-external-context-icon svg {
+.claudian-external-context-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-external-context-badge {
+.claudian-external-context-badge {
   position: absolute;
   top: 0;
   right: 0;
   font-size: 9px;
   font-weight: 600;
-  color: var(--codexdian-brand);
+  color: var(--claudian-brand);
   opacity: 0;
   transition: opacity 0.15s ease;
   pointer-events: none;
 }
 
-.codexdian-external-context-badge.visible {
+.claudian-external-context-badge.visible {
   opacity: 1;
 }
 
-.codexdian-external-context-dropdown {
+.claudian-external-context-dropdown {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: 100%;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   min-width: 260px;
   max-width: 320px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
-  border-radius: var(--codexdian-radius-md);
-  box-shadow: var(--codexdian-shadow-soft);
-  backdrop-filter: blur(16px) saturate(125%);
-  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.15s ease, visibility 0.15s ease;
   z-index: 100;
 }
 
-.codexdian-external-context-selector:hover .codexdian-external-context-dropdown {
+.claudian-external-context-selector:hover .claudian-external-context-dropdown {
   opacity: 1;
   visibility: visible;
 }
 
-.codexdian-external-context-header {
+.claudian-external-context-header {
   padding: 10px 12px;
   font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
-  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
+  border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.codexdian-external-context-list {
+.claudian-external-context-list {
   max-height: 200px;
   overflow-y: auto;
 }
 
-.codexdian-external-context-empty {
+.claudian-external-context-empty {
   padding: 16px 12px;
   text-align: center;
   color: var(--text-muted);
@@ -2596,19 +2305,19 @@ body.theme-light .codexdian-message-content pre {
   font-style: italic;
 }
 
-.codexdian-external-context-item {
+.claudian-external-context-item {
   display: flex;
   align-items: center;
   padding: 8px 12px;
   gap: 8px;
-  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
+  border-bottom: 1px solid var(--background-modifier-border-focus);
 }
 
-.codexdian-external-context-item:last-child {
+.claudian-external-context-item:last-child {
   border-bottom: none;
 }
 
-.codexdian-external-context-text {
+.claudian-external-context-text {
   flex: 1;
   font-size: 12px;
   font-family: var(--font-monospace);
@@ -2618,7 +2327,7 @@ body.theme-light .codexdian-message-content pre {
   white-space: nowrap;
 }
 
-.codexdian-external-context-lock {
+.claudian-external-context-lock {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2631,26 +2340,26 @@ body.theme-light .codexdian-message-content pre {
   transition: all 0.15s ease;
 }
 
-.codexdian-external-context-lock:hover {
+.claudian-external-context-lock:hover {
   background: var(--background-modifier-hover);
   opacity: 0.8;
 }
 
-.codexdian-external-context-lock.locked {
-  color: var(--codexdian-brand);
+.claudian-external-context-lock.locked {
+  color: var(--claudian-brand);
   opacity: 0.9;
 }
 
-.codexdian-external-context-lock.locked:hover {
+.claudian-external-context-lock.locked:hover {
   opacity: 1;
 }
 
-.codexdian-external-context-lock svg {
+.claudian-external-context-lock svg {
   width: 12px;
   height: 12px;
 }
 
-.codexdian-external-context-remove {
+.claudian-external-context-remove {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2663,13 +2372,13 @@ body.theme-light .codexdian-message-content pre {
   transition: all 0.15s ease;
 }
 
-.codexdian-external-context-remove:hover {
-  background: rgba(var(--codexdian-error-rgb), 0.15);
-  color: var(--codexdian-error);
+.claudian-external-context-remove:hover {
+  background: rgba(var(--claudian-error-rgb), 0.15);
+  color: var(--claudian-error);
   opacity: 1;
 }
 
-.codexdian-external-context-remove svg {
+.claudian-external-context-remove svg {
   width: 14px;
   height: 14px;
 }
@@ -2679,14 +2388,14 @@ body.theme-light .codexdian-message-content pre {
    toolbar/mcp-selector.css
    ============================================ */
 /* MCP Server Selector */
-.codexdian-mcp-selector {
+.claudian-mcp-selector {
   position: relative;
   display: flex;
   align-items: center;
   margin-left: 8px;
 }
 
-.codexdian-mcp-selector-icon-wrapper {
+.claudian-mcp-selector-icon-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -2694,65 +2403,58 @@ body.theme-light .codexdian-message-content pre {
   cursor: pointer;
 }
 
-.codexdian-mcp-selector-icon {
+.claudian-mcp-selector-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 80%, transparent);
   color: var(--text-faint);
-  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease;
 }
 
-.codexdian-mcp-selector-icon-wrapper:hover .codexdian-mcp-selector-icon {
+.claudian-mcp-selector-icon-wrapper:hover .claudian-mcp-selector-icon {
   color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 80%, transparent);
 }
 
-.codexdian-mcp-selector-icon.active {
-  color: var(--codexdian-brand);
+.claudian-mcp-selector-icon.active {
+  color: var(--claudian-brand);
   animation: mcp-glow 2s ease-in-out infinite;
 }
 
-.codexdian-mcp-selector-icon svg {
+.claudian-mcp-selector-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-mcp-selector-badge {
+.claudian-mcp-selector-badge {
   position: absolute;
   top: 0;
   right: 0;
   font-size: 9px;
   font-weight: 600;
-  color: var(--codexdian-brand);
+  color: var(--claudian-brand);
   opacity: 0;
   transition: opacity 0.15s ease;
   pointer-events: none;
 }
 
-.codexdian-mcp-selector-badge.visible {
+.claudian-mcp-selector-badge.visible {
   opacity: 1;
 }
 
-.codexdian-mcp-selector-dropdown {
+.claudian-mcp-selector-dropdown {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: 100%;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   min-width: 200px;
   max-width: 280px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
-  border-radius: var(--codexdian-radius-md);
-  box-shadow: var(--codexdian-shadow-soft);
-  backdrop-filter: blur(16px) saturate(125%);
-  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.15s ease, visibility 0.15s ease;
@@ -2760,7 +2462,7 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Bridge the gap between icon and dropdown to prevent hover breaks */
-.codexdian-mcp-selector-dropdown::after {
+.claudian-mcp-selector-dropdown::after {
   content: '';
   position: absolute;
   left: 0;
@@ -2769,26 +2471,26 @@ body.theme-light .codexdian-message-content pre {
   height: 8px;
 }
 
-.codexdian-mcp-selector-dropdown.visible,
-.codexdian-mcp-selector:hover .codexdian-mcp-selector-dropdown {
+.claudian-mcp-selector-dropdown.visible,
+.claudian-mcp-selector:hover .claudian-mcp-selector-dropdown {
   opacity: 1;
   visibility: visible;
 }
 
-.codexdian-mcp-selector-header {
+.claudian-mcp-selector-header {
   padding: 10px 12px;
   font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
-  border-bottom: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
+  border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.codexdian-mcp-selector-list {
+.claudian-mcp-selector-list {
   max-height: 200px;
   overflow-y: auto;
 }
 
-.codexdian-mcp-selector-empty {
+.claudian-mcp-selector-empty {
   padding: 16px 12px;
   text-align: center;
   color: var(--text-muted);
@@ -2796,7 +2498,7 @@ body.theme-light .codexdian-message-content pre {
   font-style: italic;
 }
 
-.codexdian-mcp-selector-item {
+.claudian-mcp-selector-item {
   display: flex;
   align-items: center;
   padding: 8px 12px;
@@ -2805,15 +2507,15 @@ body.theme-light .codexdian-message-content pre {
   transition: background 0.15s ease;
 }
 
-.codexdian-mcp-selector-item:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
+.claudian-mcp-selector-item:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-mcp-selector-item.enabled {
-  background: rgba(var(--codexdian-brand-rgb), 0.1);
+.claudian-mcp-selector-item.enabled {
+  background: rgba(var(--claudian-brand-rgb), 0.1);
 }
 
-.codexdian-mcp-selector-check {
+.claudian-mcp-selector-check {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2821,20 +2523,20 @@ body.theme-light .codexdian-message-content pre {
   height: 16px;
   border: 1px solid var(--background-modifier-border);
   border-radius: 3px;
-  color: var(--codexdian-brand);
+  color: var(--claudian-brand);
 }
 
-.codexdian-mcp-selector-item.enabled .codexdian-mcp-selector-check {
-  background: rgba(var(--codexdian-brand-rgb), 0.2);
-  border-color: var(--codexdian-brand);
+.claudian-mcp-selector-item.enabled .claudian-mcp-selector-check {
+  background: rgba(var(--claudian-brand-rgb), 0.2);
+  border-color: var(--claudian-brand);
 }
 
-.codexdian-mcp-selector-check svg {
+.claudian-mcp-selector-check svg {
   width: 12px;
   height: 12px;
 }
 
-.codexdian-mcp-selector-item-info {
+.claudian-mcp-selector-item-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2843,7 +2545,7 @@ body.theme-light .codexdian-message-content pre {
   overflow: hidden;
 }
 
-.codexdian-mcp-selector-item-name {
+.claudian-mcp-selector-item-name {
   font-size: 12px;
   color: var(--text-normal);
   overflow: hidden;
@@ -2851,13 +2553,13 @@ body.theme-light .codexdian-message-content pre {
   white-space: nowrap;
 }
 
-.codexdian-mcp-selector-cs-badge {
+.claudian-mcp-selector-cs-badge {
   font-size: 10px;
   font-weight: 600;
   padding: 1px 4px;
   border-radius: 3px;
-  background: rgba(var(--codexdian-brand-rgb), 0.2);
-  color: var(--codexdian-brand);
+  background: rgba(var(--claudian-brand-rgb), 0.2);
+  color: var(--claudian-brand);
   flex-shrink: 0;
   margin-left: auto;
 }
@@ -2867,7 +2569,7 @@ body.theme-light .codexdian-message-content pre {
    features/file-context.css
    ============================================ */
 /* @ Mention dropdown */
-.codexdian-mention-dropdown {
+.claudian-mention-dropdown {
   display: none;
   position: absolute;
   bottom: 100%;
@@ -2885,17 +2587,17 @@ body.theme-light .codexdian-message-content pre {
   overflow-y: auto;
 }
 
-.codexdian-mention-dropdown.visible {
+.claudian-mention-dropdown.visible {
   display: block;
 }
 
 /* Fixed positioning for inline editor */
-.codexdian-mention-dropdown-fixed {
+.claudian-mention-dropdown-fixed {
   position: fixed;
   z-index: 10001;
 }
 
-.codexdian-mention-item {
+.claudian-mention-item {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2904,24 +2606,24 @@ body.theme-light .codexdian-message-content pre {
   transition: background 0.1s ease;
 }
 
-.codexdian-mention-item:hover,
-.codexdian-mention-item.selected {
+.claudian-mention-item:hover,
+.claudian-mention-item.selected {
   background: var(--background-modifier-hover);
 }
 
-.codexdian-mention-icon {
+.claudian-mention-icon {
   display: flex;
   align-items: center;
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.codexdian-mention-icon svg {
+.claudian-mention-icon svg {
   width: 14px;
   height: 14px;
 }
 
-.codexdian-mention-path {
+.claudian-mention-path {
   font-size: 13px;
   color: var(--text-normal);
   overflow: hidden;
@@ -2929,7 +2631,7 @@ body.theme-light .codexdian-message-content pre {
   white-space: nowrap;
 }
 
-.codexdian-mention-empty {
+.claudian-mention-empty {
   padding: 12px;
   text-align: center;
   color: var(--text-muted);
@@ -2937,29 +2639,29 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Scrollbar for mention dropdown */
-.codexdian-mention-dropdown::-webkit-scrollbar {
+.claudian-mention-dropdown::-webkit-scrollbar {
   width: 6px;
 }
 
-.codexdian-mention-dropdown::-webkit-scrollbar-track {
+.claudian-mention-dropdown::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.codexdian-mention-dropdown::-webkit-scrollbar-thumb {
+.claudian-mention-dropdown::-webkit-scrollbar-thumb {
   background: var(--background-modifier-border);
   border-radius: 3px;
 }
 
 /* MCP items in @-mention dropdown */
-.codexdian-mention-item.mcp-server .codexdian-mention-icon {
+.claudian-mention-item.mcp-server .claudian-mention-icon {
   color: var(--interactive-accent);
 }
 
-.codexdian-mention-item.vault-folder .codexdian-mention-icon {
+.claudian-mention-item.vault-folder .claudian-mention-icon {
   color: var(--text-muted);
 }
 
-.codexdian-mention-text {
+.claudian-mention-text {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -2967,13 +2669,13 @@ body.theme-light .codexdian-message-content pre {
   flex: 1;
 }
 
-.codexdian-mention-name {
+.claudian-mention-name {
   font-size: 13px;
   font-weight: 500;
   color: var(--interactive-accent);
 }
 
-.codexdian-mention-desc {
+.claudian-mention-desc {
   font-size: 11px;
   color: var(--text-muted);
   overflow: hidden;
@@ -2982,17 +2684,17 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Context file items in @-mention dropdown */
-.codexdian-mention-item.context-file .codexdian-mention-icon {
-  color: var(--codexdian-brand);
+.claudian-mention-item.context-file .claudian-mention-icon {
+  color: var(--claudian-brand);
 }
 
-.codexdian-mention-item.context-file .codexdian-mention-text {
+.claudian-mention-item.context-file .claudian-mention-text {
   flex-direction: row;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.codexdian-mention-item.context-file .codexdian-mention-name-context {
+.claudian-mention-item.context-file .claudian-mention-name-context {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3000,35 +2702,35 @@ body.theme-light .codexdian-message-content pre {
 }
 
 /* Context folder filter items in @-mention dropdown */
-.codexdian-mention-item.context-folder .codexdian-mention-icon {
+.claudian-mention-item.context-folder .claudian-mention-icon {
   color: var(--text-muted);
 }
 
-.codexdian-mention-name-folder {
+.claudian-mention-name-folder {
   color: var(--text-normal);
   font-weight: 500;
 }
 
-.codexdian-mention-name-context {
+.claudian-mention-name-context {
   color: var(--text-normal);
 }
 
 /* Agent folder items in @-mention dropdown */
-.codexdian-mention-item.agent-folder .codexdian-mention-icon {
+.claudian-mention-item.agent-folder .claudian-mention-icon {
   color: var(--link-color);
 }
 
-.codexdian-mention-name-agent-folder {
+.claudian-mention-name-agent-folder {
   color: var(--link-color);
   font-weight: 600;
 }
 
 /* Agent items in @-mention dropdown (inside @Agents/) */
-.codexdian-mention-item.agent .codexdian-mention-icon {
+.claudian-mention-item.agent .claudian-mention-icon {
   color: var(--link-color);
 }
 
-.codexdian-mention-item.agent .codexdian-mention-text {
+.claudian-mention-item.agent .claudian-mention-text {
   flex-direction: row;
   align-items: baseline;
   gap: 6px;
@@ -3036,13 +2738,13 @@ body.theme-light .codexdian-message-content pre {
   white-space: nowrap;
 }
 
-.codexdian-mention-item.agent .codexdian-mention-name-agent {
+.claudian-mention-item.agent .claudian-mention-name-agent {
   color: var(--text-normal);
   font-size: 13px;
   flex-shrink: 0;
 }
 
-.codexdian-mention-item.agent .codexdian-mention-agent-desc {
+.claudian-mention-item.agent .claudian-mention-agent-desc {
   font-size: 11px;
   color: var(--text-muted);
   overflow: hidden;
@@ -3056,7 +2758,7 @@ body.theme-light .codexdian-message-content pre {
    features/file-link.css
    ============================================ */
 /* Clickable file links that open files in Obsidian */
-.codexdian-file-link {
+.claudian-file-link {
   color: var(--text-accent);
   text-decoration: none;
   cursor: pointer;
@@ -3064,17 +2766,17 @@ body.theme-light .codexdian-message-content pre {
   transition: color 0.15s ease;
 }
 
-.codexdian-file-link:hover {
+.claudian-file-link:hover {
   color: var(--text-accent-hover);
   text-decoration: underline;
 }
 
 /* File link inside inline code */
-code .codexdian-file-link {
+code .claudian-file-link {
   color: var(--text-accent);
 }
 
-code .codexdian-file-link:hover {
+code .claudian-file-link:hover {
   color: var(--text-accent-hover);
 }
 
@@ -3085,7 +2787,7 @@ code .codexdian-file-link:hover {
 /* Image Context - Preview & Attachments */
 
 /* Image preview container (in input area) */
-.codexdian-image-preview {
+.claudian-image-preview {
   display: none;
   flex-wrap: wrap;
   gap: 8px;
@@ -3094,7 +2796,7 @@ code .codexdian-file-link:hover {
 }
 
 /* Individual image preview chip */
-.codexdian-image-chip {
+.claudian-image-chip {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -3105,12 +2807,12 @@ code .codexdian-file-link:hover {
   max-width: 200px;
 }
 
-.codexdian-image-chip:hover {
+.claudian-image-chip:hover {
   border-color: var(--interactive-accent);
 }
 
 /* Image thumbnail */
-.codexdian-image-thumb {
+.claudian-image-thumb {
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -3119,21 +2821,21 @@ code .codexdian-file-link:hover {
   cursor: pointer;
 }
 
-.codexdian-image-thumb img {
+.claudian-image-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 /* Image info */
-.codexdian-image-info {
+.claudian-image-info {
   display: flex;
   flex-direction: column;
   min-width: 0;
   flex: 1;
 }
 
-.codexdian-image-name {
+.claudian-image-name {
   font-size: 12px;
   color: var(--text-normal);
   overflow: hidden;
@@ -3141,13 +2843,13 @@ code .codexdian-file-link:hover {
   white-space: nowrap;
 }
 
-.codexdian-image-size {
+.claudian-image-size {
   font-size: 10px;
   color: var(--text-muted);
 }
 
 /* Remove button */
-.codexdian-image-remove {
+.claudian-image-remove {
   position: relative;
   width: 20px;
   height: 20px;
@@ -3158,8 +2860,8 @@ code .codexdian-file-link:hover {
   font-size: 0; /* Hide text character */
 }
 
-.codexdian-image-remove::before,
-.codexdian-image-remove::after {
+.claudian-image-remove::before,
+.claudian-image-remove::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -3171,32 +2873,32 @@ code .codexdian-file-link:hover {
   transition: background 0.15s ease;
 }
 
-.codexdian-image-remove::before {
+.claudian-image-remove::before {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.codexdian-image-remove::after {
+.claudian-image-remove::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.codexdian-image-remove:hover {
+.claudian-image-remove:hover {
   background: var(--background-modifier-error);
 }
 
-.codexdian-image-remove:hover::before,
-.codexdian-image-remove:hover::after {
+.claudian-image-remove:hover::before,
+.claudian-image-remove:hover::after {
   background: var(--text-on-accent);
 }
 
 /* Drop overlay - inside input wrapper */
-.codexdian-drop-overlay {
+.claudian-drop-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(var(--codexdian-brand-rgb), 0.08);
-  border: 2px dashed var(--codexdian-brand);
+  background: rgba(var(--claudian-brand-rgb), 0.08);
+  border: 2px dashed var(--claudian-brand);
   border-radius: 6px;
   display: none;
   align-items: center;
@@ -3205,23 +2907,23 @@ code .codexdian-file-link:hover {
   pointer-events: none;
 }
 
-.codexdian-drop-overlay.visible {
+.claudian-drop-overlay.visible {
   display: flex;
 }
 
-.codexdian-drop-content {
+.claudian-drop-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: var(--codexdian-brand);
+  color: var(--claudian-brand);
 }
 
-.codexdian-drop-content svg {
+.claudian-drop-content svg {
   opacity: 0.7;
 }
 
-.codexdian-drop-content span {
+.claudian-drop-content span {
   font-size: 12px;
   font-weight: 500;
 }
@@ -3229,7 +2931,7 @@ code .codexdian-file-link:hover {
 /* Images in Messages (displayed above user bubble) */
 
 /* Images container - right-aligned above user message */
-.codexdian-message-images {
+.claudian-message-images {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -3239,7 +2941,7 @@ code .codexdian-file-link:hover {
 }
 
 /* Individual image in message - standardized size */
-.codexdian-message-image {
+.claudian-message-image {
   width: 120px;
   height: 120px;
   border-radius: 8px;
@@ -3250,12 +2952,12 @@ code .codexdian-file-link:hover {
   border: 1px solid var(--background-modifier-border);
 }
 
-.codexdian-message-image:hover {
+.claudian-message-image:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.codexdian-message-image img {
+.claudian-message-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -3268,14 +2970,14 @@ code .codexdian-file-link:hover {
    ============================================ */
 /* Image embed styles - displays ![[image.png]] wikilinks as actual images */
 
-.codexdian-embedded-image {
+.claudian-embedded-image {
   display: inline-block;
   max-width: 100%;
   margin: 0.5em 0;
   vertical-align: middle;
 }
 
-.codexdian-embedded-image img {
+.claudian-embedded-image img {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius-s);
@@ -3283,23 +2985,23 @@ code .codexdian-file-link:hover {
   transition: opacity 0.2s ease;
 }
 
-.codexdian-embedded-image img:hover {
+.claudian-embedded-image img:hover {
   opacity: 0.9;
 }
 
 /* When image is inline with text */
-.codexdian-text-block p .codexdian-embedded-image {
+.claudian-text-block p .claudian-embedded-image {
   margin: 0.25em 0;
 }
 
 /* Block-level image (standalone on its own line) */
-.codexdian-text-block p > .codexdian-embedded-image:only-child {
+.claudian-text-block p > .claudian-embedded-image:only-child {
   display: block;
   margin: 0.75em 0;
 }
 
 /* Fallback when image file not found */
-.codexdian-embedded-image-fallback {
+.claudian-embedded-image-fallback {
   color: var(--text-muted);
   font-style: italic;
   background: var(--background-modifier-hover);
@@ -3312,7 +3014,7 @@ code .codexdian-file-link:hover {
    features/image-modal.css
    ============================================ */
 /* Full-size Image Modal */
-.codexdian-image-modal-overlay {
+.claudian-image-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -3326,14 +3028,14 @@ code .codexdian-file-link:hover {
   cursor: pointer;
 }
 
-.codexdian-image-modal {
+.claudian-image-modal {
   position: relative;
   max-width: 90vw;
   max-height: 90vh;
   cursor: default;
 }
 
-.codexdian-image-modal img {
+.claudian-image-modal img {
   max-width: 90vw;
   max-height: 90vh;
   object-fit: contain;
@@ -3341,7 +3043,7 @@ code .codexdian-file-link:hover {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
-.codexdian-image-modal-close {
+.claudian-image-modal-close {
   position: absolute;
   top: -12px;
   right: -12px;
@@ -3359,7 +3061,7 @@ code .codexdian-file-link:hover {
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.codexdian-image-modal-close:hover {
+.claudian-image-modal-close:hover {
   background: var(--background-modifier-error);
   color: var(--text-on-accent);
 }
@@ -3371,8 +3073,8 @@ code .codexdian-file-link:hover {
 /* Inline Edit (CM6 decorations) */
 
 /* Selection highlight (shared by inline edit and chat) */
-.cm-line .codexdian-selection-highlight,
-.codexdian-selection-highlight {
+.cm-line .claudian-selection-highlight,
+.claudian-selection-highlight {
   background: var(--text-selection) !important;
   border-radius: 2px;
   padding: 3px 0;
@@ -3381,12 +3083,12 @@ code .codexdian-file-link:hover {
 
 /* CM6 widget container - ensure transparent background */
 .cm-widgetBuffer,
-.cm-line:has(.codexdian-inline-input-container) {
+.cm-line:has(.claudian-inline-input-container) {
   background: transparent !important;
 }
 
 /* Input container - fully transparent */
-.codexdian-inline-input-container {
+.claudian-inline-input-container {
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -3395,7 +3097,7 @@ code .codexdian-file-link:hover {
 }
 
 /* Input wrapper - contains input and spinner */
-.codexdian-inline-input-wrap {
+.claudian-inline-input-wrap {
   flex: 1;
   position: relative;
   background: transparent !important;
@@ -3403,7 +3105,7 @@ code .codexdian-file-link:hover {
 }
 
 /* Input - fully transparent */
-.codexdian-inline-input {
+.claudian-inline-input {
   width: 100%;
   padding: 4px 8px;
   padding-inline-end: 30px;
@@ -3417,22 +3119,22 @@ code .codexdian-file-link:hover {
   font-size: var(--font-ui-small, 13px) !important;
 }
 
-.codexdian-inline-input:focus,
-.codexdian-inline-input:focus-visible {
+.claudian-inline-input:focus,
+.claudian-inline-input:focus-visible {
   outline: none !important;
   box-shadow: none !important;
 }
 
-.codexdian-inline-input::placeholder {
+.claudian-inline-input::placeholder {
   color: var(--text-faint);
 }
 
-.codexdian-inline-input:disabled {
+.claudian-inline-input:disabled {
   opacity: 0.6;
 }
 
 /* Spinner - inside input box on end side */
-.codexdian-inline-spinner {
+.claudian-inline-spinner {
   position: absolute;
   inset-inline-end: 8px;
   top: 50%;
@@ -3440,14 +3142,14 @@ code .codexdian-file-link:hover {
   height: 14px;
   margin-top: -7px;
   border: 2px solid var(--background-modifier-border);
-  border-top-color: var(--codexdian-brand);
+  border-top-color: var(--claudian-brand);
   border-radius: 50%;
   box-sizing: border-box;
-  animation: codexdian-spin 0.8s linear infinite;
+  animation: claudian-spin 0.8s linear infinite;
 }
 
 /* Agent reply - shown when agent asks clarifying question */
-.codexdian-inline-agent-reply {
+.claudian-inline-agent-reply {
   padding: 8px;
   margin-bottom: 4px;
   background: transparent;
@@ -3464,7 +3166,7 @@ code .codexdian-file-link:hover {
 }
 
 /* Inline Diff - replaces selection in place */
-.codexdian-inline-diff-replace {
+.claudian-inline-diff-replace {
   /* Inherit all font properties from document */
   font-size: inherit;
   font-family: inherit;
@@ -3473,26 +3175,26 @@ code .codexdian-file-link:hover {
 }
 
 /* Deleted text - red strikethrough */
-.codexdian-diff-del {
+.claudian-diff-del {
   background: rgba(255, 80, 80, 0.2);
   text-decoration: line-through;
   color: var(--text-muted);
 }
 
 /* Inserted text - green background */
-.codexdian-diff-ins {
+.claudian-diff-ins {
   background: rgba(80, 200, 80, 0.2);
 }
 
 /* Accept/Reject buttons inline with diff */
-.codexdian-inline-diff-buttons {
+.claudian-inline-diff-buttons {
   display: inline-flex;
   gap: 8px;
   margin-inline-start: 6px;
   background: none !important;
 }
 
-.codexdian-inline-diff-btn {
+.claudian-inline-diff-btn {
   padding: 4px 6px;
   border: none !important;
   background: none !important;
@@ -3502,11 +3204,11 @@ code .codexdian-file-link:hover {
   cursor: pointer;
 }
 
-.codexdian-inline-diff-btn.reject {
+.claudian-inline-diff-btn.reject {
   color: var(--color-red);
 }
 
-.codexdian-inline-diff-btn.accept {
+.claudian-inline-diff-btn.accept {
   color: var(--color-green);
 }
 
@@ -3515,21 +3217,21 @@ code .codexdian-file-link:hover {
    features/diff.css
    ============================================ */
 /* Write/Edit Diff Block - Subagent style */
-.codexdian-write-edit-block {
+.claudian-write-edit-block {
   margin: 4px 0;
   background: transparent;
   overflow: hidden;
 }
 
-.codexdian-text-block+.codexdian-write-edit-block {
+.claudian-text-block+.claudian-write-edit-block {
   margin-top: 8px;
 }
 
-.codexdian-write-edit-block+.codexdian-text-block {
+.claudian-write-edit-block+.claudian-text-block {
   margin-top: 8px;
 }
 
-.codexdian-write-edit-header {
+.claudian-write-edit-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -3540,20 +3242,20 @@ code .codexdian-file-link:hover {
   overflow: hidden;
 }
 
-.codexdian-write-edit-icon {
+.claudian-write-edit-icon {
   width: 16px;
   height: 16px;
   color: var(--text-accent);
   flex-shrink: 0;
 }
 
-.codexdian-write-edit-icon svg {
+.claudian-write-edit-icon svg {
   width: 16px;
   height: 16px;
 }
 
 /* Two-part header: name (fixed) + summary (flexible) */
-.codexdian-write-edit-name {
+.claudian-write-edit-name {
   font-family: var(--font-monospace);
   font-size: 13px;
   font-weight: 400;
@@ -3562,7 +3264,7 @@ code .codexdian-file-link:hover {
   flex-shrink: 0;
 }
 
-.codexdian-write-edit-summary {
+.claudian-write-edit-summary {
   font-family: var(--font-monospace);
   font-size: 13px;
   color: var(--text-muted);
@@ -3573,57 +3275,57 @@ code .codexdian-file-link:hover {
   min-width: 0;
 }
 
-.codexdian-write-edit-stats {
+.claudian-write-edit-stats {
   font-family: var(--font-monospace);
   font-size: 11px;
   flex-shrink: 0;
 }
 
-.codexdian-write-edit-stats .added {
+.claudian-write-edit-stats .added {
   color: var(--color-green);
 }
 
-.codexdian-write-edit-stats .removed {
+.claudian-write-edit-stats .removed {
   color: var(--color-red);
   margin-left: 4px;
 }
 
-.codexdian-write-edit-status {
+.claudian-write-edit-status {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
 
 /* Hide empty status on successful completion so stats align to right edge */
-.codexdian-write-edit-block.done .codexdian-write-edit-status:empty {
+.claudian-write-edit-block.done .claudian-write-edit-status:empty {
   display: none;
 }
 
-.codexdian-write-edit-status svg {
+.claudian-write-edit-status svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-write-edit-status.status-completed {
+.claudian-write-edit-status.status-completed {
   color: var(--color-green);
 }
 
-.codexdian-write-edit-status.status-error,
-.codexdian-write-edit-status.status-blocked {
+.claudian-write-edit-status.status-error,
+.claudian-write-edit-status.status-blocked {
   color: var(--color-red);
 }
 
-.codexdian-write-edit-content {
+.claudian-write-edit-content {
   padding: 0;
   background: transparent;
   overflow: hidden;
 }
 
-.codexdian-write-edit-diff-row {
+.claudian-write-edit-diff-row {
   display: flex;
 }
 
-.codexdian-write-edit-diff {
+.claudian-write-edit-diff {
   flex: 1;
   font-family: var(--font-monospace);
   font-size: 12px;
@@ -3634,31 +3336,31 @@ code .codexdian-file-link:hover {
   overflow-x: auto;
 }
 
-.codexdian-write-edit-loading,
-.codexdian-write-edit-binary,
-.codexdian-write-edit-error,
-.codexdian-write-edit-done-text {
+.claudian-write-edit-loading,
+.claudian-write-edit-binary,
+.claudian-write-edit-error,
+.claudian-write-edit-done-text {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-muted);
 }
 
-.codexdian-write-edit-error {
+.claudian-write-edit-error {
   color: var(--color-red);
 }
 
 /* Diff line styling */
-.codexdian-diff-hunk {
+.claudian-diff-hunk {
   margin-bottom: 4px;
 }
 
-.codexdian-diff-line {
+.claudian-diff-line {
   display: flex;
   white-space: pre-wrap;
   word-break: break-all;
 }
 
-.codexdian-diff-prefix {
+.claudian-diff-prefix {
   flex-shrink: 0;
   width: 16px;
   text-align: center;
@@ -3666,36 +3368,36 @@ code .codexdian-file-link:hover {
   user-select: none;
 }
 
-.codexdian-diff-text {
+.claudian-diff-text {
   flex: 1;
   min-width: 0;
 }
 
 /* Diff colors - NO strikethrough for Write/Edit blocks */
-.codexdian-diff-equal {
+.claudian-diff-equal {
   color: var(--text-muted);
 }
 
-.codexdian-diff-delete {
+.claudian-diff-delete {
   background: rgba(255, 80, 80, 0.25);
   color: var(--text-normal);
 }
 
-.codexdian-diff-delete .codexdian-diff-prefix {
+.claudian-diff-delete .claudian-diff-prefix {
   color: var(--color-red);
 }
 
-.codexdian-diff-insert {
+.claudian-diff-insert {
   background: rgba(80, 200, 80, 0.25);
   color: var(--text-normal);
 }
 
-.codexdian-diff-insert .codexdian-diff-prefix {
+.claudian-diff-insert .claudian-diff-prefix {
   color: var(--color-green);
 }
 
 /* Hunk separator */
-.codexdian-diff-separator {
+.claudian-diff-separator {
   color: var(--text-muted);
   text-align: center;
   padding: 4px 0;
@@ -3706,7 +3408,7 @@ code .codexdian-file-link:hover {
   font-size: 11px;
 }
 
-.codexdian-diff-no-changes {
+.claudian-diff-no-changes {
   color: var(--text-muted);
   font-style: italic;
   padding: 8px;
@@ -3717,7 +3419,7 @@ code .codexdian-file-link:hover {
    features/slash-commands.css
    ============================================ */
 /* Slash Command Dropdown */
-.codexdian-slash-dropdown {
+.claudian-slash-dropdown {
   display: none;
   position: absolute;
   bottom: 100%;
@@ -3735,46 +3437,46 @@ code .codexdian-file-link:hover {
   overflow-y: auto;
 }
 
-.codexdian-slash-dropdown.visible {
+.claudian-slash-dropdown.visible {
   display: block;
 }
 
 /* Fixed positioning for inline editor */
-.codexdian-slash-dropdown-fixed {
+.claudian-slash-dropdown-fixed {
   position: fixed;
   z-index: 10001;
 }
 
-.codexdian-slash-item {
+.claudian-slash-item {
   padding: 8px 12px;
   cursor: pointer;
   transition: background 0.1s ease;
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.codexdian-slash-item:last-child {
+.claudian-slash-item:last-child {
   border-bottom: none;
 }
 
-.codexdian-slash-item:hover,
-.codexdian-slash-item.selected {
+.claudian-slash-item:hover,
+.claudian-slash-item.selected {
   background: var(--background-modifier-hover);
 }
 
-.codexdian-slash-name {
+.claudian-slash-name {
   font-size: 12px;
   font-weight: 500;
   color: var(--text-normal);
   font-family: var(--font-monospace);
 }
 
-.codexdian-slash-hint {
+.claudian-slash-hint {
   font-size: 12px;
   color: var(--text-muted);
   margin-left: 8px;
 }
 
-.codexdian-slash-desc {
+.claudian-slash-desc {
   font-size: 11px;
   color: var(--text-muted);
   margin-top: 2px;
@@ -3783,7 +3485,7 @@ code .codexdian-file-link:hover {
   white-space: nowrap;
 }
 
-.codexdian-slash-empty {
+.claudian-slash-empty {
   padding: 16px;
   text-align: center;
   color: var(--text-muted);
@@ -3791,15 +3493,15 @@ code .codexdian-file-link:hover {
 }
 
 /* Scrollbar */
-.codexdian-slash-dropdown::-webkit-scrollbar {
+.claudian-slash-dropdown::-webkit-scrollbar {
   width: 6px;
 }
 
-.codexdian-slash-dropdown::-webkit-scrollbar-track {
+.claudian-slash-dropdown::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.codexdian-slash-dropdown::-webkit-scrollbar-thumb {
+.claudian-slash-dropdown::-webkit-scrollbar-thumb {
   background: var(--background-modifier-border);
   border-radius: 3px;
 }
@@ -3809,7 +3511,7 @@ code .codexdian-file-link:hover {
    features/resume-session.css
    ============================================ */
 /* Resume Session Dropdown */
-.codexdian-resume-dropdown {
+.claudian-resume-dropdown {
   display: none;
   position: absolute;
   bottom: 100%;
@@ -3827,11 +3529,11 @@ code .codexdian-file-link:hover {
   overflow: hidden;
 }
 
-.codexdian-resume-dropdown.visible {
+.claudian-resume-dropdown.visible {
   display: block;
 }
 
-.codexdian-resume-header {
+.claudian-resume-header {
   padding: 8px 12px;
   font-size: 12px;
   font-weight: 600;
@@ -3841,19 +3543,19 @@ code .codexdian-file-link:hover {
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.codexdian-resume-list {
+.claudian-resume-list {
   max-height: 350px;
   overflow-y: auto;
 }
 
-.codexdian-resume-empty {
+.claudian-resume-empty {
   padding: 16px;
   text-align: center;
   color: var(--text-muted);
   font-size: 13px;
 }
 
-.codexdian-resume-item {
+.claudian-resume-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -3863,43 +3565,43 @@ code .codexdian-file-link:hover {
   transition: background 0.1s ease;
 }
 
-.codexdian-resume-item:last-child {
+.claudian-resume-item:last-child {
   border-bottom: none;
 }
 
-.codexdian-resume-item:hover,
-.codexdian-resume-item.selected {
+.claudian-resume-item:hover,
+.claudian-resume-item.selected {
   background: var(--background-modifier-hover);
 }
 
-.codexdian-resume-item.current {
+.claudian-resume-item.current {
   background: var(--background-secondary);
   border-inline-start: 2px solid var(--interactive-accent);
   padding-inline-start: 10px;
 }
 
-.codexdian-resume-item-icon {
+.claudian-resume-item-icon {
   display: flex;
   align-items: center;
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.codexdian-resume-item-icon svg {
+.claudian-resume-item-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.codexdian-resume-item.current .codexdian-resume-item-icon {
+.claudian-resume-item.current .claudian-resume-item-icon {
   color: var(--interactive-accent);
 }
 
-.codexdian-resume-item-content {
+.claudian-resume-item-content {
   flex: 1;
   min-width: 0;
 }
 
-.codexdian-resume-item-title {
+.claudian-resume-item-title {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-normal);
@@ -3908,22 +3610,22 @@ code .codexdian-file-link:hover {
   text-overflow: ellipsis;
 }
 
-.codexdian-resume-item-date {
+.claudian-resume-item-date {
   font-size: 11px;
   color: var(--text-faint);
   margin-top: 2px;
 }
 
 /* Scrollbar */
-.codexdian-resume-list::-webkit-scrollbar {
+.claudian-resume-list::-webkit-scrollbar {
   width: 6px;
 }
 
-.codexdian-resume-list::-webkit-scrollbar-track {
+.claudian-resume-list::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.codexdian-resume-list::-webkit-scrollbar-thumb {
+.claudian-resume-list::-webkit-scrollbar-thumb {
   background: var(--background-modifier-border);
   border-radius: 3px;
 }
@@ -3934,13 +3636,13 @@ code .codexdian-file-link:hover {
    ============================================ */
 /* AskUserQuestion - inline widget rendered in chat panel */
 
-.codexdian-ask-question-inline {
+.claudian-ask-question-inline {
   font-family: var(--font-monospace);
   font-size: 12px;
   outline: none;
 }
 
-.codexdian-ask-inline-title {
+.claudian-ask-inline-title {
   font-weight: 700;
   color: var(--text-muted);
   padding: 6px 10px 0;
@@ -3948,7 +3650,7 @@ code .codexdian-file-link:hover {
 
 /* ── Tab bar ─────────────────────────────────── */
 
-.codexdian-ask-tab-bar {
+.claudian-ask-tab-bar {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -3957,7 +3659,7 @@ code .codexdian-file-link:hover {
   line-height: 1.4;
 }
 
-.codexdian-ask-tab {
+.claudian-ask-tab {
   display: inline-flex;
   align-items: center;
   padding: 2px 10px;
@@ -3970,16 +3672,16 @@ code .codexdian-file-link:hover {
     color 0.15s ease;
 }
 
-.codexdian-ask-tab:hover {
+.claudian-ask-tab:hover {
   color: var(--text-normal);
 }
 
-.codexdian-ask-tab.is-active {
+.claudian-ask-tab.is-active {
   background: hsla(55, 30%, 50%, 0.18);
   color: var(--text-normal);
 }
 
-.codexdian-ask-tab-label {
+.claudian-ask-tab-label {
   font-weight: 600;
   max-width: 14ch;
   overflow: hidden;
@@ -3987,23 +3689,23 @@ code .codexdian-file-link:hover {
   white-space: nowrap;
 }
 
-.codexdian-ask-tab-tick {
+.claudian-ask-tab-tick {
   color: var(--color-green);
   font-weight: 700;
 }
 
-.codexdian-ask-tab-submit-check {
+.claudian-ask-tab-submit-check {
   color: var(--color-green);
   white-space: pre;
 }
 
 /* ── Content area ────────────────────────────── */
 
-.codexdian-ask-content {
+.claudian-ask-content {
   padding: 8px 10px;
 }
 
-.codexdian-ask-question-text {
+.claudian-ask-question-text {
   font-weight: 700;
   color: var(--text-normal);
   margin-bottom: 8px;
@@ -4012,14 +3714,14 @@ code .codexdian-file-link:hover {
 
 /* ── Item list ───────────────────────────────── */
 
-.codexdian-ask-list {
+.claudian-ask-list {
   display: flex;
   flex-direction: column;
   gap: 2px;
   margin-bottom: 8px;
 }
 
-.codexdian-ask-item {
+.claudian-ask-item {
   display: flex;
   align-items: flex-start;
   padding: 3px 4px;
@@ -4029,11 +3731,11 @@ code .codexdian-file-link:hover {
   border-radius: 3px;
 }
 
-.codexdian-ask-item:hover {
+.claudian-ask-item:hover {
   background: var(--background-modifier-hover);
 }
 
-.codexdian-ask-cursor {
+.claudian-ask-cursor {
   display: inline-block;
   width: 2ch;
   flex-shrink: 0;
@@ -4041,28 +3743,28 @@ code .codexdian-file-link:hover {
   font-weight: 700;
 }
 
-.codexdian-ask-item-num {
+.claudian-ask-item-num {
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.codexdian-ask-item-content {
+.claudian-ask-item-content {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-width: 0;
 }
 
-.codexdian-ask-label-row {
+.claudian-ask-label-row {
   display: flex;
   align-items: baseline;
 }
 
-.codexdian-ask-item-label {
+.claudian-ask-item-label {
   font-weight: 600;
 }
 
-.codexdian-ask-item-desc {
+.claudian-ask-item-desc {
   color: var(--text-muted);
   font-weight: 400;
   line-height: 1.4;
@@ -4070,39 +3772,39 @@ code .codexdian-file-link:hover {
 }
 
 /* Selected items: green text */
-.codexdian-ask-item.is-selected .codexdian-ask-item-label {
+.claudian-ask-item.is-selected .claudian-ask-item-label {
   color: var(--color-green);
 }
 
 /* Disabled items: muted text */
-.codexdian-ask-item.is-disabled .codexdian-ask-item-label {
+.claudian-ask-item.is-disabled .claudian-ask-item-label {
   color: var(--text-faint);
 }
 
 /* ── Multi-select brackets ───────────────────── */
 
-.codexdian-ask-check {
+.claudian-ask-check {
   color: var(--text-faint);
   flex-shrink: 0;
   white-space: pre;
 }
 
-.codexdian-ask-check.is-checked {
+.claudian-ask-check.is-checked {
   color: var(--color-green);
 }
 
 /* ── Single-select check mark ────────────────── */
 
-.codexdian-ask-check-mark {
+.claudian-ask-check-mark {
   color: var(--color-green);
   font-weight: 700;
 }
 
 /* ── Custom input ────────────────────────────── */
 
-.codexdian-ask-item input.codexdian-ask-custom-text,
-.codexdian-ask-item input.codexdian-ask-custom-text:hover,
-.codexdian-ask-item input.codexdian-ask-custom-text:focus {
+.claudian-ask-item input.claudian-ask-custom-text,
+.claudian-ask-item input.claudian-ask-custom-text:hover,
+.claudian-ask-item input.claudian-ask-custom-text:focus {
   border: none;
   border-radius: 0;
   background: transparent;
@@ -4120,71 +3822,71 @@ code .codexdian-file-link:hover {
   min-width: 0;
 }
 
-.codexdian-ask-custom-text::placeholder {
+.claudian-ask-custom-text::placeholder {
   color: var(--text-faint);
 }
 
 /* ── Submit review tab ───────────────────────── */
 
-.codexdian-ask-review-title {
+.claudian-ask-review-title {
   font-weight: 700;
   color: var(--text-normal);
   margin-bottom: 6px;
 }
 
-.codexdian-ask-review {
+.claudian-ask-review {
   font-family: var(--font-monospace);
   margin-bottom: 16px;
 }
 
-.codexdian-tool-content .codexdian-ask-review {
+.claudian-tool-content .claudian-ask-review {
   font-size: 12px;
 }
 
-.codexdian-ask-review:last-child {
+.claudian-ask-review:last-child {
   margin-bottom: 0;
 }
 
-.codexdian-ask-review-pair {
+.claudian-ask-review-pair {
   display: flex;
   gap: 6px;
   margin-bottom: 4px;
 }
 
-.codexdian-ask-review-pair:last-child {
+.claudian-ask-review-pair:last-child {
   margin-bottom: 0;
 }
 
-.codexdian-ask-review-num {
+.claudian-ask-review-num {
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.codexdian-ask-review-body {
+.claudian-ask-review-body {
   min-width: 0;
 }
 
-.codexdian-ask-review-q-text {
+.claudian-ask-review-q-text {
   color: var(--text-muted);
 }
 
-.codexdian-ask-review-a-text {
+.claudian-ask-review-a-text {
   color: var(--text-normal);
 }
 
-.codexdian-ask-review-empty {
+.claudian-ask-review-empty {
   color: var(--text-faint);
   font-style: italic;
 }
 
-.codexdian-ask-review-prompt {
+.claudian-ask-review-prompt {
   color: var(--text-muted);
   margin-bottom: 6px;
 }
 
 /* ── Hints ───────────────────────────────────── */
 
-.codexdian-ask-hints {
+.claudian-ask-hints {
   color: var(--text-faint);
   padding-top: 6px;
   border-top: 1px solid var(--background-modifier-border);
@@ -4192,11 +3894,11 @@ code .codexdian-file-link:hover {
 
 /* ── Approval header (inline permission request) ── */
 
-.codexdian-ask-approval-info {
+.claudian-ask-approval-info {
   padding: 8px 10px;
 }
 
-.codexdian-ask-approval-tool {
+.claudian-ask-approval-tool {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -4206,22 +3908,22 @@ code .codexdian-file-link:hover {
   margin-bottom: 8px;
 }
 
-.codexdian-ask-approval-icon {
-  color: var(--codexdian-brand);
+.claudian-ask-approval-icon {
+  color: var(--claudian-brand);
 }
 
-.codexdian-ask-approval-tool-name {
+.claudian-ask-approval-tool-name {
   font-weight: 600;
   color: var(--text-normal);
 }
 
-.codexdian-ask-approval-reason {
+.claudian-ask-approval-reason {
   color: var(--text-muted);
   font-size: 12px;
   margin-bottom: 6px;
 }
 
-.codexdian-ask-approval-blocked-path {
+.claudian-ask-approval-blocked-path {
   font-family: var(--font-monospace);
   font-size: 11px;
   color: var(--text-muted);
@@ -4232,13 +3934,13 @@ code .codexdian-file-link:hover {
   word-break: break-all;
 }
 
-.codexdian-ask-approval-agent {
+.claudian-ask-approval-agent {
   color: var(--text-muted);
   font-size: 12px;
   margin-bottom: 6px;
 }
 
-.codexdian-ask-approval-desc {
+.claudian-ask-approval-desc {
   padding: 8px 10px;
   background: var(--background-primary-alt);
   border-radius: 6px;
@@ -4254,13 +3956,13 @@ code .codexdian-file-link:hover {
    ============================================ */
 /* Plan Mode - inline cards for EnterPlanMode / ExitPlanMode */
 
-.codexdian-plan-approval-inline {
+.claudian-plan-approval-inline {
   font-family: var(--font-monospace);
   font-size: 12px;
   outline: none;
 }
 
-.codexdian-plan-inline-title {
+.claudian-plan-inline-title {
   font-weight: 700;
   color: var(--text-muted);
   padding: 6px 10px 0;
@@ -4268,7 +3970,7 @@ code .codexdian-file-link:hover {
 
 /* ── Plan content preview ────────────────────────── */
 
-.codexdian-plan-content-preview {
+.claudian-plan-content-preview {
   max-height: 300px;
   overflow-y: auto;
   margin: 6px 10px 8px;
@@ -4281,46 +3983,46 @@ code .codexdian-file-link:hover {
   color: var(--text-normal);
 }
 
-.codexdian-plan-content-preview::-webkit-scrollbar {
+.claudian-plan-content-preview::-webkit-scrollbar {
   width: 4px;
 }
 
-.codexdian-plan-content-preview::-webkit-scrollbar-thumb {
+.claudian-plan-content-preview::-webkit-scrollbar-thumb {
   background: var(--background-modifier-border);
   border-radius: 2px;
 }
 
-.codexdian-plan-content-preview p {
+.claudian-plan-content-preview p {
   margin: 0 0 6px;
 }
 
-.codexdian-plan-content-preview p:last-child {
+.claudian-plan-content-preview p:last-child {
   margin-bottom: 0;
 }
 
-.codexdian-plan-content-preview h1,
-.codexdian-plan-content-preview h2,
-.codexdian-plan-content-preview h3,
-.codexdian-plan-content-preview h4 {
+.claudian-plan-content-preview h1,
+.claudian-plan-content-preview h2,
+.claudian-plan-content-preview h3,
+.claudian-plan-content-preview h4 {
   margin: 8px 0 4px;
   font-size: 13px;
 }
 
-.codexdian-plan-content-preview ul,
-.codexdian-plan-content-preview ol {
+.claudian-plan-content-preview ul,
+.claudian-plan-content-preview ol {
   margin: 2px 0 6px;
   padding-left: 18px;
 }
 
-.codexdian-plan-content-preview li {
+.claudian-plan-content-preview li {
   margin: 0;
 }
 
-.codexdian-plan-content-preview code {
+.claudian-plan-content-preview code {
   font-size: 11px;
 }
 
-.codexdian-plan-content-text {
+.claudian-plan-content-text {
   white-space: pre-wrap;
   word-break: break-word;
   font-family: var(--font-monospace);
@@ -4328,30 +4030,30 @@ code .codexdian-file-link:hover {
 
 /* ── Permissions list ──────────────────────────── */
 
-.codexdian-plan-permissions {
+.claudian-plan-permissions {
   padding: 4px 10px 8px;
 }
 
-.codexdian-plan-permissions-label {
+.claudian-plan-permissions-label {
   color: var(--text-muted);
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-.codexdian-plan-permissions-list {
+.claudian-plan-permissions-list {
   margin: 0;
   padding-left: 18px;
   color: var(--text-normal);
   line-height: 1.5;
 }
 
-.codexdian-plan-permissions-list li {
+.claudian-plan-permissions-list li {
   margin: 0;
 }
 
 /* ── Plan mode input border ──────────────────────── */
 
-.codexdian-input-wrapper.codexdian-input-plan-mode {
+.claudian-input-wrapper.claudian-input-plan-mode {
   border-color: rgb(92, 148, 140) !important;
   box-shadow: 0 0 0 1px rgb(92, 148, 140);
 }
@@ -4363,22 +4065,22 @@ code .codexdian-file-link:hover {
 /* Instruction Mode */
 
 /* Instruction Confirm Modal */
-.codexdian-instruction-modal {
+.claudian-instruction-modal {
   max-width: 500px;
 }
 
-.codexdian-instruction-section {
+.claudian-instruction-section {
   margin-bottom: 16px;
 }
 
-.codexdian-instruction-label {
+.claudian-instruction-label {
   font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
   margin-bottom: 6px;
 }
 
-.codexdian-instruction-original {
+.claudian-instruction-original {
   padding: 10px 12px;
   background: var(--background-secondary);
   border-radius: 6px;
@@ -4388,7 +4090,7 @@ code .codexdian-file-link:hover {
   white-space: pre-wrap;
 }
 
-.codexdian-instruction-refined {
+.claudian-instruction-refined {
   padding: 12px;
   background: var(--background-primary-alt);
   border: 1px solid var(--background-modifier-border);
@@ -4399,7 +4101,7 @@ code .codexdian-file-link:hover {
   white-space: pre-wrap;
 }
 
-.codexdian-instruction-clarification {
+.claudian-instruction-clarification {
   padding: 12px;
   background: var(--background-primary-alt);
   border: 1px solid var(--background-modifier-border);
@@ -4410,11 +4112,11 @@ code .codexdian-file-link:hover {
   white-space: pre-wrap;
 }
 
-.codexdian-instruction-edit-container {
+.claudian-instruction-edit-container {
   margin-top: 6px;
 }
 
-.codexdian-instruction-edit-textarea {
+.claudian-instruction-edit-textarea {
   width: 100%;
   padding: 10px 12px;
   font-size: 14px;
@@ -4427,12 +4129,12 @@ code .codexdian-file-link:hover {
   min-height: 80px;
 }
 
-.codexdian-instruction-edit-textarea:focus {
+.claudian-instruction-edit-textarea:focus {
   outline: none;
   border-color: var(--interactive-accent);
 }
 
-.codexdian-instruction-response-textarea {
+.claudian-instruction-response-textarea {
   width: 100%;
   padding: 10px 12px;
   font-size: 14px;
@@ -4445,19 +4147,19 @@ code .codexdian-file-link:hover {
   min-height: 60px;
 }
 
-.codexdian-instruction-response-textarea:focus {
+.claudian-instruction-response-textarea:focus {
   outline: none;
   border-color: var(--interactive-accent);
 }
 
-.codexdian-instruction-buttons {
+.claudian-instruction-buttons {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
   margin-top: 16px;
 }
 
-.codexdian-instruction-btn {
+.claudian-instruction-btn {
   padding: 8px 16px;
   font-size: 13px;
   border: none;
@@ -4466,35 +4168,35 @@ code .codexdian-file-link:hover {
   font-weight: 500;
 }
 
-.codexdian-instruction-reject-btn {
+.claudian-instruction-reject-btn {
   background: var(--background-modifier-border);
   color: var(--text-normal);
 }
 
-.codexdian-instruction-reject-btn:hover {
+.claudian-instruction-reject-btn:hover {
   background: var(--background-modifier-border-hover);
 }
 
-.codexdian-instruction-edit-btn {
+.claudian-instruction-edit-btn {
   background: var(--background-modifier-border);
   color: var(--text-normal);
 }
 
-.codexdian-instruction-edit-btn:hover {
+.claudian-instruction-edit-btn:hover {
   background: var(--background-modifier-border-hover);
 }
 
-.codexdian-instruction-accept-btn {
+.claudian-instruction-accept-btn {
   background: var(--interactive-accent);
   color: var(--text-on-accent);
 }
 
-.codexdian-instruction-accept-btn:hover {
+.claudian-instruction-accept-btn:hover {
   opacity: 0.9;
 }
 
 /* Instruction loading state */
-.codexdian-instruction-loading {
+.claudian-instruction-loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4503,22 +4205,22 @@ code .codexdian-file-link:hover {
   color: var(--text-muted);
 }
 
-.codexdian-instruction-spinner {
+.claudian-instruction-spinner {
   width: 18px;
   height: 18px;
   border: 2px solid var(--background-modifier-border);
   border-top-color: var(--interactive-accent);
   border-radius: 50%;
-  animation: codexdian-spin 0.8s linear infinite;
+  animation: claudian-spin 0.8s linear infinite;
 }
 
 /* Instruction modal content sections */
-.codexdian-instruction-content-section {
+.claudian-instruction-content-section {
   margin: 8px 0;
 }
 
-.codexdian-instruction-clarification-section,
-.codexdian-instruction-confirmation-section {
+.claudian-instruction-clarification-section,
+.claudian-instruction-confirmation-section {
   margin-top: 8px;
 }
 
@@ -4527,41 +4229,41 @@ code .codexdian-file-link:hover {
    modals/mcp-modal.css
    ============================================ */
 /* MCP Server Modal */
-.codexdian-mcp-modal .modal-content {
+.claudian-mcp-modal .modal-content {
   width: 480px;
   max-width: 90vw;
 }
 
-.codexdian-mcp-type-fields {
+.claudian-mcp-type-fields {
   margin: 12px 0;
   padding: 12px;
   background: var(--background-secondary);
   border-radius: 6px;
 }
 
-.codexdian-mcp-type-fields .setting-item {
+.claudian-mcp-type-fields .setting-item {
   padding: 8px 0;
   border-top: none;
 }
 
-.codexdian-mcp-type-fields .setting-item:first-child {
+.claudian-mcp-type-fields .setting-item:first-child {
   padding-top: 0;
 }
 
-.codexdian-mcp-cmd-setting,
-.codexdian-mcp-env-setting {
+.claudian-mcp-cmd-setting,
+.claudian-mcp-env-setting {
   flex-direction: column;
   align-items: flex-start;
 }
 
-.codexdian-mcp-cmd-setting .setting-item-control,
-.codexdian-mcp-env-setting .setting-item-control {
+.claudian-mcp-cmd-setting .setting-item-control,
+.claudian-mcp-env-setting .setting-item-control {
   width: 100%;
   margin-top: 8px;
 }
 
-.codexdian-mcp-cmd-textarea,
-.codexdian-mcp-env-textarea {
+.claudian-mcp-cmd-textarea,
+.claudian-mcp-env-textarea {
   width: 100%;
   min-height: 50px;
   resize: vertical;
@@ -4573,13 +4275,13 @@ code .codexdian-file-link:hover {
   background: var(--background-primary);
 }
 
-.codexdian-mcp-cmd-textarea:focus,
-.codexdian-mcp-env-textarea:focus {
+.claudian-mcp-cmd-textarea:focus,
+.claudian-mcp-env-textarea:focus {
   border-color: var(--interactive-accent);
   outline: none;
 }
 
-.codexdian-mcp-buttons {
+.claudian-mcp-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
@@ -4587,21 +4289,21 @@ code .codexdian-file-link:hover {
 }
 
 /* MCP Test Modal */
-.codexdian-mcp-test-modal {
+.claudian-mcp-test-modal {
   width: 500px;
   max-width: 90vw;
 }
 
-.codexdian-mcp-test-modal .modal-content {
+.claudian-mcp-test-modal .modal-content {
   padding: 0 20px 20px 20px;
 }
 
-.codexdian-mcp-test-modal .modal-title {
+.claudian-mcp-test-modal .modal-title {
   padding: 20px 20px 12px 20px;
   margin: 0 -20px;
 }
 
-.codexdian-mcp-test-loading {
+.claudian-mcp-test-loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4610,18 +4312,18 @@ code .codexdian-file-link:hover {
   color: var(--text-muted);
 }
 
-.codexdian-mcp-test-spinner {
+.claudian-mcp-test-spinner {
   width: 20px;
   height: 20px;
-  animation: codexdian-spin 1s linear infinite;
+  animation: claudian-spin 1s linear infinite;
 }
 
-.codexdian-mcp-test-spinner svg {
+.claudian-mcp-test-spinner svg {
   width: 100%;
   height: 100%;
 }
 
-.codexdian-mcp-test-status {
+.claudian-mcp-test-status {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -4631,29 +4333,29 @@ code .codexdian-file-link:hover {
   margin-bottom: 12px;
 }
 
-.codexdian-mcp-test-icon {
+.claudian-mcp-test-icon {
   display: flex;
   align-items: center;
 }
 
-.codexdian-mcp-test-icon svg {
+.claudian-mcp-test-icon svg {
   width: 20px;
   height: 20px;
 }
 
-.codexdian-mcp-test-icon.success {
+.claudian-mcp-test-icon.success {
   color: var(--color-green);
 }
 
-.codexdian-mcp-test-icon.error {
+.claudian-mcp-test-icon.error {
   color: var(--text-error);
 }
 
-.codexdian-mcp-test-text {
+.claudian-mcp-test-text {
   font-weight: 500;
 }
 
-.codexdian-mcp-test-error {
+.claudian-mcp-test-error {
   padding: 10px 12px;
   background: rgba(var(--color-red-rgb), 0.1);
   border: 1px solid var(--text-error);
@@ -4663,18 +4365,18 @@ code .codexdian-file-link:hover {
   margin-bottom: 12px;
 }
 
-.codexdian-mcp-test-tools {
+.claudian-mcp-test-tools {
   margin-bottom: 16px;
 }
 
-.codexdian-mcp-test-tools-header {
+.claudian-mcp-test-tools-header {
   font-weight: 600;
   font-size: 13px;
   margin-bottom: 8px;
   color: var(--text-muted);
 }
 
-.codexdian-mcp-test-tools-list {
+.claudian-mcp-test-tools-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -4682,67 +4384,67 @@ code .codexdian-file-link:hover {
   overflow-y: auto;
 }
 
-.codexdian-mcp-test-tool {
+.claudian-mcp-test-tool {
   padding: 10px 12px;
   background: var(--background-secondary);
   border-radius: 6px;
 }
 
-.codexdian-mcp-test-tool-header {
+.claudian-mcp-test-tool-header {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.codexdian-mcp-test-tool-icon {
+.claudian-mcp-test-tool-icon {
   display: flex;
   align-items: center;
   color: var(--text-muted);
 }
 
-.codexdian-mcp-test-tool-icon svg {
+.claudian-mcp-test-tool-icon svg {
   width: 14px;
   height: 14px;
 }
 
-.codexdian-mcp-test-tool-name {
+.claudian-mcp-test-tool-name {
   font-weight: 500;
   font-size: 13px;
 }
 
-.codexdian-mcp-test-tool-toggle {
+.claudian-mcp-test-tool-toggle {
   margin-left: auto;
 }
 
-.codexdian-mcp-test-tool-toggle .checkbox-container {
+.claudian-mcp-test-tool-toggle .checkbox-container {
   display: flex;
   align-items: center;
 }
 
-.codexdian-mcp-test-tool-disabled {
+.claudian-mcp-test-tool-disabled {
   opacity: 0.75;
 }
 
-.codexdian-mcp-test-tool-disabled .codexdian-mcp-test-tool-name {
+.claudian-mcp-test-tool-disabled .claudian-mcp-test-tool-name {
   text-decoration: line-through;
   color: var(--text-muted);
 }
 
-.codexdian-mcp-toggle-all-btn {
+.claudian-mcp-toggle-all-btn {
   margin-right: 8px;
 }
 
-.codexdian-mcp-toggle-all-btn.is-destructive {
+.claudian-mcp-toggle-all-btn.is-destructive {
   background: rgba(var(--color-red-rgb), 0.1);
   border-color: rgba(var(--color-red-rgb), 0.3);
   color: var(--text-error);
 }
 
-.codexdian-mcp-toggle-all-btn.is-destructive:hover {
+.claudian-mcp-toggle-all-btn.is-destructive:hover {
   background: rgba(var(--color-red-rgb), 0.2);
 }
 
-.codexdian-mcp-test-tool-desc {
+.claudian-mcp-test-tool-desc {
   font-size: 12px;
   color: var(--text-muted);
   margin-top: 4px;
@@ -4752,7 +4454,7 @@ code .codexdian-file-link:hover {
   overflow: hidden;
 }
 
-.codexdian-mcp-test-no-tools {
+.claudian-mcp-test-no-tools {
   padding: 16px;
   text-align: center;
   color: var(--text-muted);
@@ -4762,7 +4464,7 @@ code .codexdian-file-link:hover {
   margin-bottom: 16px;
 }
 
-.codexdian-mcp-test-buttons {
+.claudian-mcp-test-buttons {
   display: flex;
   justify-content: center;
   margin-top: 16px;
@@ -4773,16 +4475,16 @@ code .codexdian-file-link:hover {
    modals/fork-target.css
    ============================================ */
 /* Fork Target Modal */
-.codexdian-fork-target-modal {
+.claudian-fork-target-modal {
   max-width: 340px;
 }
 
-.codexdian-fork-target-list {
+.claudian-fork-target-list {
   display: flex;
   flex-direction: column;
 }
 
-.codexdian-fork-target-option {
+.claudian-fork-target-option {
   padding: 10px 12px;
   border-radius: 6px;
   cursor: pointer;
@@ -4790,7 +4492,7 @@ code .codexdian-file-link:hover {
   font-size: 14px;
 }
 
-.codexdian-fork-target-option:hover {
+.claudian-fork-target-option:hover {
   background: var(--background-modifier-hover);
 }
 
@@ -4798,1430 +4500,1002 @@ code .codexdian-file-link:hover {
 /* ============================================
    settings/base.css
    ============================================ */
-/* Settings page shell */
-.codexdian-settings {
-  --codexdian-settings-card-bg: color-mix(in srgb, var(--background-secondary) 84%, var(--background-primary));
-  --codexdian-settings-card-bg-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
-  --codexdian-settings-border: color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
-  --codexdian-settings-border-strong: color-mix(in srgb, var(--background-modifier-border-hover) 72%, var(--codexdian-brand) 28%);
-  --codexdian-settings-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 10px 0 56px;
-}
-
-.codexdian-settings-hero {
-  margin: 0 0 24px;
-  padding: 20px 22px;
-  border-radius: 20px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-brand) 20%, var(--background-modifier-border));
-  background:
-    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--codexdian-brand) 14%, transparent), transparent 40%),
-    linear-gradient(145deg, color-mix(in srgb, var(--background-secondary) 82%, transparent), color-mix(in srgb, var(--background-primary) 76%, transparent));
-  box-shadow: var(--codexdian-settings-shadow);
-}
-
-.codexdian-settings-hero__eyebrow {
-  margin-bottom: 7px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--codexdian-brand);
-}
-
-.codexdian-settings-hero__title {
-  margin: 0;
-  font-size: 28px;
-  line-height: 1.08;
-}
-
-.codexdian-settings-hero__desc {
-  margin-top: 9px;
-  max-width: 700px;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-/* Core setting cards */
-.codexdian-settings .setting-item {
+/* Settings page - remove separator lines from setting items */
+.claudian-settings .setting-item {
   border-top: none;
-  margin: 10px 0;
-  padding: 14px 16px;
-  border-radius: 16px;
-  border: 1px solid var(--codexdian-settings-border);
-  background: linear-gradient(
-      160deg,
-      color-mix(in srgb, var(--codexdian-settings-card-bg-strong) 88%, transparent),
-      color-mix(in srgb, var(--codexdian-settings-card-bg) 90%, transparent)
-    );
-  box-shadow: var(--codexdian-settings-shadow);
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
-.codexdian-settings .setting-item:hover {
-  border-color: var(--codexdian-settings-border-strong);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.08);
-  transform: translateY(-1px);
+/* Settings section headings (via setHeading()) */
+.claudian-settings .setting-item-heading {
+  padding-top: 18px;
+  margin-top: 12px;
+  border-top: 1px solid var(--background-modifier-border);
 }
 
-.codexdian-settings .setting-item-heading {
-  margin: 28px 0 8px;
-  padding: 0 2px;
-  border: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.codexdian-settings .setting-item-heading:first-child {
+.claudian-settings .setting-item-heading:first-child {
+  padding-top: 0;
   margin-top: 0;
+  border-top: none;
 }
 
-.codexdian-settings .setting-item-heading .setting-item-name {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-
-.codexdian-settings .setting-item-name {
-  font-size: 14px;
-  font-weight: 600;
+.claudian-settings .setting-item-heading .setting-item-name {
+  font-size: var(--font-ui-medium);
+  font-weight: var(--font-semibold);
   color: var(--text-normal);
 }
 
-.codexdian-settings .setting-item-description {
-  margin-top: 4px;
-  color: var(--text-muted);
-  line-height: 1.45;
-}
-
-.codexdian-settings .setting-item-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.codexdian-settings .setting-item-control input[type="text"],
-.codexdian-settings .setting-item-control textarea,
-.codexdian-settings .setting-item-control select {
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--background-primary) 86%, var(--background-secondary) 14%);
-  color: var(--text-normal);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-.codexdian-settings .setting-item-control input[type="text"],
-.codexdian-settings .setting-item-control select {
-  max-width: min(460px, 100%);
-}
-
-.codexdian-settings .setting-item-control textarea {
-  min-height: 96px;
-  line-height: 1.4;
-}
-
-.codexdian-settings .setting-item-control input[type="text"]:focus,
-.codexdian-settings .setting-item-control textarea:focus,
-.codexdian-settings .setting-item-control select:focus {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 58%, var(--background-modifier-border-hover));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 28%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 90%, var(--background-secondary) 10%);
-}
-
-/* Custom section descriptions */
-.codexdian-sp-settings-desc,
-.codexdian-mcp-settings-desc,
-.codexdian-plugin-settings-desc,
-.codexdian-approved-desc {
-  margin: 4px 3px 12px;
-  padding: 10px 12px;
-  border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--background-secondary) 68%, transparent);
-  color: var(--text-muted);
-}
-
-.codexdian-sp-settings-desc p,
-.codexdian-mcp-settings-desc p,
-.codexdian-plugin-settings-desc p,
-.codexdian-approved-desc p {
-  margin: 0;
+/* Custom section descriptions - align with items */
+.claudian-sp-settings-desc,
+.claudian-mcp-settings-desc,
+.claudian-plugin-settings-desc,
+.claudian-approved-desc {
+  padding: 0 12px;
 }
 
 /* Unified icon action buttons for settings */
-.codexdian-settings-action-btn {
-  display: inline-flex;
+.claudian-settings-action-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 74%, var(--background-secondary) 26%);
-  border-radius: 9px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
   cursor: pointer;
   color: var(--text-muted);
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.codexdian-settings-action-btn:hover {
-  background: color-mix(in srgb, var(--background-modifier-hover) 74%, var(--background-secondary) 26%);
+.claudian-settings-action-btn:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
-  border-color: color-mix(in srgb, var(--codexdian-brand) 30%, var(--background-modifier-border-hover));
 }
 
-.codexdian-settings-action-btn svg {
-  width: 15px;
-  height: 15px;
+.claudian-settings-action-btn svg {
+  width: 14px;
+  height: 14px;
 }
 
-.codexdian-settings-delete-btn:hover {
+.claudian-settings-delete-btn:hover {
   color: var(--text-error);
 }
 
-/* Shared modal buttons */
-.codexdian-cancel-btn,
-.codexdian-save-btn {
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
-  border-radius: 10px;
-  padding: 7px 14px;
-  font-size: 13px;
+/* Hotkey grid - 3 columns */
+.claudian-hotkey-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 12px;
+  padding: 4px 0;
+}
+
+.claudian-hotkey-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  border-radius: 6px;
 }
 
-.codexdian-cancel-btn {
-  background: color-mix(in srgb, var(--background-secondary) 84%, var(--background-primary));
-  color: var(--text-normal);
-}
-
-.codexdian-cancel-btn:hover {
+.claudian-hotkey-item:hover {
   background: var(--background-modifier-hover);
 }
 
-.codexdian-save-btn {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 48%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--codexdian-brand) 80%, var(--interactive-accent));
-  color: var(--text-on-accent);
-}
-
-.codexdian-save-btn:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 62%, var(--background-modifier-border-hover));
-  filter: brightness(1.04);
-}
-
-/* Hotkey grid */
-.codexdian-hotkey-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 10px;
-  padding: 6px 0 0;
-}
-
-.codexdian-hotkey-item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px 12px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 80%, var(--background-primary));
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.codexdian-hotkey-item:hover {
-  background: color-mix(in srgb, var(--background-modifier-hover) 78%, var(--background-secondary) 22%);
-  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
-}
-
-.codexdian-hotkey-name {
+.claudian-hotkey-name {
   flex: 1;
   color: var(--text-normal);
   font-size: var(--font-ui-small);
 }
 
-.codexdian-hotkey-badge {
+.claudian-hotkey-badge {
   color: var(--text-muted);
-  font-size: 11px;
-  background: color-mix(in srgb, var(--background-primary) 78%, var(--background-modifier-hover) 22%);
-  padding: 3px 8px;
-  border-radius: 7px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 70%, transparent);
+  font-size: var(--font-ui-smaller);
+  background: var(--background-modifier-hover);
+  padding: 2px 6px;
+  border-radius: 4px;
   font-family: var(--font-monospace);
 }
 
-.codexdian-settings-media-input {
-  width: 220px;
+/* Media folder input width */
+.claudian-settings-media-input {
+  width: 200px;
 }
 
-/* Shared list layout (slash + agent) */
-.codexdian-sp-header {
+/* ── Shared settings panel layout (used by slash-settings + agent-settings) ── */
+
+.claudian-sp-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 2px 10px;
+  margin-bottom: 12px;
+  padding: 0 12px;
 }
 
-.codexdian-sp-label {
+.claudian-sp-label {
   font-size: var(--font-ui-small);
   color: var(--text-muted);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: var(--font-medium);
 }
 
-.codexdian-sp-header-actions {
+.claudian-sp-header-actions {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
-.codexdian-sp-empty-state {
-  margin-top: 8px;
-  padding: 22px;
+.claudian-sp-empty-state {
+  padding: 20px;
   text-align: center;
   color: var(--text-muted);
-  border-radius: 13px;
-  border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
-}
-
-.codexdian-sp-list {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
+  background: var(--background-secondary);
+  border-radius: 6px;
   margin-top: 8px;
 }
 
-.codexdian-sp-item {
+.claudian-sp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.claudian-sp-item {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding: 12px;
-  border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 82%, var(--background-primary));
-  transition: border-color 0.15s ease, background 0.15s ease;
+  background: var(--background-secondary);
+  border-radius: 6px;
 }
 
-.codexdian-sp-item:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 26%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+.claudian-sp-item:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-sp-info {
+.claudian-sp-info {
   flex: 1;
   min-width: 0;
 }
 
-.codexdian-sp-item-header {
+.claudian-sp-item-header {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
-.codexdian-sp-item-name {
+.claudian-sp-item-name {
   font-weight: 600;
   font-family: var(--font-monospace);
   color: var(--text-normal);
 }
 
-.codexdian-sp-item-desc {
-  margin-top: 3px;
+.claudian-sp-item-desc {
   font-size: 13px;
   color: var(--text-muted);
+  margin-top: 2px;
 }
 
-.codexdian-sp-item-actions {
+.claudian-sp-item-actions {
   display: flex;
-  gap: 5px;
-  margin-left: 14px;
+  gap: 4px;
+  margin-left: 16px;
   flex-shrink: 0;
 }
 
-.codexdian-sp-advanced-section {
-  margin: 9px 0;
-  padding: 0 12px 10px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 62%, transparent);
+.claudian-sp-advanced-section {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 0 12px;
+  margin: 8px 0;
 }
 
-.codexdian-sp-advanced-summary {
+.claudian-sp-advanced-summary {
   cursor: pointer;
-  padding: 10px 0;
+  padding: 8px 0;
   font-size: var(--font-ui-small);
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: var(--font-medium);
 }
 
-.codexdian-sp-advanced-section[open] .codexdian-sp-advanced-summary {
+.claudian-sp-advanced-section[open] .claudian-sp-advanced-summary {
   margin-bottom: 4px;
 }
 
-.codexdian-sp-modal .modal-content {
-  width: min(640px, calc(100vw - 52px));
-  max-width: 640px;
+.claudian-sp-modal .modal-content {
+  max-width: 600px;
+  width: auto;
 }
 
-.codexdian-sp-content-area {
+.claudian-sp-content-area {
   width: 100%;
-  margin-top: 8px;
-  padding: 10px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  padding: 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  background: var(--background-primary);
   color: var(--text-normal);
   resize: vertical;
-  font-family: var(--font-monospace);
-  font-size: 12px;
+  margin-top: 8px;
 }
 
-.codexdian-sp-content-area:focus {
+.claudian-sp-content-area:focus {
   outline: none;
-  border-color: color-mix(in srgb, var(--codexdian-brand) 54%, var(--background-modifier-border-hover));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
+  border-color: var(--interactive-accent);
 }
 
-.codexdian-sp-modal-buttons {
+.claudian-sp-modal-buttons {
   display: flex;
-  justify-content: flex-end;
   gap: 8px;
   margin-top: 16px;
-}
-
-@media (max-width: 900px) {
-  .codexdian-settings {
-    max-width: 100%;
-  }
-
-  .codexdian-settings .setting-item {
-    padding: 13px 14px;
-  }
-
-  .codexdian-hotkey-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-}
-
-@media (max-width: 700px) {
-  .codexdian-settings-hero {
-    padding: 16px 17px;
-    border-radius: 16px;
-  }
-
-  .codexdian-settings-hero__title {
-    font-size: 24px;
-  }
-
-  .codexdian-settings .setting-item {
-    border-radius: 13px;
-  }
+  justify-content: flex-end;
 }
 
 
 /* ============================================
    settings/env-snippets.css
    ============================================ */
-/* Context limits */
-.codexdian-context-limits-container {
+/* Context Limits Styles */
+.claudian-context-limits-container {
   margin-top: 16px;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
 }
 
-.codexdian-context-limits-header {
+.claudian-context-limits-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2px 0 8px;
+  margin-bottom: 8px;
+  margin-top: 16px;
+  padding: 0 12px;
 }
 
-.codexdian-context-limits-label {
+.claudian-context-limits-label {
   font-size: var(--font-ui-small);
   color: var(--text-muted);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: var(--font-medium);
 }
 
-.codexdian-context-limits-desc {
-  margin-bottom: 8px;
-  font-size: 12px;
+.claudian-context-limits-desc {
+  font-size: var(--font-ui-smaller);
   color: var(--text-muted);
+  padding: 0 12px;
+  margin-bottom: 8px;
 }
 
-.codexdian-context-limits-list {
+.claudian-context-limits-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 8px;
 }
 
-.codexdian-context-limits-item {
+.claudian-context-limits-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 10px 11px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 72%, var(--background-secondary));
-  transition: background 0.15s ease, border-color 0.15s ease;
+  padding: 12px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
-.codexdian-context-limits-item:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+.claudian-context-limits-item:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-context-limits-model {
+.claudian-context-limits-model {
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-small);
+  color: var(--text-normal);
   flex: 1;
   min-width: 0;
-  font-family: var(--font-monospace);
-  font-size: 12px;
-  color: var(--text-normal);
   word-break: break-all;
 }
 
-.codexdian-context-limits-input-wrapper {
+.claudian-context-limits-input-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-left: 8px;
+  margin-left: 16px;
   flex-shrink: 0;
 }
 
-.codexdian-context-limits-input {
-  width: 88px;
+.claudian-context-limits-input {
+  width: 80px;
   padding: 4px 8px;
-  font-size: 12px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
+  font-size: var(--font-ui-small);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  background: var(--background-primary);
   color: var(--text-normal);
 }
 
-.codexdian-context-limits-input:focus {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 58%, var(--background-modifier-border-hover));
+.claudian-context-limits-input:focus {
+  border-color: var(--interactive-accent);
   outline: none;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
 }
 
-.codexdian-context-limits-input.codexdian-input-error {
+.claudian-context-limits-input.claudian-input-error {
   border-color: var(--text-error);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--text-error) 24%, transparent);
 }
 
-.codexdian-context-limit-validation {
+.claudian-context-limit-validation {
   display: none;
-  margin-top: 4px;
-  font-size: 11px;
+  font-size: var(--font-ui-smaller);
   color: var(--text-error);
+  margin-top: 4px;
 }
 
-/* Environment snippets */
-.codexdian-env-snippets-container {
+/* Environment Snippets Styles */
+.claudian-env-snippets-container {
   margin-top: 16px;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
 }
 
-.codexdian-snippet-header {
+.claudian-snippet-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  margin-top: 16px;
+  padding: 0 12px;
 }
 
-.codexdian-snippet-label {
+.claudian-snippet-label {
   font-size: var(--font-ui-small);
   color: var(--text-muted);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: var(--font-medium);
 }
 
-.codexdian-snippet-empty {
-  margin-top: 8px;
+.claudian-save-env-btn {
+  padding: 6px 16px;
+  font-size: 13px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.claudian-save-env-btn:hover {
+  opacity: 0.9;
+}
+
+.claudian-snippet-empty {
   padding: 20px;
   text-align: center;
   color: var(--text-muted);
-  border-radius: 12px;
-  border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 66%, transparent);
+  background: var(--background-secondary);
+  border-radius: 6px;
+  margin-top: 8px;
 }
 
-.codexdian-snippet-list {
+.claudian-snippet-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 8px;
 }
 
-.codexdian-snippet-item {
+.claudian-snippet-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 11px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 72%, var(--background-secondary));
-  transition: background 0.15s ease, border-color 0.15s ease;
+  padding: 12px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
-.codexdian-snippet-item:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+.claudian-snippet-item:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-snippet-info {
+.claudian-snippet-info {
   flex: 1;
   min-width: 0;
 }
 
-.codexdian-snippet-name {
-  margin-bottom: 3px;
+.claudian-snippet-name {
   font-weight: 600;
-  font-family: var(--font-monospace);
-  color: var(--text-normal);
+  margin-bottom: 4px;
   word-break: break-word;
 }
 
-.codexdian-snippet-description {
-  font-size: 12px;
+.claudian-snippet-description {
+  font-size: 13px;
   color: var(--text-muted);
 }
 
-.codexdian-snippet-actions {
+.claudian-snippet-actions {
   display: flex;
-  gap: 5px;
-  margin-left: 8px;
+  gap: 4px;
+  margin-left: 16px;
   flex-shrink: 0;
 }
 
-/* Env snippet modal */
-.codexdian-env-snippet-modal .modal-content {
-  width: min(620px, calc(100vw - 52px));
-  max-width: 620px;
+.claudian-restore-snippet-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.codexdian-env-snippet-modal .setting-item {
-  margin: 8px 0;
-  padding: 10px 0;
-  border-top: none;
+.claudian-restore-snippet-btn:hover {
+  opacity: 0.9;
 }
 
-.codexdian-env-snippet-modal .setting-item-info {
+.claudian-edit-snippet-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  background: var(--background-modifier-border);
+  color: var(--text-normal);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.claudian-edit-snippet-btn:hover {
+  background: var(--background-modifier-border-hover);
+}
+
+.claudian-delete-snippet-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  background: var(--background-modifier-error);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.claudian-delete-snippet-btn:hover {
+  opacity: 0.9;
+}
+
+/* Env Snippet Modal */
+.claudian-env-snippet-modal .modal-content {
+  max-width: 550px;
+  width: 550px;
+  padding: 16px;
+}
+
+.claudian-env-snippet-modal h2 {
+  margin: 0 0 16px 0;
+}
+
+.claudian-env-snippet-modal .setting-item {
+  padding: 8px 0;
+  margin: 0;
+}
+
+.claudian-env-snippet-modal .setting-item-info {
   margin-bottom: 4px;
 }
 
-.codexdian-env-snippet-setting {
+/* Full-width env vars textarea setting */
+.claudian-env-snippet-setting {
   flex-direction: column;
   align-items: flex-start;
 }
 
-.codexdian-env-snippet-setting .setting-item-info {
+.claudian-env-snippet-setting .setting-item-info {
   width: 100%;
   margin-bottom: 8px;
 }
 
-.codexdian-env-snippet-control {
+.claudian-env-snippet-control {
   width: 100%;
 }
 
-.codexdian-env-snippet-control textarea {
+.claudian-env-snippet-control textarea {
   width: 100%;
   min-width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
   font-family: var(--font-monospace);
   font-size: 12px;
   resize: vertical;
 }
 
-.codexdian-env-snippet-control textarea:focus {
-  outline: none;
-  border-color: color-mix(in srgb, var(--codexdian-brand) 56%, var(--background-modifier-border-hover));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
-}
-
-.codexdian-snippet-preview {
+.claudian-snippet-preview {
   margin: 8px 0;
-  padding: 8px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 84%, var(--background-primary));
+  padding: 6px;
+  background: var(--background-secondary);
+  border-radius: 6px;
 }
 
-.codexdian-env-preview {
-  margin: 0;
-  max-height: 120px;
-  overflow-y: auto;
-  padding: 8px;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--background-primary) 90%, var(--background-secondary));
+.claudian-env-preview {
+  background: var(--background-primary);
+  padding: 6px;
+  border-radius: 4px;
   font-family: var(--font-monospace);
   font-size: 11px;
-  line-height: 1.35;
+  line-height: 1.3;
   white-space: pre-wrap;
   word-break: break-all;
   color: var(--text-muted);
+  max-height: 120px;
+  overflow-y: auto;
+  margin: 0;
 }
 
-.codexdian-snippet-buttons {
+.claudian-snippet-buttons {
   display: flex;
-  justify-content: flex-end;
   gap: 8px;
   margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.claudian-cancel-btn,
+.claudian-save-btn {
+  padding: 6px 16px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.claudian-cancel-btn {
+  background: var(--background-modifier-border);
+  color: var(--text-normal);
+}
+
+.claudian-cancel-btn:hover {
+  background: var(--background-modifier-border-hover);
+}
+
+.claudian-save-btn {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+.claudian-save-btn:hover {
+  opacity: 0.9;
 }
 
 /* Context limits section in snippet modal */
-.codexdian-snippet-context-limits {
+.claudian-snippet-context-limits {
   margin-top: 1em;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 78%, var(--background-primary));
 }
 
-.codexdian-snippet-context-limits .setting-item-description {
+.claudian-snippet-context-limits .setting-item-description {
   margin-bottom: 0.5em;
 }
 
-.codexdian-snippet-limit-row {
+.claudian-snippet-limit-row {
   display: flex;
   align-items: center;
   gap: 0.5em;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.25em;
 }
 
-.codexdian-snippet-limit-model {
+.claudian-snippet-limit-model {
   font-family: var(--font-monospace);
-  font-size: 12px;
+  font-size: var(--font-ui-small);
 }
 
-.codexdian-snippet-limit-spacer {
+.claudian-snippet-limit-spacer {
   flex: 1;
 }
 
-.codexdian-snippet-limit-input {
-  width: 84px;
+.claudian-snippet-limit-input {
+  width: 80px;
 }
 
 
 /* ============================================
    settings/slash-settings.css
    ============================================ */
-/* Slash command settings */
-.codexdian-slash-item-hint {
-  font-size: 11px;
+/* Slash Command Settings — unique rules only (shared layout in base.css .claudian-sp-*) */
+
+.claudian-slash-item-hint {
+  font-size: 12px;
   color: var(--text-muted);
-  font-family: var(--font-monospace);
-  opacity: 0.9;
+  font-style: italic;
 }
 
-.codexdian-slash-item-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 7px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-brand) 42%, transparent);
-  background: color-mix(in srgb, var(--codexdian-brand) 18%, transparent);
-  color: color-mix(in srgb, var(--codexdian-brand) 76%, var(--text-normal));
-  font-size: 9px;
-  letter-spacing: 0.05em;
+.claudian-slash-item-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--background-modifier-border);
+  border-radius: 4px;
+  color: var(--text-muted);
   text-transform: uppercase;
-  font-weight: 700;
 }
 
 
 /* ============================================
    settings/mcp-settings.css
    ============================================ */
-/* MCP server settings */
-.codexdian-mcp-settings-desc {
+/* MCP Server Settings */
+.claudian-mcp-settings-desc {
   margin-bottom: 12px;
 }
 
-.codexdian-mcp-container {
+.claudian-mcp-container {
   margin-top: 8px;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
 }
 
-.codexdian-mcp-header {
+.claudian-mcp-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  padding: 0 12px;
 }
 
-.codexdian-mcp-label {
+.claudian-mcp-label {
   font-size: var(--font-ui-small);
   color: var(--text-muted);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: var(--font-medium);
 }
 
-.codexdian-mcp-add-container {
+.claudian-mcp-add-container {
   position: relative;
 }
 
-.codexdian-mcp-add-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  display: none;
-  min-width: 220px;
-  padding: 5px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 90%, var(--background-secondary));
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
-  z-index: 100;
+.claudian-add-mcp-btn {
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
 }
 
-.codexdian-mcp-add-dropdown.is-visible {
+.claudian-add-mcp-btn:hover {
+  background: var(--interactive-accent-hover);
+}
+
+.claudian-mcp-add-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  min-width: 180px;
+  background-color: var(--modal-background, var(--background-primary));
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.claudian-mcp-add-dropdown.is-visible {
   display: block;
 }
 
-.codexdian-mcp-add-option {
+.claudian-mcp-add-option {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 10px;
-  border-radius: 8px;
+  padding: 8px 12px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-normal);
-  transition: background 0.14s ease;
 }
 
-.codexdian-mcp-add-option:hover {
-  background: color-mix(in srgb, var(--background-modifier-hover) 72%, var(--background-secondary));
+.claudian-mcp-add-option:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-mcp-add-option-icon {
-  display: inline-flex;
+.claudian-mcp-add-option-icon {
+  display: flex;
   align-items: center;
   color: var(--text-muted);
 }
 
-.codexdian-mcp-add-option-icon svg {
-  width: 15px;
-  height: 15px;
+.claudian-mcp-add-option-icon svg {
+  width: 16px;
+  height: 16px;
 }
 
-.codexdian-mcp-empty {
-  margin-top: 8px;
-  padding: 20px;
+.claudian-mcp-empty {
+  padding: 16px;
   text-align: center;
   color: var(--text-muted);
-  border-radius: 12px;
-  border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 66%, transparent);
+  font-size: 13px;
+  background: var(--background-secondary);
+  border-radius: 6px;
 }
 
-.codexdian-mcp-list {
+.claudian-mcp-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.codexdian-mcp-item {
+.claudian-mcp-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 11px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 72%, var(--background-secondary));
-  transition: border-color 0.15s ease, background 0.15s ease;
+  padding: 10px 12px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  transition: background 0.15s ease;
 }
 
-.codexdian-mcp-item:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+.claudian-mcp-item:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-mcp-item-disabled {
-  opacity: 0.62;
+.claudian-mcp-item-disabled {
+  opacity: 0.6;
 }
 
-.codexdian-mcp-status {
-  width: 9px;
-  height: 9px;
+.claudian-mcp-status {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   margin-top: 6px;
   flex-shrink: 0;
 }
 
-.codexdian-mcp-status-enabled {
+.claudian-mcp-status-enabled {
   background: var(--color-green);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-green) 22%, transparent);
 }
 
-.codexdian-mcp-status-disabled {
+.claudian-mcp-status-disabled {
   background: var(--text-muted);
 }
 
-.codexdian-mcp-info {
+.claudian-mcp-info {
   flex: 1;
   min-width: 0;
 }
 
-.codexdian-mcp-name-row {
+.claudian-mcp-name-row {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
-.codexdian-mcp-name {
+.claudian-mcp-name {
   font-weight: 600;
-  font-family: var(--font-monospace);
 }
 
-.codexdian-mcp-type-badge,
-.codexdian-mcp-context-saving-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 7px;
-  border-radius: 999px;
+.claudian-mcp-type-badge {
   font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.codexdian-mcp-type-badge {
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 82%, var(--background-secondary));
+  padding: 2px 6px;
+  background: var(--background-modifier-border);
+  border-radius: 4px;
   color: var(--text-muted);
+  text-transform: uppercase;
 }
 
-.codexdian-mcp-context-saving-badge {
-  border: 1px solid color-mix(in srgb, var(--codexdian-brand) 44%, transparent);
-  background: color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
-  color: color-mix(in srgb, var(--codexdian-brand) 74%, var(--text-normal));
-  font-weight: 700;
+.claudian-mcp-context-saving-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-radius: 4px;
+  font-weight: 600;
 }
 
-.codexdian-mcp-preview {
+.claudian-mcp-preview {
+  font-size: 12px;
+  color: var(--text-muted);
   margin-top: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 12px;
-  color: var(--text-muted);
 }
 
-.codexdian-mcp-actions {
+.claudian-mcp-actions {
   display: flex;
-  gap: 5px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
-.codexdian-mcp-action-btn {
-  display: inline-flex;
+.claudian-mcp-action-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  border-radius: 9px;
-  background: color-mix(in srgb, var(--background-primary) 78%, var(--background-secondary));
-  color: var(--text-muted);
+  border: none;
+  background: transparent;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  color: var(--text-muted);
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.codexdian-mcp-action-btn:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 28%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--background-modifier-hover) 72%, var(--background-secondary));
+.claudian-mcp-action-btn:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.codexdian-mcp-action-btn svg {
-  width: 15px;
-  height: 15px;
-}
-
-.codexdian-mcp-delete-btn:hover {
-  color: var(--text-error);
-}
-
-/* Add/edit MCP modal */
-.codexdian-mcp-modal .modal-content {
-  width: min(680px, calc(100vw - 52px));
-  max-width: 680px;
-}
-
-.codexdian-mcp-type-fields {
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
-}
-
-.codexdian-mcp-cmd-setting,
-.codexdian-mcp-env-setting {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.codexdian-mcp-cmd-setting .setting-item-control,
-.codexdian-mcp-env-setting .setting-item-control {
-  width: 100%;
-}
-
-.codexdian-mcp-cmd-textarea,
-.codexdian-mcp-env-textarea {
-  width: 100%;
-  min-width: 100%;
-  padding: 9px 10px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
-  font-family: var(--font-monospace);
-  font-size: 12px;
-  line-height: 1.35;
-  resize: vertical;
-}
-
-.codexdian-mcp-cmd-textarea:focus,
-.codexdian-mcp-env-textarea:focus {
-  outline: none;
-  border-color: color-mix(in srgb, var(--codexdian-brand) 56%, var(--background-modifier-border-hover));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
-}
-
-.codexdian-mcp-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-/* MCP verify modal */
-.codexdian-mcp-test-modal .modal-content {
-  width: min(720px, calc(100vw - 52px));
-  max-width: 720px;
-}
-
-.codexdian-mcp-test-loading {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
-}
-
-.codexdian-mcp-test-spinner {
-  display: inline-flex;
-  width: 18px;
-  height: 18px;
-  color: var(--text-muted);
-  animation: codexdian-mcp-spin 1s linear infinite;
-}
-
-.codexdian-mcp-test-spinner svg {
-  width: 18px;
-  height: 18px;
-}
-
-.codexdian-mcp-test-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.codexdian-mcp-test-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.codexdian-mcp-test-icon.success {
-  color: var(--color-green);
-}
-
-.codexdian-mcp-test-icon.error {
-  color: var(--text-error);
-}
-
-.codexdian-mcp-test-text {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-normal);
-}
-
-.codexdian-mcp-test-error {
-  margin-bottom: 10px;
-  padding: 8px 10px;
-  border-radius: 9px;
-  border: 1px solid color-mix(in srgb, var(--text-error) 40%, transparent);
-  background: color-mix(in srgb, var(--text-error) 14%, transparent);
-  color: var(--text-error);
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.codexdian-mcp-test-tools {
-  margin-top: 10px;
-}
-
-.codexdian-mcp-test-tools-header {
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.codexdian-mcp-test-tools-list {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.codexdian-mcp-test-no-tools {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 9px;
-  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
-  color: var(--text-muted);
-  font-size: 12px;
-}
-
-.codexdian-mcp-test-tool {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
-  transition: border-color 0.14s ease;
-}
-
-.codexdian-mcp-test-tool-disabled {
-  opacity: 0.62;
-}
-
-.codexdian-mcp-test-tool-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.codexdian-mcp-test-tool-icon {
-  display: inline-flex;
-  align-items: center;
-  color: var(--text-muted);
-}
-
-.codexdian-mcp-test-tool-name {
-  flex: 1;
-  min-width: 0;
-  font-family: var(--font-monospace);
-  font-size: 12px;
-  color: var(--text-normal);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.codexdian-mcp-test-tool-toggle {
-  margin-left: 8px;
-}
-
-.codexdian-mcp-test-tool-toggle .checkbox-container {
-  display: inline-flex;
-  width: 34px;
-  height: 20px;
-  padding: 2px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-modifier-border) 84%, transparent);
-  cursor: pointer;
-  transition: background 0.14s ease, border-color 0.14s ease;
-}
-
-.codexdian-mcp-test-tool-toggle .checkbox-container::after {
-  content: '';
+.claudian-mcp-action-btn svg {
   width: 14px;
   height: 14px;
-  border-radius: 50%;
-  background: var(--background-primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  transform: translateX(0);
-  transition: transform 0.14s ease;
 }
 
-.codexdian-mcp-test-tool-toggle .checkbox-container.is-enabled {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 52%, transparent);
-  background: color-mix(in srgb, var(--codexdian-brand) 68%, var(--interactive-accent));
-}
-
-.codexdian-mcp-test-tool-toggle .checkbox-container.is-enabled::after {
-  transform: translateX(14px);
-}
-
-.codexdian-mcp-test-tool-toggle .checkbox-container input {
-  display: none;
-}
-
-.codexdian-mcp-test-tool-desc {
-  margin-top: 5px;
-  font-size: 12px;
-  line-height: 1.35;
-  color: var(--text-muted);
-}
-
-.codexdian-mcp-test-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.codexdian-mcp-toggle-all-btn {
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  border-radius: 9px;
-  padding: 6px 12px;
-  background: color-mix(in srgb, var(--background-secondary) 82%, var(--background-primary));
-  color: var(--text-normal);
-  cursor: pointer;
-}
-
-.codexdian-mcp-toggle-all-btn:hover:not(:disabled) {
-  background: var(--background-modifier-hover);
-}
-
-.codexdian-mcp-toggle-all-btn.is-destructive {
-  border-color: color-mix(in srgb, var(--text-error) 46%, transparent);
+.claudian-mcp-delete-btn:hover {
   color: var(--text-error);
-  background: color-mix(in srgb, var(--text-error) 10%, transparent);
-}
-
-.codexdian-mcp-toggle-all-btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-@keyframes codexdian-mcp-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 
 /* ============================================
    settings/plugin-settings.css
    ============================================ */
-/* Plugin settings */
-.codexdian-plugin-settings-desc {
+/* Plugin Settings */
+.claudian-plugin-settings-desc {
   margin-bottom: 12px;
 }
 
-.codexdian-plugins-container {
+.claudian-plugins-container {
   margin-top: 8px;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
 }
 
-.codexdian-plugin-header {
+.claudian-plugin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  padding: 0 12px;
 }
 
-.codexdian-plugin-label {
+.claudian-plugin-label {
   font-size: var(--font-ui-small);
   color: var(--text-muted);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: var(--font-medium);
 }
 
-.codexdian-plugin-empty {
-  margin-top: 8px;
-  padding: 20px;
+.claudian-plugin-empty {
+  padding: 16px;
   text-align: center;
   color: var(--text-muted);
-  border-radius: 12px;
-  border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 66%, transparent);
+  font-size: 13px;
+  background: var(--background-secondary);
+  border-radius: 6px;
 }
 
-.codexdian-plugin-list {
+.claudian-plugin-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.codexdian-plugin-section-header {
-  margin: 4px 0 1px;
-  padding: 4px 2px;
-  font-size: 10px;
-  letter-spacing: 0.08em;
+.claudian-plugin-section-header {
+  font-size: 11px;
   color: var(--text-muted);
   text-transform: uppercase;
-  font-weight: 700;
+  padding: 8px 12px 4px;
+  font-weight: 600;
 }
 
-.codexdian-plugin-item {
+.claudian-plugin-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 11px;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 80%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 72%, var(--background-secondary));
-  transition: border-color 0.15s ease, background 0.15s ease;
+  padding: 10px 12px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  transition: background 0.15s ease;
 }
 
-.codexdian-plugin-item:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 24%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--background-modifier-hover) 66%, var(--background-secondary) 34%);
+.claudian-plugin-item:hover {
+  background: var(--background-modifier-hover);
 }
 
-.codexdian-plugin-item-disabled {
-  opacity: 0.62;
+.claudian-plugin-item-disabled {
+  opacity: 0.6;
 }
 
-.codexdian-plugin-item-error {
-  border-color: color-mix(in srgb, var(--text-error) 32%, var(--background-modifier-border));
+.claudian-plugin-item-error {
+  opacity: 0.8;
 }
 
-.codexdian-plugin-status {
-  width: 9px;
-  height: 9px;
+.claudian-plugin-status {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   margin-top: 6px;
   flex-shrink: 0;
 }
 
-.codexdian-plugin-status-enabled {
+.claudian-plugin-status-enabled {
   background: var(--color-green);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-green) 22%, transparent);
 }
 
-.codexdian-plugin-status-disabled {
+.claudian-plugin-status-disabled {
   background: var(--text-muted);
 }
 
-.codexdian-plugin-status-error {
+.claudian-plugin-status-error {
   background: var(--text-error);
 }
 
-.codexdian-plugin-info {
+.claudian-plugin-info {
   flex: 1;
   min-width: 0;
 }
 
-.codexdian-plugin-name-row {
+.claudian-plugin-name-row {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.codexdian-plugin-name {
-  font-family: var(--font-monospace);
+.claudian-plugin-name {
   font-weight: 600;
 }
 
-.codexdian-plugin-version-badge,
-.codexdian-plugin-error-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 7px;
-  border-radius: 999px;
+.claudian-plugin-version-badge {
   font-size: 10px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.codexdian-plugin-version-badge {
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 76%, transparent);
-  background: color-mix(in srgb, var(--background-primary) 82%, var(--background-secondary));
+  padding: 2px 6px;
+  background: var(--background-modifier-border);
+  border-radius: 4px;
   color: var(--text-muted);
 }
 
-.codexdian-plugin-error-badge {
-  border: 1px solid color-mix(in srgb, var(--text-error) 44%, transparent);
-  background: color-mix(in srgb, var(--text-error) 12%, transparent);
-  color: var(--text-error);
+.claudian-plugin-error-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--text-error);
+  color: var(--text-on-accent);
+  border-radius: 4px;
+  text-transform: uppercase;
 }
 
-.codexdian-plugin-preview {
+.claudian-plugin-preview {
+  font-size: 12px;
+  color: var(--text-muted);
   margin-top: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 12px;
-  color: var(--text-muted);
 }
 
-.codexdian-plugin-preview-error {
+.claudian-plugin-preview-error {
   color: var(--text-error);
 }
 
-.codexdian-plugin-actions {
+.claudian-plugin-actions {
   display: flex;
-  gap: 5px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
-.codexdian-plugin-action-btn {
-  display: inline-flex;
+.claudian-plugin-action-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 82%, transparent);
-  border-radius: 9px;
-  background: color-mix(in srgb, var(--background-primary) 78%, var(--background-secondary));
-  color: var(--text-muted);
+  border: none;
+  background: transparent;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  color: var(--text-muted);
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.codexdian-plugin-action-btn:hover {
-  border-color: color-mix(in srgb, var(--codexdian-brand) 28%, var(--background-modifier-border-hover));
-  background: color-mix(in srgb, var(--background-modifier-hover) 72%, var(--background-secondary));
+.claudian-plugin-action-btn:hover {
+  background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.codexdian-plugin-action-btn svg {
-  width: 15px;
-  height: 15px;
+.claudian-plugin-action-btn svg {
+  width: 14px;
+  height: 14px;
 }
 
 
 /* ============================================
    settings/agent-settings.css
    ============================================ */
-/* Agent Settings — all structural rules live in base.css .codexdian-sp-* */
+/* Agent Settings — all structural rules live in base.css .claudian-sp-* */
 /* This file is kept as a placeholder for future agent-specific overrides. */
 
 
@@ -6231,40 +5505,40 @@ code .codexdian-file-link:hover {
 /* Accessibility - Focus Visible Styles */
 
 /* outline + offset + border-radius */
-.codexdian-tool-header:focus-visible,
-.codexdian-thinking-header:focus-visible,
-.codexdian-subagent-header:focus-visible,
-.codexdian-header-btn:focus-visible,
-.codexdian-model-btn:focus-visible,
-.codexdian-thinking-current:focus-visible {
-  outline: 2px solid var(--codexdian-brand);
+.claudian-tool-header:focus-visible,
+.claudian-thinking-header:focus-visible,
+.claudian-subagent-header:focus-visible,
+.claudian-header-btn:focus-visible,
+.claudian-model-btn:focus-visible,
+.claudian-thinking-current:focus-visible {
+  outline: 2px solid var(--interactive-accent);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 /* outline + offset only */
-.codexdian-action-btn:focus-visible,
-.codexdian-toggle-switch:focus-visible,
-.codexdian-file-chip:focus-visible,
-.codexdian-image-chip:focus-visible,
-.codexdian-file-chip-remove:focus-visible,
-.codexdian-image-remove:focus-visible,
-.codexdian-image-modal-close:focus-visible,
-.codexdian-approved-remove-btn:focus-visible,
-.codexdian-save-env-btn:focus-visible,
-.codexdian-restore-snippet-btn:focus-visible,
-.codexdian-edit-snippet-btn:focus-visible,
-.codexdian-delete-snippet-btn:focus-visible,
-.codexdian-cancel-btn:focus-visible,
-.codexdian-save-btn:focus-visible,
-.codexdian-code-lang-label:focus-visible {
-  outline: 2px solid var(--codexdian-brand);
+.claudian-action-btn:focus-visible,
+.claudian-toggle-switch:focus-visible,
+.claudian-file-chip:focus-visible,
+.claudian-image-chip:focus-visible,
+.claudian-file-chip-remove:focus-visible,
+.claudian-image-remove:focus-visible,
+.claudian-image-modal-close:focus-visible,
+.claudian-approved-remove-btn:focus-visible,
+.claudian-save-env-btn:focus-visible,
+.claudian-restore-snippet-btn:focus-visible,
+.claudian-edit-snippet-btn:focus-visible,
+.claudian-delete-snippet-btn:focus-visible,
+.claudian-cancel-btn:focus-visible,
+.claudian-save-btn:focus-visible,
+.claudian-code-lang-label:focus-visible {
+  outline: 2px solid var(--interactive-accent);
   outline-offset: 2px;
 }
 
 /* outline + negative offset + border-radius */
-.codexdian-history-item-content:focus-visible {
-  outline: 2px solid var(--codexdian-brand);
+.claudian-history-item-content:focus-visible {
+  outline: 2px solid var(--interactive-accent);
   outline-offset: -2px;
   border-radius: 4px;
 }
