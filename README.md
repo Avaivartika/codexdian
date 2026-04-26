@@ -189,9 +189,9 @@ If you encounter `spawn codex ENOENT` or `Codex CLI not found`, the plugin can't
 |----------|---------|--------------|
 | macOS/Linux | `which codex` | `/opt/homebrew/bin/codex` |
 | Windows (native) | `where.exe codex` | `C:\Users\you\AppData\Local\Programs\Codex\codex.exe` |
-| Windows (npm) | `npm root -g` | `{root}\@openai\codex\dist\cli.js` |
+| Windows (npm) | `npm root -g` | `{root}\@openai\codex\bin\codex.js` |
 
-> **Note**: On Windows, avoid `.cmd` wrappers. Use `codex.exe` or `cli.js`.
+> **Note**: On Windows, avoid `.cmd` wrappers. Use `codex.exe` or `codex.js`.
 
 **Alternative**: Add your Node.js bin directory to PATH in Settings → Environment → Custom variables.
 

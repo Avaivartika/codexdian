@@ -289,7 +289,7 @@
     "cliPath": {
       "name": "Ruta CLI Codex",
       "desc": "Ruta personalizada a Codex CLI. Dejar vacío para detección automática.",
-      "descWindows": "Para el instalador nativo, use codex.exe. Para instalaciones con npm/pnpm/yarn u otros gestores de paquetes, use la ruta cli.js (no codex.cmd).",
+      "descWindows": "Para el instalador nativo, use codex.exe. Para instalaciones con npm/pnpm/yarn u otros gestores de paquetes, use la ruta codex.js (no .cmd).",
       "descUnix": "Pegue la salida de \"which codex\" — funciona tanto para instalaciones nativas como npm/pnpm/yarn.",
       "validation": {
         "notExist": "La ruta no existe",

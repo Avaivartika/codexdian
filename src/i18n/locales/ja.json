@@ -289,7 +289,7 @@
     "cliPath": {
       "name": "Codex CLI パス",
       "desc": "Codex CLI のカスタムパス。空欄で自動検出を使用。",
-      "descWindows": "ネイティブインストーラーの場合は codex.exe を使用。npm/pnpm/yarn やその他のパッケージマネージャーでのインストールの場合は cli.js パスを使用（codex.cmd ではない）。",
+      "descWindows": "ネイティブインストーラーの場合は codex.exe を使用。npm/pnpm/yarn やその他のパッケージマネージャーでのインストールの場合は codex.js パスを使用（.cmd ではない）。",
       "descUnix": "\"which codex\" の出力を貼り付けてください - ネイティブと npm/pnpm/yarn インストールの両方で動作します。",
       "validation": {
         "notExist": "パスが存在しません",

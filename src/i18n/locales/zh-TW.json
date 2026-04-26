@@ -289,7 +289,7 @@
     "cliPath": {
       "name": "Codex CLI 路徑",
       "desc": "Codex CLI 的自訂路徑。留空使用自動檢測。",
-      "descWindows": "對於原生安裝程式，使用 codex.exe。對於 npm/pnpm/yarn 或其他套件管理器安裝，使用 cli.js 路徑（不是 codex.cmd）。",
+      "descWindows": "對於原生安裝程式，使用 codex.exe。對於 npm/pnpm/yarn 或其他套件管理器安裝，使用 codex.js 路徑（不是 .cmd）。",
       "descUnix": "貼上 \"which codex\" 的輸出 - 適用於原生安裝和 npm/pnpm/yarn 安裝。",
       "validation": {
         "notExist": "路徑不存在",

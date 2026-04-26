@@ -711,8 +711,8 @@ export class CodexdianSettingTab extends PluginSettingTab {
 
     cliPathSetting.addText((text) => {
       const placeholder = process.platform === 'win32'
-        ? 'C:\\Users\\you\\AppData\\Roaming\\npm\\node_modules\\@openai\\codex\\dist\\cli.js'
-        : '/usr/local/lib/node_modules/@openai/codex/dist/cli.js';
+        ? 'C:\\Users\\you\\AppData\\Roaming\\npm\\node_modules\\@openai\\codex\\bin\\codex.js'
+        : '/usr/local/lib/node_modules/@openai/codex/bin/codex.js';
 
       const currentValue = this.plugin.settings.codexCliPathsByHost?.[hostnameKey] || '';
 

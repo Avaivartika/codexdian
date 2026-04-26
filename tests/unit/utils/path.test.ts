@@ -486,10 +486,10 @@ describe('findCodexCLIPath', () => {
     expect(result).toBe(commonPath);
   });
 
-  it('falls back to npm cli.js paths when binary not found', () => {
+  it('falls back to npm codex.js paths when binary not found', () => {
     const cliJsPath = path.join(
       os.homedir(), '.npm-global', 'lib', 'node_modules',
-      '@openai', 'codex', 'dist', 'cli.js'
+      '@openai', 'codex', 'bin', 'codex.js'
     );
 
     jest.spyOn(fs, 'existsSync').mockImplementation(

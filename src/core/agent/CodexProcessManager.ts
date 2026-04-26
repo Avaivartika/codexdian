@@ -1,8 +1,11 @@
 import type { ChildProcessWithoutNullStreams } from 'node:child_process';
 import { spawn } from 'node:child_process';
+import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { EventEmitter } from 'events';
+
+import { findNodeExecutable } from '../../utils/env';
 
 interface StartOptions {
   cliPath: string;
@@ -14,13 +17,21 @@ function isJavaScriptEntry(cliPath: string): boolean {
   return cliPath.endsWith('.js') || cliPath.endsWith('.mjs') || cliPath.endsWith('.cjs');
 }
 
-function resolveNodeExecutable(cliPath: string): string {
+function resolveNodeExecutable(cliPath: string, env: NodeJS.ProcessEnv): string {
   const dirname = path.dirname(cliPath);
   const candidate = process.platform === 'win32'
     ? path.join(dirname, 'node.exe')
     : path.join(dirname, 'node');
 
-  return candidate;
+  try {
+    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
+      return candidate;
+    }
+  } catch {
+    // Fall through to PATH-based resolution.
+  }
+
+  return findNodeExecutable(env.PATH) ?? (process.platform === 'win32' ? 'node.exe' : 'node');
 }
 
 export interface CodexProcessEvents {
@@ -42,7 +53,7 @@ export class CodexProcessManager extends EventEmitter {
       ? [options.cliPath, 'app-server', '--listen', 'stdio://']
       : ['app-server', '--listen', 'stdio://'];
     const command = isJavaScriptEntry(options.cliPath)
-      ? resolveNodeExecutable(options.cliPath)
+      ? resolveNodeExecutable(options.cliPath, options.env)
       : options.cliPath;
 
     this.child = spawn(command, args, {

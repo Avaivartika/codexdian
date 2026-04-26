@@ -173,6 +173,7 @@ function isExistingFile(filePath: string): boolean {
 
 function resolveCliJsNearPathEntry(entry: string, isWindows: boolean): string | null {
   const directCandidates = [
+    path.join(entry, 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
     path.join(entry, 'node_modules', '@openai', 'codex', 'dist', 'cli.js'),
   ];
   for (const directCandidate of directCandidates) {
@@ -186,9 +187,11 @@ function resolveCliJsNearPathEntry(entry: string, isWindows: boolean): string | 
     const prefix = path.dirname(entry);
     const candidates = isWindows
       ? [
+        path.join(prefix, 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
         path.join(prefix, 'node_modules', '@openai', 'codex', 'dist', 'cli.js'),
       ]
       : [
+        path.join(prefix, 'lib', 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
         path.join(prefix, 'lib', 'node_modules', '@openai', 'codex', 'dist', 'cli.js'),
       ];
     for (const candidate of candidates) {
@@ -261,12 +264,14 @@ function getNpmCliJsPaths(): string[] {
 
   if (isWindows) {
     cliJsPaths.push(
+      path.join(homeDir, 'AppData', 'Roaming', 'npm', 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
       path.join(homeDir, 'AppData', 'Roaming', 'npm', 'node_modules', '@openai', 'codex', 'dist', 'cli.js')
     );
 
     const npmPrefix = getNpmGlobalPrefix();
     if (npmPrefix) {
       cliJsPaths.push(
+        path.join(npmPrefix, 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
         path.join(npmPrefix, 'node_modules', '@openai', 'codex', 'dist', 'cli.js')
       );
     }
@@ -275,22 +280,29 @@ function getNpmCliJsPaths(): string[] {
     const programFilesX86 = process.env['ProgramFiles(x86)'] || 'C:\\Program Files (x86)';
 
     cliJsPaths.push(
+      path.join(programFiles, 'nodejs', 'node_global', 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
+      path.join(programFilesX86, 'nodejs', 'node_global', 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
       path.join(programFiles, 'nodejs', 'node_global', 'node_modules', '@openai', 'codex', 'dist', 'cli.js'),
       path.join(programFilesX86, 'nodejs', 'node_global', 'node_modules', '@openai', 'codex', 'dist', 'cli.js')
     );
 
     cliJsPaths.push(
+      path.join('D:', 'Program Files', 'nodejs', 'node_global', 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
       path.join('D:', 'Program Files', 'nodejs', 'node_global', 'node_modules', '@openai', 'codex', 'dist', 'cli.js')
     );
   } else {
     cliJsPaths.push(
+      path.join(homeDir, '.npm-global', 'lib', 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
       path.join(homeDir, '.npm-global', 'lib', 'node_modules', '@openai', 'codex', 'dist', 'cli.js'),
+      '/usr/local/lib/node_modules/@openai/codex/bin/codex.js',
       '/usr/local/lib/node_modules/@openai/codex/dist/cli.js',
+      '/usr/lib/node_modules/@openai/codex/bin/codex.js',
       '/usr/lib/node_modules/@openai/codex/dist/cli.js'
     );
 
     if (process.env.npm_config_prefix) {
       cliJsPaths.push(
+        path.join(process.env.npm_config_prefix, 'lib', 'node_modules', '@openai', 'codex', 'bin', 'codex.js'),
         path.join(process.env.npm_config_prefix, 'lib', 'node_modules', '@openai', 'codex', 'dist', 'cli.js')
       );
     }
@@ -384,7 +396,7 @@ export function findCodexCLIPath(pathValue?: string): string | null {
     }
   }
 
-  // On Windows, prefer native .exe, then cli.js. Avoid .cmd fallback
+  // On Windows, prefer native .exe, then JS entrypoints. Avoid .cmd fallback
   // because it requires shell: true and breaks SDK stdio streaming.
   if (isWindows) {
     const exePaths: string[] = [

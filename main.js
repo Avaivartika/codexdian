@@ -12462,12 +12462,12 @@ var require_dist = __commonJS({
         throw new Error(`Unknown format "${name}"`);
       return f;
     };
-    function addFormats(ajv, list, fs10, exportName) {
+    function addFormats(ajv, list, fs11, exportName) {
       var _a3;
       var _b;
       (_a3 = (_b = ajv.opts.code).formats) !== null && _a3 !== void 0 ? _a3 : _b.formats = (0, codegen_1._)`require("ajv-formats/dist/formats").${exportName}`;
       for (const f of list)
-        ajv.addFormat(f, fs10[f]);
+        ajv.addFormat(f, fs11[f]);
     }
     module2.exports = exports = formatsPlugin;
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -12480,7 +12480,7 @@ var require_windows = __commonJS({
   "node_modules/isexe/windows.js"(exports, module2) {
     module2.exports = isexe;
     isexe.sync = sync;
-    var fs10 = require("fs");
+    var fs11 = require("fs");
     function checkPathExt(path10, options) {
       var pathext = options.pathExt !== void 0 ? options.pathExt : process.env.PATHEXT;
       if (!pathext) {
@@ -12505,12 +12505,12 @@ var require_windows = __commonJS({
       return checkPathExt(path10, options);
     }
     function isexe(path10, options, cb) {
-      fs10.stat(path10, function(er, stat) {
+      fs11.stat(path10, function(er, stat) {
         cb(er, er ? false : checkStat(stat, path10, options));
       });
     }
     function sync(path10, options) {
-      return checkStat(fs10.statSync(path10), path10, options);
+      return checkStat(fs11.statSync(path10), path10, options);
     }
   }
 });
@@ -12520,14 +12520,14 @@ var require_mode = __commonJS({
   "node_modules/isexe/mode.js"(exports, module2) {
     module2.exports = isexe;
     isexe.sync = sync;
-    var fs10 = require("fs");
+    var fs11 = require("fs");
     function isexe(path10, options, cb) {
-      fs10.stat(path10, function(er, stat) {
+      fs11.stat(path10, function(er, stat) {
         cb(er, er ? false : checkStat(stat, options));
       });
     }
     function sync(path10, options) {
-      return checkStat(fs10.statSync(path10), options);
+      return checkStat(fs11.statSync(path10), options);
     }
     function checkStat(stat, options) {
       return stat.isFile() && checkMode(stat, options);
@@ -12551,7 +12551,7 @@ var require_mode = __commonJS({
 // node_modules/isexe/index.js
 var require_isexe = __commonJS({
   "node_modules/isexe/index.js"(exports, module2) {
-    var fs10 = require("fs");
+    var fs11 = require("fs");
     var core;
     if (process.platform === "win32" || global.TESTING_WINDOWS) {
       core = require_windows();
@@ -12815,16 +12815,16 @@ var require_shebang_command = __commonJS({
 var require_readShebang = __commonJS({
   "node_modules/cross-spawn/lib/util/readShebang.js"(exports, module2) {
     "use strict";
-    var fs10 = require("fs");
+    var fs11 = require("fs");
     var shebangCommand = require_shebang_command();
     function readShebang(command) {
       const size = 150;
       const buffer = Buffer.alloc(size);
       let fd;
       try {
-        fd = fs10.openSync(command, "r");
-        fs10.readSync(fd, buffer, 0, size, 0);
-        fs10.closeSync(fd);
+        fd = fs11.openSync(command, "r");
+        fs11.readSync(fd, buffer, 0, size, 0);
+        fs11.closeSync(fd);
       } catch (e) {
       }
       return shebangCommand(buffer.toString());
@@ -13451,6 +13451,7 @@ function isExistingFile(filePath) {
 }
 function resolveCliJsNearPathEntry(entry, isWindows2) {
   const directCandidates = [
+    path.join(entry, "node_modules", "@openai", "codex", "bin", "codex.js"),
     path.join(entry, "node_modules", "@openai", "codex", "dist", "cli.js")
   ];
   for (const directCandidate of directCandidates) {
@@ -13462,8 +13463,10 @@ function resolveCliJsNearPathEntry(entry, isWindows2) {
   if (baseName === "bin") {
     const prefix = path.dirname(entry);
     const candidates = isWindows2 ? [
+      path.join(prefix, "node_modules", "@openai", "codex", "bin", "codex.js"),
       path.join(prefix, "node_modules", "@openai", "codex", "dist", "cli.js")
     ] : [
+      path.join(prefix, "lib", "node_modules", "@openai", "codex", "bin", "codex.js"),
       path.join(prefix, "lib", "node_modules", "@openai", "codex", "dist", "cli.js")
     ];
     for (const candidate of candidates) {
@@ -13520,31 +13523,40 @@ function getNpmCliJsPaths() {
   const cliJsPaths = [];
   if (isWindows2) {
     cliJsPaths.push(
+      path.join(homeDir, "AppData", "Roaming", "npm", "node_modules", "@openai", "codex", "bin", "codex.js"),
       path.join(homeDir, "AppData", "Roaming", "npm", "node_modules", "@openai", "codex", "dist", "cli.js")
     );
     const npmPrefix = getNpmGlobalPrefix();
     if (npmPrefix) {
       cliJsPaths.push(
+        path.join(npmPrefix, "node_modules", "@openai", "codex", "bin", "codex.js"),
         path.join(npmPrefix, "node_modules", "@openai", "codex", "dist", "cli.js")
       );
     }
     const programFiles = process.env.ProgramFiles || "C:\\Program Files";
     const programFilesX86 = process.env["ProgramFiles(x86)"] || "C:\\Program Files (x86)";
     cliJsPaths.push(
+      path.join(programFiles, "nodejs", "node_global", "node_modules", "@openai", "codex", "bin", "codex.js"),
+      path.join(programFilesX86, "nodejs", "node_global", "node_modules", "@openai", "codex", "bin", "codex.js"),
       path.join(programFiles, "nodejs", "node_global", "node_modules", "@openai", "codex", "dist", "cli.js"),
       path.join(programFilesX86, "nodejs", "node_global", "node_modules", "@openai", "codex", "dist", "cli.js")
     );
     cliJsPaths.push(
+      path.join("D:", "Program Files", "nodejs", "node_global", "node_modules", "@openai", "codex", "bin", "codex.js"),
       path.join("D:", "Program Files", "nodejs", "node_global", "node_modules", "@openai", "codex", "dist", "cli.js")
     );
   } else {
     cliJsPaths.push(
+      path.join(homeDir, ".npm-global", "lib", "node_modules", "@openai", "codex", "bin", "codex.js"),
       path.join(homeDir, ".npm-global", "lib", "node_modules", "@openai", "codex", "dist", "cli.js"),
+      "/usr/local/lib/node_modules/@openai/codex/bin/codex.js",
       "/usr/local/lib/node_modules/@openai/codex/dist/cli.js",
+      "/usr/lib/node_modules/@openai/codex/bin/codex.js",
       "/usr/lib/node_modules/@openai/codex/dist/cli.js"
     );
     if (process.env.npm_config_prefix) {
       cliJsPaths.push(
+        path.join(process.env.npm_config_prefix, "lib", "node_modules", "@openai", "codex", "bin", "codex.js"),
         path.join(process.env.npm_config_prefix, "lib", "node_modules", "@openai", "codex", "dist", "cli.js")
       );
     }
@@ -39561,15 +39573,23 @@ var import_obsidian24 = require("obsidian");
 
 // src/core/agent/CodexProcessManager.ts
 var import_node_child_process = require("node:child_process");
+var fs5 = __toESM(require("node:fs"));
 var path5 = __toESM(require("node:path"));
 var import_events = require("events");
 function isJavaScriptEntry(cliPath) {
   return cliPath.endsWith(".js") || cliPath.endsWith(".mjs") || cliPath.endsWith(".cjs");
 }
-function resolveNodeExecutable(cliPath) {
+function resolveNodeExecutable(cliPath, env) {
+  var _a3;
   const dirname4 = path5.dirname(cliPath);
   const candidate = process.platform === "win32" ? path5.join(dirname4, "node.exe") : path5.join(dirname4, "node");
-  return candidate;
+  try {
+    if (fs5.existsSync(candidate) && fs5.statSync(candidate).isFile()) {
+      return candidate;
+    }
+  } catch (e) {
+  }
+  return (_a3 = findNodeExecutable(env.PATH)) != null ? _a3 : process.platform === "win32" ? "node.exe" : "node";
 }
 var CodexProcessManager = class extends import_events.EventEmitter {
   constructor() {
@@ -39581,7 +39601,7 @@ var CodexProcessManager = class extends import_events.EventEmitter {
   start(options) {
     this.stop();
     const args = isJavaScriptEntry(options.cliPath) ? [options.cliPath, "app-server", "--listen", "stdio://"] : ["app-server", "--listen", "stdio://"];
-    const command = isJavaScriptEntry(options.cliPath) ? resolveNodeExecutable(options.cliPath) : options.cliPath;
+    const command = isJavaScriptEntry(options.cliPath) ? resolveNodeExecutable(options.cliPath, options.env) : options.cliPath;
     this.child = (0, import_node_child_process.spawn)(command, args, {
       cwd: options.cwd,
       env: options.env,
@@ -41604,7 +41624,7 @@ var settings = {
   cliPath: {
     name: "Codex CLI-Pfad",
     desc: "Benutzerdefinierter Pfad zum Codex CLI. Leer lassen f\xFCr automatische Erkennung.",
-    descWindows: "F\xFCr den nativen Installer verwenden Sie codex.exe. F\xFCr npm/pnpm/yarn oder andere Paketmanager-Installationen verwenden Sie den cli.js-Pfad (nicht codex.cmd).",
+    descWindows: "F\xFCr den nativen Installer verwenden Sie codex.exe. F\xFCr npm/pnpm/yarn oder andere Paketmanager-Installationen verwenden Sie den codex.js-Pfad (nicht .cmd).",
     descUnix: 'F\xFCgen Sie die Ausgabe von "which codex" ein \u2014 funktioniert sowohl f\xFCr native als auch npm/pnpm/yarn-Installationen.',
     validation: {
       notExist: "Pfad existiert nicht",
@@ -41920,7 +41940,7 @@ var settings2 = {
   cliPath: {
     name: "Codex CLI path",
     desc: "Custom path to Codex CLI. Leave empty for auto-detection.",
-    descWindows: "For native installs, use codex.exe. For npm/pnpm/yarn or other package manager installs, use the cli.js path when needed.",
+    descWindows: "For native installs, use codex.exe. For npm/pnpm/yarn or other package manager installs, use the codex.js path when needed.",
     descUnix: 'Paste the output of "which codex" \u2014 works for both native and npm/pnpm/yarn installs.',
     validation: {
       notExist: "Path does not exist",
@@ -42236,7 +42256,7 @@ var settings3 = {
   cliPath: {
     name: "Ruta CLI Codex",
     desc: "Ruta personalizada a Codex CLI. Dejar vac\xEDo para detecci\xF3n autom\xE1tica.",
-    descWindows: "Para el instalador nativo, use codex.exe. Para instalaciones con npm/pnpm/yarn u otros gestores de paquetes, use la ruta cli.js (no codex.cmd).",
+    descWindows: "Para el instalador nativo, use codex.exe. Para instalaciones con npm/pnpm/yarn u otros gestores de paquetes, use la ruta codex.js (no .cmd).",
     descUnix: 'Pegue la salida de "which codex" \u2014 funciona tanto para instalaciones nativas como npm/pnpm/yarn.',
     validation: {
       notExist: "La ruta no existe",
@@ -42552,7 +42572,7 @@ var settings4 = {
   cliPath: {
     name: "Chemin CLI Codex",
     desc: "Chemin personnalis\xE9 vers Codex CLI. Laisser vide pour la d\xE9tection automatique.",
-    descWindows: "Pour l'installateur natif, utilisez codex.exe. Pour les installations npm/pnpm/yarn ou autres gestionnaires de paquets, utilisez le chemin cli.js (pas codex.cmd).",
+    descWindows: "Pour l'installateur natif, utilisez codex.exe. Pour les installations npm/pnpm/yarn ou autres gestionnaires de paquets, utilisez le chemin codex.js (pas .cmd).",
     descUnix: 'Collez la sortie de "which codex" \u2014 fonctionne pour les installations natives et npm/pnpm/yarn.',
     validation: {
       notExist: "Le chemin n'existe pas",
@@ -42868,7 +42888,7 @@ var settings5 = {
   cliPath: {
     name: "Codex CLI \u30D1\u30B9",
     desc: "Codex CLI \u306E\u30AB\u30B9\u30BF\u30E0\u30D1\u30B9\u3002\u7A7A\u6B04\u3067\u81EA\u52D5\u691C\u51FA\u3092\u4F7F\u7528\u3002",
-    descWindows: "\u30CD\u30A4\u30C6\u30A3\u30D6\u30A4\u30F3\u30B9\u30C8\u30FC\u30E9\u30FC\u306E\u5834\u5408\u306F codex.exe \u3092\u4F7F\u7528\u3002npm/pnpm/yarn \u3084\u305D\u306E\u4ED6\u306E\u30D1\u30C3\u30B1\u30FC\u30B8\u30DE\u30CD\u30FC\u30B8\u30E3\u30FC\u3067\u306E\u30A4\u30F3\u30B9\u30C8\u30FC\u30EB\u306E\u5834\u5408\u306F cli.js \u30D1\u30B9\u3092\u4F7F\u7528\uFF08codex.cmd \u3067\u306F\u306A\u3044\uFF09\u3002",
+    descWindows: "\u30CD\u30A4\u30C6\u30A3\u30D6\u30A4\u30F3\u30B9\u30C8\u30FC\u30E9\u30FC\u306E\u5834\u5408\u306F codex.exe \u3092\u4F7F\u7528\u3002npm/pnpm/yarn \u3084\u305D\u306E\u4ED6\u306E\u30D1\u30C3\u30B1\u30FC\u30B8\u30DE\u30CD\u30FC\u30B8\u30E3\u30FC\u3067\u306E\u30A4\u30F3\u30B9\u30C8\u30FC\u30EB\u306E\u5834\u5408\u306F codex.js \u30D1\u30B9\u3092\u4F7F\u7528\uFF08.cmd \u3067\u306F\u306A\u3044\uFF09\u3002",
     descUnix: '"which codex" \u306E\u51FA\u529B\u3092\u8CBC\u308A\u4ED8\u3051\u3066\u304F\u3060\u3055\u3044 - \u30CD\u30A4\u30C6\u30A3\u30D6\u3068 npm/pnpm/yarn \u30A4\u30F3\u30B9\u30C8\u30FC\u30EB\u306E\u4E21\u65B9\u3067\u52D5\u4F5C\u3057\u307E\u3059\u3002',
     validation: {
       notExist: "\u30D1\u30B9\u304C\u5B58\u5728\u3057\u307E\u305B\u3093",
@@ -43184,7 +43204,7 @@ var settings6 = {
   cliPath: {
     name: "Codex CLI \uACBD\uB85C",
     desc: "Codex CLI\uC758 \uC0AC\uC6A9\uC790 \uC815\uC758 \uACBD\uB85C. \uBE44\uC6CC\uB450\uBA74 \uC790\uB3D9 \uAC10\uC9C0 \uC0AC\uC6A9.",
-    descWindows: "\uB124\uC774\uD2F0\uBE0C \uC124\uCE58 \uD504\uB85C\uADF8\uB7A8\uC758 \uACBD\uC6B0 codex.exe\uB97C \uC0AC\uC6A9\uD558\uC138\uC694. npm/pnpm/yarn \uB610\uB294 \uAE30\uD0C0 \uD328\uD0A4\uC9C0 \uAD00\uB9AC\uC790 \uC124\uCE58\uC758 \uACBD\uC6B0 cli.js \uACBD\uB85C\uB97C \uC0AC\uC6A9\uD558\uC138\uC694 (codex.cmd\uAC00 \uC544\uB2D8).",
+    descWindows: "\uB124\uC774\uD2F0\uBE0C \uC124\uCE58 \uD504\uB85C\uADF8\uB7A8\uC758 \uACBD\uC6B0 codex.exe\uB97C \uC0AC\uC6A9\uD558\uC138\uC694. npm/pnpm/yarn \uB610\uB294 \uAE30\uD0C0 \uD328\uD0A4\uC9C0 \uAD00\uB9AC\uC790 \uC124\uCE58\uC758 \uACBD\uC6B0 codex.js \uACBD\uB85C\uB97C \uC0AC\uC6A9\uD558\uC138\uC694 (.cmd\uAC00 \uC544\uB2D8).",
     descUnix: '"which codex"\uC758 \uCD9C\uB825\uC744 \uBD99\uC5EC\uB123\uC73C\uC138\uC694 - \uB124\uC774\uD2F0\uBE0C \uBC0F npm/pnpm/yarn \uC124\uCE58 \uBAA8\uB450\uC5D0\uC11C \uC791\uB3D9\uD569\uB2C8\uB2E4.',
     validation: {
       notExist: "\uACBD\uB85C\uAC00 \uC874\uC7AC\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4",
@@ -43500,7 +43520,7 @@ var settings7 = {
   cliPath: {
     name: "Caminho CLI Codex",
     desc: "Caminho personalizado para Codex CLI. Deixe vazio para detec\xE7\xE3o autom\xE1tica.",
-    descWindows: "Para o instalador nativo, use codex.exe. Para instala\xE7\xF5es com npm/pnpm/yarn ou outros gerenciadores de pacotes, use o caminho cli.js (n\xE3o codex.cmd).",
+    descWindows: "Para o instalador nativo, use codex.exe. Para instala\xE7\xF5es com npm/pnpm/yarn ou outros gerenciadores de pacotes, use o caminho codex.js (n\xE3o .cmd).",
     descUnix: 'Cole a sa\xEDda de "which codex" \u2014 funciona tanto para instala\xE7\xF5es nativas quanto npm/pnpm/yarn.',
     validation: {
       notExist: "Caminho n\xE3o existe",
@@ -43816,7 +43836,7 @@ var settings8 = {
   cliPath: {
     name: "\u041F\u0443\u0442\u044C \u043A CLI Codex",
     desc: "\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u043F\u0443\u0442\u044C \u043A Codex CLI. \u041E\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u043F\u0443\u0441\u0442\u044B\u043C \u0434\u043B\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u044F.",
-    descWindows: "\u0414\u043B\u044F \u043D\u0430\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0449\u0438\u043A\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 codex.exe. \u0414\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043E\u043A \u0447\u0435\u0440\u0435\u0437 npm/pnpm/yarn \u0438\u043B\u0438 \u0434\u0440\u0443\u0433\u0438\u0435 \u043C\u0435\u043D\u0435\u0434\u0436\u0435\u0440\u044B \u043F\u0430\u043A\u0435\u0442\u043E\u0432 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043F\u0443\u0442\u044C \u043A cli.js (\u043D\u0435 codex.cmd).",
+    descWindows: "\u0414\u043B\u044F \u043D\u0430\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0449\u0438\u043A\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 codex.exe. \u0414\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043E\u043A \u0447\u0435\u0440\u0435\u0437 npm/pnpm/yarn \u0438\u043B\u0438 \u0434\u0440\u0443\u0433\u0438\u0435 \u043C\u0435\u043D\u0435\u0434\u0436\u0435\u0440\u044B \u043F\u0430\u043A\u0435\u0442\u043E\u0432 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043F\u0443\u0442\u044C \u043A codex.js (\u043D\u0435 .cmd).",
     descUnix: '\u0412\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0432\u044B\u0432\u043E\u0434 \u043A\u043E\u043C\u0430\u043D\u0434\u044B "which codex" \u2014 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u043A\u0430\u043A \u0434\u043B\u044F \u043D\u0430\u0442\u0438\u0432\u043D\u044B\u0445 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043E\u043A, \u0442\u0430\u043A \u0438 \u0434\u043B\u044F npm/pnpm/yarn.',
     validation: {
       notExist: "\u041F\u0443\u0442\u044C \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442",
@@ -44132,7 +44152,7 @@ var settings9 = {
   cliPath: {
     name: "Codex CLI \u8DEF\u5F84",
     desc: "Codex CLI \u7684\u81EA\u5B9A\u4E49\u8DEF\u5F84\u3002\u7559\u7A7A\u4F7F\u7528\u81EA\u52A8\u68C0\u6D4B\u3002",
-    descWindows: "\u5BF9\u4E8E\u539F\u751F\u5B89\u88C5\u7A0B\u5E8F\uFF0C\u4F7F\u7528 codex.exe\u3002\u5BF9\u4E8E npm/pnpm/yarn \u6216\u5176\u4ED6\u5305\u7BA1\u7406\u5668\u5B89\u88C5\uFF0C\u53EF\u4F7F\u7528 cli.js \u8DEF\u5F84\u3002",
+    descWindows: "\u5BF9\u4E8E\u539F\u751F\u5B89\u88C5\u7A0B\u5E8F\uFF0C\u4F7F\u7528 codex.exe\u3002\u5BF9\u4E8E npm/pnpm/yarn \u6216\u5176\u4ED6\u5305\u7BA1\u7406\u5668\u5B89\u88C5\uFF0C\u53EF\u4F7F\u7528 codex.js \u8DEF\u5F84\u3002",
     descUnix: '\u7C98\u8D34 "which codex" \u7684\u8F93\u51FA - \u9002\u7528\u4E8E\u539F\u751F\u5B89\u88C5\u548C npm/pnpm/yarn \u5B89\u88C5\u3002',
     validation: {
       notExist: "\u8DEF\u5F84\u4E0D\u5B58\u5728",
@@ -44448,7 +44468,7 @@ var settings10 = {
   cliPath: {
     name: "Codex CLI \u8DEF\u5F91",
     desc: "Codex CLI \u7684\u81EA\u8A02\u8DEF\u5F91\u3002\u7559\u7A7A\u4F7F\u7528\u81EA\u52D5\u6AA2\u6E2C\u3002",
-    descWindows: "\u5C0D\u65BC\u539F\u751F\u5B89\u88DD\u7A0B\u5F0F\uFF0C\u4F7F\u7528 codex.exe\u3002\u5C0D\u65BC npm/pnpm/yarn \u6216\u5176\u4ED6\u5957\u4EF6\u7BA1\u7406\u5668\u5B89\u88DD\uFF0C\u4F7F\u7528 cli.js \u8DEF\u5F91\uFF08\u4E0D\u662F codex.cmd\uFF09\u3002",
+    descWindows: "\u5C0D\u65BC\u539F\u751F\u5B89\u88DD\u7A0B\u5F0F\uFF0C\u4F7F\u7528 codex.exe\u3002\u5C0D\u65BC npm/pnpm/yarn \u6216\u5176\u4ED6\u5957\u4EF6\u7BA1\u7406\u5668\u5B89\u88DD\uFF0C\u4F7F\u7528 codex.js \u8DEF\u5F91\uFF08\u4E0D\u662F .cmd\uFF09\u3002",
     descUnix: '\u8CBC\u4E0A "which codex" \u7684\u8F38\u51FA - \u9069\u7528\u65BC\u539F\u751F\u5B89\u88DD\u548C npm/pnpm/yarn \u5B89\u88DD\u3002',
     validation: {
       notExist: "\u8DEF\u5F91\u4E0D\u5B58\u5728",
@@ -49264,8 +49284,8 @@ var InlineExitPlanMode = class {
       return null;
     }
     try {
-      const fs10 = require("fs");
-      const content = fs10.readFileSync(planFilePath, "utf-8");
+      const fs11 = require("fs");
+      const content = fs11.readFileSync(planFilePath, "utf-8");
       return content.trim() || null;
     } catch (err) {
       this.planReadError = err instanceof Error ? err.message : "unknown error";
@@ -50610,7 +50630,7 @@ function diffFromToolInput(toolCall, filePath) {
 
 // src/utils/sdkSession.ts
 var import_fs = require("fs");
-var fs5 = __toESM(require("fs/promises"));
+var fs6 = __toESM(require("fs/promises"));
 var os5 = __toESM(require("os"));
 var path6 = __toESM(require("path"));
 
@@ -50793,7 +50813,7 @@ async function loadSubagentToolCalls(vaultPath, sessionId, agentId) {
   if (!subagentFilePath) return [];
   try {
     if (!(0, import_fs.existsSync)(subagentFilePath)) return [];
-    const content = await fs5.readFile(subagentFilePath, "utf-8");
+    const content = await fs6.readFile(subagentFilePath, "utf-8");
     const lines = content.split("\n").filter((line) => line.trim());
     const events = [];
     const seen = /* @__PURE__ */ new Set();
@@ -50822,7 +50842,7 @@ async function loadSubagentFinalResult(vaultPath, sessionId, agentId) {
   if (!subagentFilePath) return null;
   try {
     if (!(0, import_fs.existsSync)(subagentFilePath)) return null;
-    const content = await fs5.readFile(subagentFilePath, "utf-8");
+    const content = await fs6.readFile(subagentFilePath, "utf-8");
     return extractFinalResultFromSubagentJsonl(content);
   } catch (e) {
     return null;
@@ -50857,7 +50877,7 @@ async function deleteSDKSession(vaultPath, sessionId) {
   try {
     const sessionPath = getSDKSessionPath(vaultPath, sessionId);
     if (!(0, import_fs.existsSync)(sessionPath)) return;
-    await fs5.unlink(sessionPath);
+    await fs6.unlink(sessionPath);
   } catch (e) {
   }
 }
@@ -50867,7 +50887,7 @@ async function readSDKSession(vaultPath, sessionId) {
     if (!(0, import_fs.existsSync)(sessionPath)) {
       return { messages: [], skippedLines: 0 };
     }
-    const content = await fs5.readFile(sessionPath, "utf-8");
+    const content = await fs6.readFile(sessionPath, "utf-8");
     const lines = content.split("\n").filter((line) => line.trim());
     const messages = [];
     let skippedLines = 0;
@@ -53867,7 +53887,7 @@ var import_obsidian19 = require("obsidian");
 var import_obsidian16 = require("obsidian");
 
 // src/utils/externalContext.ts
-var fs6 = __toESM(require("fs"));
+var fs7 = __toESM(require("fs"));
 function normalizePathForComparison3(p) {
   return normalizePathForComparison(p);
 }
@@ -53926,7 +53946,7 @@ function buildExternalContextDisplayEntries(externalContexts) {
 }
 function validateDirectoryPath(p) {
   try {
-    const stats = fs6.statSync(p);
+    const stats = fs7.statSync(p);
     if (!stats.isDirectory()) {
       return { valid: false, error: "Path exists but is not a directory" };
     }
@@ -53954,7 +53974,7 @@ function isDuplicatePath(newPath, existingPaths) {
 }
 
 // src/utils/externalContextScanner.ts
-var fs7 = __toESM(require("fs"));
+var fs8 = __toESM(require("fs"));
 var path7 = __toESM(require("path"));
 var CACHE_TTL_MS = 3e4;
 var MAX_FILES_PER_PATH = 1e3;
@@ -54000,10 +54020,10 @@ var ExternalContextScanner = class {
     if (depth > MAX_DEPTH) return [];
     const files = [];
     try {
-      if (!fs7.existsSync(dir)) return [];
-      const stat = fs7.statSync(dir);
+      if (!fs8.existsSync(dir)) return [];
+      const stat = fs8.statSync(dir);
       if (!stat.isDirectory()) return [];
-      const entries = fs7.readdirSync(dir, { withFileTypes: true });
+      const entries = fs8.readdirSync(dir, { withFileTypes: true });
       for (const entry of entries) {
         if (entry.name.startsWith(".")) continue;
         if (SKIP_DIRECTORIES.has(entry.name)) continue;
@@ -54014,7 +54034,7 @@ var ExternalContextScanner = class {
           files.push(...subFiles);
         } else if (entry.isFile()) {
           try {
-            const fileStat = fs7.statSync(fullPath);
+            const fileStat = fs8.statSync(fullPath);
             files.push({
               path: fullPath,
               name: entry.name,
@@ -60448,7 +60468,7 @@ var InlineEditController = class {
 };
 
 // src/features/settings/CodexdianSettings.ts
-var fs8 = __toESM(require("fs"));
+var fs9 = __toESM(require("fs"));
 var import_obsidian36 = require("obsidian");
 
 // src/features/settings/keyboardNavigation.ts
@@ -62764,10 +62784,10 @@ var CodexdianSettingTab = class extends import_obsidian36.PluginSettingTab {
       const trimmed = value.trim();
       if (!trimmed) return null;
       const expandedPath = expandHomePath(trimmed);
-      if (!fs8.existsSync(expandedPath)) {
+      if (!fs9.existsSync(expandedPath)) {
         return t("settings.cliPath.validation.notExist");
       }
-      const stat = fs8.statSync(expandedPath);
+      const stat = fs9.statSync(expandedPath);
       if (!stat.isFile()) {
         return t("settings.cliPath.validation.isDirectory");
       }
@@ -62775,7 +62795,7 @@ var CodexdianSettingTab = class extends import_obsidian36.PluginSettingTab {
     };
     cliPathSetting.addText((text) => {
       var _a3;
-      const placeholder = process.platform === "win32" ? "C:\\Users\\you\\AppData\\Roaming\\npm\\node_modules\\@openai\\codex\\dist\\cli.js" : "/usr/local/lib/node_modules/@openai/codex/dist/cli.js";
+      const placeholder = process.platform === "win32" ? "C:\\Users\\you\\AppData\\Roaming\\npm\\node_modules\\@openai\\codex\\bin\\codex.js" : "/usr/local/lib/node_modules/@openai/codex/bin/codex.js";
       const currentValue = ((_a3 = this.plugin.settings.codexCliPathsByHost) == null ? void 0 : _a3[hostnameKey]) || "";
       text.setPlaceholder(placeholder).setValue(currentValue).onChange(async (value) => {
         var _a4, _b;
@@ -62879,7 +62899,7 @@ var CodexdianSettingTab = class extends import_obsidian36.PluginSettingTab {
 };
 
 // src/utils/codexCli.ts
-var fs9 = __toESM(require("fs"));
+var fs10 = __toESM(require("fs"));
 var CodexCliResolver = class {
   constructor() {
     this.resolvedPath = null;
@@ -62922,8 +62942,8 @@ function resolveCodexCliPath(hostnamePath, legacyPath, envText) {
   if (trimmedHostname) {
     try {
       const expandedPath = expandHomePath(trimmedHostname);
-      if (fs9.existsSync(expandedPath)) {
-        const stat = fs9.statSync(expandedPath);
+      if (fs10.existsSync(expandedPath)) {
+        const stat = fs10.statSync(expandedPath);
         if (stat.isFile()) {
           return expandedPath;
         }
@@ -62935,8 +62955,8 @@ function resolveCodexCliPath(hostnamePath, legacyPath, envText) {
   if (trimmedLegacy) {
     try {
       const expandedPath = expandHomePath(trimmedLegacy);
-      if (fs9.existsSync(expandedPath)) {
-        const stat = fs9.statSync(expandedPath);
+      if (fs10.existsSync(expandedPath)) {
+        const stat = fs10.statSync(expandedPath);
         if (stat.isFile()) {
           return expandedPath;
         }

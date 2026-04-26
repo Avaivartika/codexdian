@@ -289,7 +289,7 @@
     "cliPath": {
       "name": "Codex CLI-Pfad",
       "desc": "Benutzerdefinierter Pfad zum Codex CLI. Leer lassen für automatische Erkennung.",
-      "descWindows": "Für den nativen Installer verwenden Sie codex.exe. Für npm/pnpm/yarn oder andere Paketmanager-Installationen verwenden Sie den cli.js-Pfad (nicht codex.cmd).",
+      "descWindows": "Für den nativen Installer verwenden Sie codex.exe. Für npm/pnpm/yarn oder andere Paketmanager-Installationen verwenden Sie den codex.js-Pfad (nicht .cmd).",
       "descUnix": "Fügen Sie die Ausgabe von \"which codex\" ein — funktioniert sowohl für native als auch npm/pnpm/yarn-Installationen.",
       "validation": {
         "notExist": "Pfad existiert nicht",

@@ -590,11 +590,11 @@ describe('utils.ts', () => {
         expect(findCodexCLIPath()).toBeNull();
       });
 
-      it('should check cli.js paths as fallback on Unix', () => {
+      it('should check codex.js paths as fallback on Unix', () => {
         jest.spyOn(os, 'homedir').mockReturnValue('/home/test');
-        mockExistingFile('/usr/local/lib/node_modules/@openai/codex/dist/cli.js');
+        mockExistingFile('/usr/local/lib/node_modules/@openai/codex/bin/codex.js');
 
-        expect(findCodexCLIPath()).toBe('/usr/local/lib/node_modules/@openai/codex/dist/cli.js');
+        expect(findCodexCLIPath()).toBe('/usr/local/lib/node_modules/@openai/codex/bin/codex.js');
       });
 
       it('should resolve Codex CLI from custom PATH', () => {
@@ -640,31 +640,28 @@ describe('utils.ts', () => {
         }) as fs.Stats);
       }
 
-      it('should prefer .exe when both .exe and cli.js exist', () => {
+      it('should prefer .exe when both .exe and codex.js exist', () => {
         jest.spyOn(os, 'homedir').mockReturnValue('C:\\Users\\test');
         const exePath = path.join('C:\\Users\\test', '.codex', 'local', 'codex.exe');
-        const cliJsPath = path.join('C:\\Users\\test', 'AppData', 'Roaming', 'npm', 'node_modules', '@openai', 'codex', 'dist', 'cli.js');
+        const cliJsPath = path.join('C:\\Users\\test', 'AppData', 'Roaming', 'npm', 'node_modules', '@openai', 'codex', 'bin', 'codex.js');
         mockExistingFile(exePath, cliJsPath);
 
         expect(findCodexCLIPath()).toBe(exePath);
       });
 
-      it('should prioritize cli.js over .cmd files on Windows', () => {
+      it('should prioritize codex.js over .cmd files on Windows', () => {
         jest.spyOn(os, 'homedir').mockReturnValue('C:\\Users\\test');
-        // Note: path.join uses actual platform separator, so we match against that
-        const cliJsPath = path.join('C:\\Users\\test', 'AppData', 'Roaming', 'npm', 'node_modules', '@openai', 'codex', 'dist', 'cli.js');
+        const cliJsPath = path.join('C:\\Users\\test', 'AppData', 'Roaming', 'npm', 'node_modules', '@openai', 'codex', 'bin', 'codex.js');
         const cmdPath = path.join('C:\\Users\\test', 'AppData', 'Roaming', 'npm', 'codex.cmd');
-        // Both .cmd and cli.js exist, but cli.js should be returned (cmd is ignored entirely)
         mockExistingFile(cmdPath, cliJsPath);
 
-        // Should return cli.js, not codex.cmd
         expect(findCodexCLIPath()).toBe(cliJsPath);
       });
 
-      it('should find cli.js in custom npm global path via npm_config_prefix', () => {
+      it('should find codex.js in custom npm global path via npm_config_prefix', () => {
         jest.spyOn(os, 'homedir').mockReturnValue('C:\\Users\\test');
         process.env.npm_config_prefix = 'D:\\nodejs\\node_global';
-        const expectedPath = path.join('D:\\nodejs\\node_global', 'node_modules', '@openai', 'codex', 'dist', 'cli.js');
+        const expectedPath = path.join('D:\\nodejs\\node_global', 'node_modules', '@openai', 'codex', 'bin', 'codex.js');
         mockExistingFile(expectedPath);
 
         expect(findCodexCLIPath()).toBe(expectedPath);
@@ -693,9 +690,9 @@ describe('utils.ts', () => {
         expect(findCodexCLIPath()).toBeNull();
       });
 
-      it('should resolve cli.js from custom PATH npm prefix', () => {
+      it('should resolve codex.js from custom PATH npm prefix', () => {
         const npmBin = 'C:\\Users\\test\\AppData\\Roaming\\npm';
-        const cliJsPath = path.join(npmBin, 'node_modules', '@openai', 'codex', 'dist', 'cli.js');
+        const cliJsPath = path.join(npmBin, 'node_modules', '@openai', 'codex', 'bin', 'codex.js');
         mockExistingFile(cliJsPath);
 
         const customPath = `${npmBin};C:\\Windows\\System32`;

@@ -289,7 +289,7 @@
     "cliPath": {
       "name": "Caminho CLI Codex",
       "desc": "Caminho personalizado para Codex CLI. Deixe vazio para detecção automática.",
-      "descWindows": "Para o instalador nativo, use codex.exe. Para instalações com npm/pnpm/yarn ou outros gerenciadores de pacotes, use o caminho cli.js (não codex.cmd).",
+      "descWindows": "Para o instalador nativo, use codex.exe. Para instalações com npm/pnpm/yarn ou outros gerenciadores de pacotes, use o caminho codex.js (não .cmd).",
       "descUnix": "Cole a saída de \"which codex\" — funciona tanto para instalações nativas quanto npm/pnpm/yarn.",
       "validation": {
         "notExist": "Caminho não existe",
