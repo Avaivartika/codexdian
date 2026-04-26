@@ -55586,6 +55586,9 @@ var ModelSelector = class {
     this.container = parentEl.createDiv({ cls: "codexdian-model-selector" });
     this.render();
   }
+  getElement() {
+    return this.container;
+  }
   getAvailableModels() {
     const models = [...DEFAULT_CODEX_MODELS];
     if (this.callbacks.getEnvironmentVariables) {
@@ -55620,6 +55623,7 @@ var ModelSelector = class {
     const modelInfo = models.find((m) => m.value === currentModel);
     const displayModel = modelInfo || models[0];
     this.buttonEl.empty();
+    this.buttonEl.setAttribute("title", (displayModel == null ? void 0 : displayModel.description) || "Choose the model for this chat");
     const labelEl = this.buttonEl.createSpan({ cls: "codexdian-model-label" });
     labelEl.setText((displayModel == null ? void 0 : displayModel.label) || "Unknown");
   }
@@ -55661,6 +55665,9 @@ var ThinkingBudgetSelector = class {
     this.container = parentEl.createDiv({ cls: "codexdian-thinking-selector" });
     this.render();
   }
+  getElement() {
+    return this.container;
+  }
   render() {
     this.container.empty();
     this.effortEl = this.container.createDiv({ cls: "codexdian-thinking-effort" });
@@ -55688,6 +55695,7 @@ var ThinkingBudgetSelector = class {
     const currentInfo = EFFORT_LEVELS.find((e) => e.value === currentEffort);
     const currentEl = this.effortGearsEl.createDiv({ cls: "codexdian-thinking-current" });
     currentEl.setText((currentInfo == null ? void 0 : currentInfo.label) || "High");
+    currentEl.setAttribute("title", "Reasoning effort: balance answer speed and depth");
     const optionsEl = this.effortGearsEl.createDiv({ cls: "codexdian-thinking-options" });
     for (const effort of [...EFFORT_LEVELS].reverse()) {
       const gearEl = optionsEl.createDiv({ cls: "codexdian-thinking-gear" });
@@ -55709,6 +55717,7 @@ var ThinkingBudgetSelector = class {
     const currentBudgetInfo = THINKING_BUDGETS.find((b) => b.value === currentBudget);
     const currentEl = this.budgetGearsEl.createDiv({ cls: "codexdian-thinking-current" });
     currentEl.setText((currentBudgetInfo == null ? void 0 : currentBudgetInfo.label) || "Off");
+    currentEl.setAttribute("title", "Thinking budget for custom models");
     const optionsEl = this.budgetGearsEl.createDiv({ cls: "codexdian-thinking-options" });
     for (const budget of [...THINKING_BUDGETS].reverse()) {
       const gearEl = optionsEl.createDiv({ cls: "codexdian-thinking-gear" });
@@ -55758,6 +55767,9 @@ var ServiceTierSelector = class {
     this.callbacks = callbacks;
     this.container = parentEl.createDiv({ cls: "codexdian-service-tier-selector" });
     this.render();
+  }
+  getElement() {
+    return this.container;
   }
   render() {
     this.container.empty();
@@ -55812,6 +55824,9 @@ var VerbositySelector = class {
     this.container = parentEl.createDiv({ cls: "codexdian-verbosity-selector" });
     this.render();
   }
+  getElement() {
+    return this.container;
+  }
   render() {
     this.container.empty();
     this.controlEl = this.container.createDiv({ cls: "codexdian-verbosity-control" });
@@ -55862,6 +55877,9 @@ var RunningIndicator = class {
     this.container.setAttribute("title", "Codex is currently running");
     this.update(false);
   }
+  getElement() {
+    return this.container;
+  }
   update(isRunning) {
     this.container.toggleClass("active", isRunning);
     this.container.setAttribute("aria-hidden", isRunning ? "false" : "true");
@@ -55875,8 +55893,12 @@ var PermissionToggle = class {
     this.container = parentEl.createDiv({ cls: "codexdian-permission-toggle" });
     this.render();
   }
+  getElement() {
+    return this.container;
+  }
   render() {
     this.container.empty();
+    this.container.setAttribute("title", "Permission mode: Safe asks before risky actions; YOLO allows edits and commands without prompts; PLAN avoids edits.");
     this.labelEl = this.container.createSpan({ cls: "codexdian-permission-label" });
     this.toggleEl = this.container.createDiv({ cls: "codexdian-toggle-switch" });
     this.updateDisplay();
@@ -55927,6 +55949,9 @@ var ExternalContextSelector = class {
     this.callbacks = callbacks;
     this.container = parentEl.createDiv({ cls: "codexdian-external-context-selector" });
     this.render();
+  }
+  getElement() {
+    return this.container;
   }
   setOnChange(callback) {
     this.onChangeCallback = callback;
@@ -56185,6 +56210,9 @@ var McpServerSelector = class {
     this.container = parentEl.createDiv({ cls: "codexdian-mcp-selector" });
     this.render();
   }
+  getElement() {
+    return this.container;
+  }
   setMcpManager(manager) {
     this.mcpManager = manager;
     this.pruneEnabledServers();
@@ -56348,6 +56376,9 @@ var ContextUsageMeter = class {
     this.render();
     this.container.style.display = "none";
   }
+  getElement() {
+    return this.container;
+  }
   render() {
     const size = 16;
     const strokeWidth = 2;
@@ -56403,12 +56434,116 @@ var ContextUsageMeter = class {
       tooltip += " (Approaching limit, run `/compact` to continue)";
     }
     this.container.setAttribute("data-tooltip", tooltip);
+    this.container.setAttribute("title", `Context usage: ${tooltip}`);
   }
   formatTokens(tokens) {
     if (tokens >= 1e3) {
       return `${Math.round(tokens / 1e3)}k`;
     }
     return String(tokens);
+  }
+};
+var ToolbarOverflowMenu = class {
+  constructor(parentEl, items) {
+    this.hiddenIds = /* @__PURE__ */ new Set();
+    this.resizeObserver = null;
+    this.scheduled = false;
+    this.parentEl = parentEl;
+    this.items = items;
+    this.container = parentEl.createDiv({ cls: "codexdian-toolbar-overflow" });
+    this.buttonEl = this.container.createDiv({ cls: "codexdian-toolbar-overflow-btn", text: "..." });
+    this.buttonEl.setAttribute("title", "More toolbar settings");
+    this.dropdownEl = this.container.createDiv({ cls: "codexdian-toolbar-overflow-menu" });
+    this.buttonEl.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.container.toggleClass("open", !this.container.hasClass("open"));
+    });
+    if (typeof document !== "undefined") {
+      document.addEventListener("click", () => this.container.removeClass("open"));
+    }
+    if (typeof ResizeObserver !== "undefined") {
+      this.resizeObserver = new ResizeObserver(() => this.scheduleUpdate());
+      this.resizeObserver.observe(parentEl);
+    }
+    this.scheduleUpdate();
+  }
+  scheduleUpdate() {
+    if (this.scheduled) return;
+    this.scheduled = true;
+    const requestFrame = typeof window !== "undefined" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : (callback) => setTimeout(callback, 0);
+    requestFrame(() => {
+      this.scheduled = false;
+      this.update();
+    });
+  }
+  update() {
+    const availableWidth = this.parentEl.clientWidth;
+    if (!availableWidth) {
+      this.container.style.display = "none";
+      return;
+    }
+    this.restoreItems();
+    const candidates = this.items.filter((item) => item.canOverflow !== false && this.isRenderable(item.element));
+    const overflowWidth = this.measureElement(this.container) || 34;
+    let usedWidth = this.items.filter((item) => this.isRenderable(item.element)).reduce((sum, item) => sum + this.measureElement(item.element), 0);
+    this.container.style.display = "none";
+    this.hiddenIds.clear();
+    for (const item of [...candidates].reverse()) {
+      if (usedWidth <= availableWidth) break;
+      this.hiddenIds.add(item.id);
+      usedWidth -= this.measureElement(item.element);
+      usedWidth += this.hiddenIds.size === 1 ? overflowWidth : 0;
+    }
+    if (this.hiddenIds.size === 0) {
+      this.dropdownEl.empty();
+      this.container.removeClass("open");
+      this.container.style.display = "none";
+      return;
+    }
+    this.container.style.display = "flex";
+    this.renderDropdown();
+  }
+  restoreItems() {
+    for (const item of this.items) {
+      if (item.element.parentElement !== this.parentEl) {
+        this.parentEl.insertBefore(item.element, this.container);
+      }
+    }
+  }
+  renderDropdown() {
+    this.dropdownEl.empty();
+    for (const item of this.items.filter((entry) => this.hiddenIds.has(entry.id))) {
+      const rowEl = this.dropdownEl.createDiv({ cls: "codexdian-toolbar-overflow-row" });
+      const infoEl = rowEl.createDiv({ cls: "codexdian-toolbar-overflow-info" });
+      infoEl.createSpan({ cls: "codexdian-toolbar-overflow-label", text: item.label });
+      infoEl.createSpan({ cls: "codexdian-toolbar-overflow-desc", text: item.description });
+      const controlEl = rowEl.createDiv({ cls: "codexdian-toolbar-overflow-control" });
+      controlEl.appendChild(item.element);
+    }
+  }
+  isRenderable(element) {
+    return element.style.display !== "none";
+  }
+  measureElement(element) {
+    var _a3, _b, _c;
+    const rectWidth = (_b = (_a3 = element.getBoundingClientRect) == null ? void 0 : _a3.call(element).width) != null ? _b : 0;
+    const baseWidth = element.offsetWidth || rectWidth || this.estimateWidth(element);
+    const style = typeof window !== "undefined" ? (_c = window.getComputedStyle) == null ? void 0 : _c.call(window, element) : null;
+    const marginLeft = style ? parseFloat(style.marginLeft || "0") || 0 : 0;
+    const marginRight = style ? parseFloat(style.marginRight || "0") || 0 : 0;
+    return baseWidth + marginLeft + marginRight;
+  }
+  estimateWidth(element) {
+    if (element.hasClass("codexdian-model-selector")) return 142;
+    if (element.hasClass("codexdian-thinking-selector")) return 76;
+    if (element.hasClass("codexdian-service-tier-selector")) return 66;
+    if (element.hasClass("codexdian-verbosity-selector")) return 76;
+    if (element.hasClass("codexdian-context-meter")) return 62;
+    if (element.hasClass("codexdian-external-context-selector")) return 36;
+    if (element.hasClass("codexdian-mcp-selector")) return 36;
+    if (element.hasClass("codexdian-permission-toggle")) return 78;
+    if (element.hasClass("codexdian-running-indicator")) return 82;
+    return 48;
   }
 };
 function createInputToolbar(parentEl, callbacks) {
@@ -56421,12 +56556,71 @@ function createInputToolbar(parentEl, callbacks) {
   const externalContextSelector = new ExternalContextSelector(parentEl, callbacks);
   const mcpServerSelector = new McpServerSelector(parentEl);
   const permissionToggle = new PermissionToggle(parentEl, callbacks);
+  const overflowMenu = new ToolbarOverflowMenu(parentEl, [
+    {
+      id: "model",
+      label: "Model",
+      description: "Choose which Codex model answers this chat.",
+      element: modelSelector.getElement(),
+      canOverflow: true
+    },
+    {
+      id: "thinking",
+      label: "Reasoning",
+      description: "Balance answer speed and depth.",
+      element: thinkingBudgetSelector.getElement(),
+      canOverflow: true
+    },
+    {
+      id: "service-tier",
+      label: "Mode",
+      description: "Auto, Fast, or Flex service tier.",
+      element: serviceTierSelector.getElement()
+    },
+    {
+      id: "verbosity",
+      label: "Verbosity",
+      description: "Brief, Normal, or Detailed responses.",
+      element: verbositySelector.getElement()
+    },
+    {
+      id: "running",
+      label: "Status",
+      description: "Shows whether Codex is currently running.",
+      element: runningIndicator.getElement()
+    },
+    {
+      id: "context",
+      label: "Context",
+      description: "Current context-window usage.",
+      element: contextUsageMeter.getElement()
+    },
+    {
+      id: "external-context",
+      label: "Folders",
+      description: "Add extra folders to the current Codex session.",
+      element: externalContextSelector.getElement()
+    },
+    {
+      id: "mcp",
+      label: "MCP",
+      description: "Enable MCP servers for this chat.",
+      element: mcpServerSelector.getElement()
+    },
+    {
+      id: "permission",
+      label: "Permissions",
+      description: "Switch between Safe, YOLO, and Plan behavior.",
+      element: permissionToggle.getElement()
+    }
+  ]);
   return {
     modelSelector,
     thinkingBudgetSelector,
     serviceTierSelector,
     verbositySelector,
     runningIndicator,
+    overflowMenu,
     contextUsageMeter,
     externalContextSelector,
     mcpServerSelector,

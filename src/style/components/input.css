@@ -116,9 +116,11 @@
 
 /* Input toolbar */
 .codexdian-input-toolbar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 4px;
   flex-shrink: 0;
   padding: 8px 10px 10px 10px;
   border-top: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 82%, transparent);
