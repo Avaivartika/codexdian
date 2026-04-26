@@ -99,12 +99,6 @@ export class ModelSelector {
     this.buttonEl = this.container.createDiv({ cls: 'codexdian-model-btn' });
     this.setReady(this.isReady);
     this.updateDisplay();
-    createToolbarHoverHint(
-      this.container,
-      'Model',
-      'Choose the model for this chat',
-      'codexdian-toolbar-hint--model',
-    );
 
     this.dropdownEl = this.container.createDiv({ cls: 'codexdian-model-dropdown' });
     this.renderOptions();
@@ -182,22 +176,10 @@ export class ThinkingBudgetSelector {
     // Effort selector (for adaptive thinking models)
     this.effortEl = this.container.createDiv({ cls: 'codexdian-thinking-effort' });
     this.effortGearsEl = this.effortEl.createDiv({ cls: 'codexdian-thinking-gears' });
-    createToolbarHoverHint(
-      this.effortEl,
-      'Reasoning effort',
-      'Balance answer speed and depth',
-      'codexdian-toolbar-hint--thinking',
-    );
 
     // Legacy budget selector (for custom models)
     this.budgetEl = this.container.createDiv({ cls: 'codexdian-thinking-budget' });
     this.budgetGearsEl = this.budgetEl.createDiv({ cls: 'codexdian-thinking-gears' });
-    createToolbarHoverHint(
-      this.budgetEl,
-      'Thinking budget',
-      'Set token budget for custom models',
-      'codexdian-toolbar-hint--thinking',
-    );
 
     this.updateDisplay();
   }
@@ -314,12 +296,6 @@ export class ServiceTierSelector {
     this.controlEl = this.container.createDiv({ cls: 'codexdian-service-tier-control' });
     this.currentEl = this.controlEl.createDiv({ cls: 'codexdian-service-tier-current' });
     this.optionsEl = this.controlEl.createDiv({ cls: 'codexdian-service-tier-options' });
-    createToolbarHoverHint(
-      this.container,
-      'Mode',
-      'Choose Codex service tier',
-      'codexdian-toolbar-hint--service-tier',
-    );
     this.updateDisplay();
   }
 
@@ -375,12 +351,6 @@ export class VerbositySelector {
     this.controlEl = this.container.createDiv({ cls: 'codexdian-verbosity-control' });
     this.currentEl = this.controlEl.createDiv({ cls: 'codexdian-verbosity-current' });
     this.optionsEl = this.controlEl.createDiv({ cls: 'codexdian-verbosity-options' });
-    createToolbarHoverHint(
-      this.container,
-      'Verbosity',
-      'Control response detail',
-      'codexdian-toolbar-hint--verbosity',
-    );
     this.updateDisplay();
   }
 
