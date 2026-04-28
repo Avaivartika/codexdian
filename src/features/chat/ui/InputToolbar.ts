@@ -305,8 +305,7 @@ export class RunningIndicator {
 
   constructor(parentEl: HTMLElement) {
     this.container = parentEl.createDiv({ cls: 'codexdian-running-indicator' });
-    this.container.createSpan({ cls: 'codexdian-running-dot' });
-    this.container.createSpan({ cls: 'codexdian-running-label', text: 'Running' });
+    this.container.createSpan({ cls: 'codexdian-running-stop-icon' });
     this.container.setAttribute('title', 'Codex is currently running');
     createToolbarHoverHint(
       this.container,
@@ -1092,7 +1091,7 @@ class ToolbarOverflowMenu {
     model: 142,
     thinking: 78,
     'service-tier': 28,
-    running: 82,
+    running: 28,
     context: 72,
     'external-context': 36,
     mcp: 36,

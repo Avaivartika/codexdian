@@ -164,39 +164,47 @@
 .codexdian-running-indicator {
   display: none;
   align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  font-size: 11px;
-  line-height: 1.1;
+  justify-content: center;
+  width: 28px;
+  height: 24px;
   color: var(--text-muted);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 78%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 78%, transparent);
-  white-space: nowrap;
 }
 
 .codexdian-running-indicator.active {
   display: flex;
 }
 
-.codexdian-running-dot {
-  width: 6px;
-  height: 6px;
+.codexdian-running-stop-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--codexdian-brand);
   border-radius: 999px;
+  background: color-mix(in srgb, var(--codexdian-brand) 9%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 24%, transparent);
+  animation: codexdian-running-pulse 1.4s ease-in-out infinite;
+}
+
+.codexdian-running-stop-icon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
   background: var(--codexdian-brand);
-  animation: codexdian-running-pulse 1s ease-in-out infinite;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes codexdian-running-pulse {
   0%,
   100% {
-    opacity: 0.35;
-    transform: scale(0.85);
+    opacity: 0.68;
   }
 
   50% {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
