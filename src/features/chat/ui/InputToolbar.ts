@@ -1076,6 +1076,7 @@ interface ToolbarOverflowItem {
   description: string;
   element: HTMLElement;
   canOverflow?: boolean;
+  overflowPriority?: number;
 }
 
 class ToolbarOverflowMenu {
@@ -1096,6 +1097,7 @@ class ToolbarOverflowMenu {
     'external-context': 36,
     mcp: 36,
     permission: 90,
+    overflow: 24,
   };
 
   constructor(parentEl: HTMLElement, items: ToolbarOverflowItem[]) {
@@ -1152,10 +1154,12 @@ class ToolbarOverflowMenu {
       return;
     }
 
-    const candidates = this.items.filter(item => item.canOverflow !== false && this.isRenderable(item.element));
+    const candidates = this.items
+      .filter(item => item.canOverflow !== false && this.isRenderable(item.element))
+      .sort((a, b) => (b.overflowPriority ?? 0) - (a.overflowPriority ?? 0));
     this.container.style.display = 'flex';
 
-    for (const item of [...candidates].reverse()) {
+    for (const item of candidates) {
       if (this.getRequiredWidth() <= availableWidth) break;
       this.hiddenIds.add(item.id);
       this.renderDropdown();
@@ -1261,6 +1265,7 @@ export function createInputToolbar(
       description: 'Choose which Codex model answers this chat.',
       element: modelSelector.getElement(),
       canOverflow: true,
+      overflowPriority: 10,
     },
     {
       id: 'thinking',
@@ -1268,42 +1273,49 @@ export function createInputToolbar(
       description: 'Balance answer speed and depth.',
       element: thinkingBudgetSelector.getElement(),
       canOverflow: true,
+      overflowPriority: 20,
     },
     {
       id: 'service-tier',
       label: 'Mode',
       description: 'Toggle fast mode on or off.',
       element: serviceTierSelector.getElement(),
+      canOverflow: false,
     },
     {
       id: 'running',
       label: 'Status',
       description: 'Shows whether Codex is currently running.',
       element: runningIndicator.getElement(),
+      overflowPriority: 90,
     },
     {
       id: 'context',
       label: 'Context',
       description: 'Current context-window usage.',
       element: contextUsageMeter.getElement(),
+      overflowPriority: 35,
     },
     {
       id: 'external-context',
       label: 'Folders',
       description: 'Add extra folders to the current Codex session.',
       element: externalContextSelector.getElement(),
+      overflowPriority: 45,
     },
     {
       id: 'mcp',
       label: 'MCP',
       description: 'Enable MCP servers for this chat.',
       element: mcpServerSelector.getElement(),
+      overflowPriority: 100,
     },
     {
       id: 'permission',
       label: 'Permissions',
       description: 'Switch between Safe, YOLO, and Plan behavior.',
       element: permissionToggle.getElement(),
+      overflowPriority: 80,
     },
   ]);
 

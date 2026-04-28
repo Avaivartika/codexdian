@@ -56381,7 +56381,8 @@ var ToolbarOverflowMenu = class {
       context: 72,
       "external-context": 36,
       mcp: 36,
-      permission: 90
+      permission: 90,
+      overflow: 24
     };
     this.parentEl = parentEl;
     this.items = items;
@@ -56425,9 +56426,12 @@ var ToolbarOverflowMenu = class {
       this.container.removeClass("open");
       return;
     }
-    const candidates = this.items.filter((item) => item.canOverflow !== false && this.isRenderable(item.element));
+    const candidates = this.items.filter((item) => item.canOverflow !== false && this.isRenderable(item.element)).sort((a, b) => {
+      var _a3, _b;
+      return ((_a3 = b.overflowPriority) != null ? _a3 : 0) - ((_b = a.overflowPriority) != null ? _b : 0);
+    });
     this.container.style.display = "flex";
-    for (const item of [...candidates].reverse()) {
+    for (const item of candidates) {
       if (this.getRequiredWidth() <= availableWidth) break;
       this.hiddenIds.add(item.id);
       this.renderDropdown();
@@ -56509,50 +56513,58 @@ function createInputToolbar(parentEl, callbacks) {
       label: "Model",
       description: "Choose which Codex model answers this chat.",
       element: modelSelector.getElement(),
-      canOverflow: true
+      canOverflow: true,
+      overflowPriority: 10
     },
     {
       id: "thinking",
       label: "Reasoning",
       description: "Balance answer speed and depth.",
       element: thinkingBudgetSelector.getElement(),
-      canOverflow: true
+      canOverflow: true,
+      overflowPriority: 20
     },
     {
       id: "service-tier",
       label: "Mode",
       description: "Toggle fast mode on or off.",
-      element: serviceTierSelector.getElement()
+      element: serviceTierSelector.getElement(),
+      canOverflow: false
     },
     {
       id: "running",
       label: "Status",
       description: "Shows whether Codex is currently running.",
-      element: runningIndicator.getElement()
+      element: runningIndicator.getElement(),
+      overflowPriority: 90
     },
     {
       id: "context",
       label: "Context",
       description: "Current context-window usage.",
-      element: contextUsageMeter.getElement()
+      element: contextUsageMeter.getElement(),
+      overflowPriority: 35
     },
     {
       id: "external-context",
       label: "Folders",
       description: "Add extra folders to the current Codex session.",
-      element: externalContextSelector.getElement()
+      element: externalContextSelector.getElement(),
+      overflowPriority: 45
     },
     {
       id: "mcp",
       label: "MCP",
       description: "Enable MCP servers for this chat.",
-      element: mcpServerSelector.getElement()
+      element: mcpServerSelector.getElement(),
+      overflowPriority: 100
     },
     {
       id: "permission",
       label: "Permissions",
       description: "Switch between Safe, YOLO, and Plan behavior.",
-      element: permissionToggle.getElement()
+      element: permissionToggle.getElement(),
+      overflowPriority: 80
     }
   ]);
   return {
