@@ -30,7 +30,6 @@ import type {
   ServiceTierSelector,
   StatusPanel,
   ThinkingBudgetSelector,
-  VerbositySelector,
 } from '../ui';
 import type { NavigationSidebar } from '../ui';
 
@@ -132,7 +131,6 @@ export interface TabUIComponents {
   modelSelector: ModelSelector | null;
   thinkingBudgetSelector: ThinkingBudgetSelector | null;
   serviceTierSelector: ServiceTierSelector | null;
-  verbositySelector: VerbositySelector | null;
   runningIndicator: RunningIndicator | null;
   externalContextSelector: ExternalContextSelector | null;
   mcpServerSelector: McpServerSelector | null;

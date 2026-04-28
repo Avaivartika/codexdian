@@ -55731,21 +55731,9 @@ var ThinkingBudgetSelector = class {
     }
   }
 };
-var SERVICE_TIER_OPTIONS = [
-  { value: "auto", label: "Auto", title: "Use Codex default service tier" },
-  { value: "fast", label: "Fast", title: "Prefer lower-latency Codex responses" },
-  { value: "flex", label: "Flex", title: "Use flexible service tier when available" }
-];
-var VERBOSITY_OPTIONS = [
-  { value: "low", label: "Brief", title: "Shorter responses" },
-  { value: "medium", label: "Normal", title: "Balanced response detail" },
-  { value: "high", label: "Detail", title: "More detailed responses" }
-];
 var ServiceTierSelector = class {
   constructor(parentEl, callbacks) {
-    this.controlEl = null;
-    this.currentEl = null;
-    this.optionsEl = null;
+    this.buttonEl = null;
     this.callbacks = callbacks;
     this.container = parentEl.createDiv({ cls: "codexdian-service-tier-selector" });
     this.render();
@@ -55755,88 +55743,25 @@ var ServiceTierSelector = class {
   }
   render() {
     this.container.empty();
-    this.controlEl = this.container.createDiv({ cls: "codexdian-service-tier-control" });
-    this.currentEl = this.controlEl.createDiv({ cls: "codexdian-service-tier-current" });
-    this.optionsEl = this.controlEl.createDiv({ cls: "codexdian-service-tier-options" });
+    this.buttonEl = this.container.createDiv({ cls: "codexdian-service-tier-button", text: "\u26A1" });
+    this.buttonEl.addEventListener("click", async (event) => {
+      var _a3, _b, _c;
+      event.stopPropagation();
+      const current = (_a3 = this.callbacks.getSettings().serviceTier) != null ? _a3 : "auto";
+      await ((_c = (_b = this.callbacks).onServiceTierChange) == null ? void 0 : _c.call(_b, current === "fast" ? "auto" : "fast"));
+      this.updateDisplay();
+    });
     this.updateDisplay();
   }
   updateDisplay() {
-    var _a3, _b, _c, _d;
+    var _a3, _b, _c;
     const current = (_a3 = this.callbacks.getSettings().serviceTier) != null ? _a3 : "auto";
-    const currentOption = (_b = SERVICE_TIER_OPTIONS.find((option) => option.value === current)) != null ? _b : SERVICE_TIER_OPTIONS[0];
     this.container.toggleClass("codexdian-service-tier-fast", current === "fast");
-    this.container.toggleClass("codexdian-service-tier-flex", current === "flex");
-    (_c = this.currentEl) == null ? void 0 : _c.setText(currentOption.label);
-    (_d = this.currentEl) == null ? void 0 : _d.setAttribute("title", currentOption.title);
-    this.renderOptions();
-  }
-  renderOptions() {
-    var _a3;
-    if (!this.optionsEl) return;
-    this.optionsEl.empty();
-    const current = (_a3 = this.callbacks.getSettings().serviceTier) != null ? _a3 : "auto";
-    for (const option of SERVICE_TIER_OPTIONS) {
-      const optionEl = this.optionsEl.createDiv({ cls: "codexdian-service-tier-option" });
-      optionEl.setText(option.label);
-      optionEl.setAttribute("title", option.title);
-      if (option.value === current) {
-        optionEl.addClass("selected");
-      }
-      optionEl.addEventListener("click", async (event) => {
-        var _a4, _b;
-        event.stopPropagation();
-        await ((_b = (_a4 = this.callbacks).onServiceTierChange) == null ? void 0 : _b.call(_a4, option.value));
-        this.updateDisplay();
-      });
-    }
-  }
-};
-var VerbositySelector = class {
-  constructor(parentEl, callbacks) {
-    this.controlEl = null;
-    this.currentEl = null;
-    this.optionsEl = null;
-    this.callbacks = callbacks;
-    this.container = parentEl.createDiv({ cls: "codexdian-verbosity-selector" });
-    this.render();
-  }
-  getElement() {
-    return this.container;
-  }
-  render() {
-    this.container.empty();
-    this.controlEl = this.container.createDiv({ cls: "codexdian-verbosity-control" });
-    this.currentEl = this.controlEl.createDiv({ cls: "codexdian-verbosity-current" });
-    this.optionsEl = this.controlEl.createDiv({ cls: "codexdian-verbosity-options" });
-    this.updateDisplay();
-  }
-  updateDisplay() {
-    var _a3, _b, _c, _d;
-    const current = (_a3 = this.callbacks.getSettings().verbosity) != null ? _a3 : "medium";
-    const currentOption = (_b = VERBOSITY_OPTIONS.find((option) => option.value === current)) != null ? _b : VERBOSITY_OPTIONS[1];
-    (_c = this.currentEl) == null ? void 0 : _c.setText(currentOption.label);
-    (_d = this.currentEl) == null ? void 0 : _d.setAttribute("title", currentOption.title);
-    this.renderOptions();
-  }
-  renderOptions() {
-    var _a3;
-    if (!this.optionsEl) return;
-    this.optionsEl.empty();
-    const current = (_a3 = this.callbacks.getSettings().verbosity) != null ? _a3 : "medium";
-    for (const option of VERBOSITY_OPTIONS) {
-      const optionEl = this.optionsEl.createDiv({ cls: "codexdian-verbosity-option" });
-      optionEl.setText(option.label);
-      optionEl.setAttribute("title", option.title);
-      if (option.value === current) {
-        optionEl.addClass("selected");
-      }
-      optionEl.addEventListener("click", async (event) => {
-        var _a4, _b;
-        event.stopPropagation();
-        await ((_b = (_a4 = this.callbacks).onVerbosityChange) == null ? void 0 : _b.call(_a4, option.value));
-        this.updateDisplay();
-      });
-    }
+    (_b = this.buttonEl) == null ? void 0 : _b.toggleClass("active", current === "fast");
+    (_c = this.buttonEl) == null ? void 0 : _c.setAttribute(
+      "title",
+      current === "fast" ? "Fast mode is on. Click to return to normal mode." : "Fast mode is off. Click to enable fast mode."
+    );
   }
 };
 var RunningIndicator = class {
@@ -56533,7 +56458,6 @@ function createInputToolbar(parentEl, callbacks) {
   const modelSelector = new ModelSelector(parentEl, callbacks);
   const thinkingBudgetSelector = new ThinkingBudgetSelector(parentEl, callbacks);
   const serviceTierSelector = new ServiceTierSelector(parentEl, callbacks);
-  const verbositySelector = new VerbositySelector(parentEl, callbacks);
   const runningIndicator = new RunningIndicator(parentEl);
   const contextUsageMeter = new ContextUsageMeter(parentEl);
   const externalContextSelector = new ExternalContextSelector(parentEl, callbacks);
@@ -56557,14 +56481,8 @@ function createInputToolbar(parentEl, callbacks) {
     {
       id: "service-tier",
       label: "Mode",
-      description: "Auto, Fast, or Flex service tier.",
+      description: "Toggle fast mode on or off.",
       element: serviceTierSelector.getElement()
-    },
-    {
-      id: "verbosity",
-      label: "Verbosity",
-      description: "Brief, Normal, or Detailed responses.",
-      element: verbositySelector.getElement()
     },
     {
       id: "running",
@@ -56601,7 +56519,6 @@ function createInputToolbar(parentEl, callbacks) {
     modelSelector,
     thinkingBudgetSelector,
     serviceTierSelector,
-    verbositySelector,
     runningIndicator,
     overflowMenu,
     contextUsageMeter,
@@ -57463,7 +57380,6 @@ function createTab(options) {
       modelSelector: null,
       thinkingBudgetSelector: null,
       serviceTierSelector: null,
-      verbositySelector: null,
       runningIndicator: null,
       externalContextSelector: null,
       mcpServerSelector: null,
@@ -57721,10 +57637,6 @@ function initializeInputToolbar(tab, plugin) {
       plugin.settings.serviceTier = tier;
       await plugin.saveSettings();
     },
-    onVerbosityChange: async (verbosity) => {
-      plugin.settings.verbosity = verbosity;
-      await plugin.saveSettings();
-    },
     onPermissionModeChange: async (mode) => {
       plugin.settings.permissionMode = mode;
       await plugin.saveSettings();
@@ -57734,7 +57646,6 @@ function initializeInputToolbar(tab, plugin) {
   tab.ui.modelSelector = toolbarComponents.modelSelector;
   tab.ui.thinkingBudgetSelector = toolbarComponents.thinkingBudgetSelector;
   tab.ui.serviceTierSelector = toolbarComponents.serviceTierSelector;
-  tab.ui.verbositySelector = toolbarComponents.verbositySelector;
   tab.ui.runningIndicator = toolbarComponents.runningIndicator;
   tab.ui.contextUsageMeter = toolbarComponents.contextUsageMeter;
   tab.ui.externalContextSelector = toolbarComponents.externalContextSelector;
@@ -63060,15 +62971,6 @@ var CodexdianSettingTab = class extends import_obsidian36.PluginSettingTab {
         var _a3;
         return dropdown.addOption("auto", "Auto").addOption("fast", "Fast").addOption("flex", "Flex").setValue((_a3 = this.plugin.settings.serviceTier) != null ? _a3 : "auto").onChange(async (value) => {
           this.plugin.settings.serviceTier = value;
-          await this.plugin.saveSettings();
-        });
-      }
-    );
-    new import_obsidian36.Setting(containerEl).setName("Output verbosity").setDesc("Controls GPT-5 response detail when supported by the selected Codex model.").addDropdown(
-      (dropdown) => {
-        var _a3;
-        return dropdown.addOption("low", "Low").addOption("medium", "Normal").addOption("high", "Detailed").setValue((_a3 = this.plugin.settings.verbosity) != null ? _a3 : "medium").onChange(async (value) => {
-          this.plugin.settings.verbosity = value;
           await this.plugin.saveSettings();
         });
       }

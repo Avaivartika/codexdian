@@ -12,7 +12,6 @@ export {
   RunningIndicator,
   ServiceTierSelector,
   ThinkingBudgetSelector,
-  VerbositySelector,
 } from './InputToolbar';
 export { type InstructionModeCallbacks, InstructionModeManager, type InstructionModeState } from './InstructionModeManager';
 export { NavigationSidebar } from './NavigationSidebar';

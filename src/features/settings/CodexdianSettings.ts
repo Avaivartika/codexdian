@@ -586,21 +586,6 @@ export class CodexdianSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName('Output verbosity')
-      .setDesc('Controls GPT-5 response detail when supported by the selected Codex model.')
-      .addDropdown((dropdown) =>
-        dropdown
-          .addOption('low', 'Low')
-          .addOption('medium', 'Normal')
-          .addOption('high', 'Detailed')
-          .setValue(this.plugin.settings.verbosity ?? 'medium')
-          .onChange(async (value) => {
-            this.plugin.settings.verbosity = value as typeof this.plugin.settings.verbosity;
-            await this.plugin.saveSettings();
-          })
-      );
-
-    new Setting(containerEl)
       .setName(t('settings.enableChrome.name'))
       .setDesc(t('settings.enableChrome.desc'))
       .addToggle((toggle) =>

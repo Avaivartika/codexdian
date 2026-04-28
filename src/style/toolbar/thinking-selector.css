@@ -46,7 +46,6 @@
 }
 
 .codexdian-service-tier-selector:hover > .codexdian-toolbar-hint,
-.codexdian-verbosity-selector:hover > .codexdian-toolbar-hint,
 .codexdian-running-indicator:hover > .codexdian-toolbar-hint,
 .codexdian-permission-toggle:hover > .codexdian-toolbar-hint,
 .codexdian-external-context-selector:hover > .codexdian-toolbar-hint,
@@ -124,100 +123,40 @@
   font-weight: 500;
 }
 
-.codexdian-service-tier-selector,
-.codexdian-verbosity-selector {
+.codexdian-service-tier-selector {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.codexdian-service-tier-control,
-.codexdian-verbosity-control {
-  position: relative;
+.codexdian-service-tier-button {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 24px;
+  padding: 0;
+  border: 0;
   border-radius: 999px;
-}
-
-.codexdian-service-tier-current,
-.codexdian-verbosity-current {
-  padding: 4px 9px;
-  font-size: 11px;
-  color: color-mix(in srgb, var(--text-muted) 82%, var(--text-normal));
-  font-weight: 600;
+  background: transparent;
+  color: color-mix(in srgb, var(--text-muted) 80%, var(--text-normal));
   cursor: pointer;
-  border-radius: 999px;
-  white-space: nowrap;
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 84%, transparent);
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 86%, transparent);
-  line-height: 1.1;
-  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.55;
+  transition: color 0.15s ease, background 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
 }
 
-.codexdian-service-tier-current:hover,
-.codexdian-verbosity-current:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 78%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 82%, transparent);
+.codexdian-service-tier-button:hover {
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 70%, transparent);
   color: var(--text-normal);
+  opacity: 0.85;
 }
 
-.codexdian-service-tier-options,
-.codexdian-verbosity-options {
-  position: absolute;
-  left: 0;
-  bottom: 100%;
-  margin-bottom: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 82px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--codexdian-glass-bg-strong) 88%, transparent), color-mix(in srgb, var(--codexdian-glass-bg) 90%, transparent));
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 90%, transparent);
-  border-radius: 10px;
-  padding: 5px;
-  box-shadow: var(--codexdian-shadow-soft);
-  backdrop-filter: blur(16px) saturate(125%);
-  -webkit-backdrop-filter: blur(16px) saturate(125%);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.15s ease, visibility 0.15s ease;
-  z-index: 5;
-}
-
-.codexdian-service-tier-control:hover .codexdian-service-tier-options,
-.codexdian-verbosity-control:hover .codexdian-verbosity-options {
-  opacity: 1;
-  visibility: visible;
-}
-
-.codexdian-service-tier-option,
-.codexdian-verbosity-option {
-  padding: 6px 10px;
-  font-size: 11px;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-radius: 7px;
-  transition: background 0.1s ease, color 0.1s ease;
-  white-space: nowrap;
-}
-
-.codexdian-service-tier-option:hover,
-.codexdian-verbosity-option:hover {
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
-  color: var(--text-normal);
-}
-
-.codexdian-service-tier-option.selected,
-.codexdian-verbosity-option.selected {
-  background: rgba(var(--codexdian-brand-rgb), 0.15);
+.codexdian-service-tier-button.active {
   color: var(--codexdian-brand);
-  font-weight: 500;
-}
-
-.codexdian-service-tier-fast .codexdian-service-tier-current {
-  color: color-mix(in srgb, var(--text-success) 76%, var(--text-normal));
-  border-color: color-mix(in srgb, var(--text-success) 34%, transparent);
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
 .codexdian-running-indicator {
@@ -264,19 +203,18 @@
   display: none;
   align-items: center;
   flex-shrink: 0;
-  margin-left: auto;
 }
 
 .codexdian-toolbar-overflow-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 28px;
+  min-width: 24px;
   height: 24px;
-  padding: 0 8px 2px;
+  padding: 0 4px 2px;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--codexdian-glass-border) 84%, transparent);
-  background: color-mix(in srgb, var(--codexdian-glass-bg) 80%, transparent);
+  border: 0;
+  background: transparent;
   color: var(--text-muted);
   cursor: pointer;
   font-size: 15px;
@@ -288,8 +226,7 @@
 .codexdian-toolbar-overflow-btn:hover,
 .codexdian-toolbar-overflow.open .codexdian-toolbar-overflow-btn {
   color: var(--text-normal);
-  background: color-mix(in srgb, var(--codexdian-surface-elevated) 76%, transparent);
-  border-color: color-mix(in srgb, var(--codexdian-border-strong) 80%, transparent);
+  background: color-mix(in srgb, var(--codexdian-surface-elevated) 68%, transparent);
 }
 
 .codexdian-toolbar-overflow-menu {

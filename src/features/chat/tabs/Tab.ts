@@ -119,7 +119,6 @@ export function createTab(options: TabCreateOptions): TabData {
       modelSelector: null,
       thinkingBudgetSelector: null,
       serviceTierSelector: null,
-      verbositySelector: null,
       runningIndicator: null,
       externalContextSelector: null,
       mcpServerSelector: null,
@@ -482,10 +481,6 @@ function initializeInputToolbar(tab: TabData, plugin: CodexdianPlugin): void {
       plugin.settings.serviceTier = tier;
       await plugin.saveSettings();
     },
-    onVerbosityChange: async (verbosity) => {
-      plugin.settings.verbosity = verbosity;
-      await plugin.saveSettings();
-    },
     onPermissionModeChange: async (mode) => {
       plugin.settings.permissionMode = mode;
       await plugin.saveSettings();
@@ -496,7 +491,6 @@ function initializeInputToolbar(tab: TabData, plugin: CodexdianPlugin): void {
   tab.ui.modelSelector = toolbarComponents.modelSelector;
   tab.ui.thinkingBudgetSelector = toolbarComponents.thinkingBudgetSelector;
   tab.ui.serviceTierSelector = toolbarComponents.serviceTierSelector;
-  tab.ui.verbositySelector = toolbarComponents.verbositySelector;
   tab.ui.runningIndicator = toolbarComponents.runningIndicator;
   tab.ui.contextUsageMeter = toolbarComponents.contextUsageMeter;
   tab.ui.externalContextSelector = toolbarComponents.externalContextSelector;

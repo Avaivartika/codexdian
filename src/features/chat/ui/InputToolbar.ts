@@ -262,23 +262,9 @@ export class ThinkingBudgetSelector {
   }
 }
 
-const SERVICE_TIER_OPTIONS: { value: ServiceTierMode; label: string; title: string }[] = [
-  { value: 'auto', label: 'Auto', title: 'Use Codex default service tier' },
-  { value: 'fast', label: 'Fast', title: 'Prefer lower-latency Codex responses' },
-  { value: 'flex', label: 'Flex', title: 'Use flexible service tier when available' },
-];
-
-const VERBOSITY_OPTIONS: { value: VerbosityLevel; label: string; title: string }[] = [
-  { value: 'low', label: 'Brief', title: 'Shorter responses' },
-  { value: 'medium', label: 'Normal', title: 'Balanced response detail' },
-  { value: 'high', label: 'Detail', title: 'More detailed responses' },
-];
-
 export class ServiceTierSelector {
   private container: HTMLElement;
-  private controlEl: HTMLElement | null = null;
-  private currentEl: HTMLElement | null = null;
-  private optionsEl: HTMLElement | null = null;
+  private buttonEl: HTMLElement | null = null;
   private callbacks: ToolbarCallbacks;
 
   constructor(parentEl: HTMLElement, callbacks: ToolbarCallbacks) {
@@ -293,92 +279,24 @@ export class ServiceTierSelector {
 
   private render(): void {
     this.container.empty();
-    this.controlEl = this.container.createDiv({ cls: 'codexdian-service-tier-control' });
-    this.currentEl = this.controlEl.createDiv({ cls: 'codexdian-service-tier-current' });
-    this.optionsEl = this.controlEl.createDiv({ cls: 'codexdian-service-tier-options' });
+    this.buttonEl = this.container.createDiv({ cls: 'codexdian-service-tier-button', text: '⚡' });
+    this.buttonEl.addEventListener('click', async (event) => {
+      event.stopPropagation();
+      const current = this.callbacks.getSettings().serviceTier ?? 'auto';
+      await this.callbacks.onServiceTierChange?.(current === 'fast' ? 'auto' : 'fast');
+      this.updateDisplay();
+    });
     this.updateDisplay();
   }
 
   updateDisplay(): void {
     const current = this.callbacks.getSettings().serviceTier ?? 'auto';
-    const currentOption = SERVICE_TIER_OPTIONS.find(option => option.value === current) ?? SERVICE_TIER_OPTIONS[0];
     this.container.toggleClass('codexdian-service-tier-fast', current === 'fast');
-    this.container.toggleClass('codexdian-service-tier-flex', current === 'flex');
-    this.currentEl?.setText(currentOption.label);
-    this.currentEl?.setAttribute('title', currentOption.title);
-    this.renderOptions();
-  }
-
-  private renderOptions(): void {
-    if (!this.optionsEl) return;
-    this.optionsEl.empty();
-    const current = this.callbacks.getSettings().serviceTier ?? 'auto';
-    for (const option of SERVICE_TIER_OPTIONS) {
-      const optionEl = this.optionsEl.createDiv({ cls: 'codexdian-service-tier-option' });
-      optionEl.setText(option.label);
-      optionEl.setAttribute('title', option.title);
-      if (option.value === current) {
-        optionEl.addClass('selected');
-      }
-      optionEl.addEventListener('click', async (event) => {
-        event.stopPropagation();
-        await this.callbacks.onServiceTierChange?.(option.value);
-        this.updateDisplay();
-      });
-    }
-  }
-}
-
-export class VerbositySelector {
-  private container: HTMLElement;
-  private controlEl: HTMLElement | null = null;
-  private currentEl: HTMLElement | null = null;
-  private optionsEl: HTMLElement | null = null;
-  private callbacks: ToolbarCallbacks;
-
-  constructor(parentEl: HTMLElement, callbacks: ToolbarCallbacks) {
-    this.callbacks = callbacks;
-    this.container = parentEl.createDiv({ cls: 'codexdian-verbosity-selector' });
-    this.render();
-  }
-
-  getElement(): HTMLElement {
-    return this.container;
-  }
-
-  private render(): void {
-    this.container.empty();
-    this.controlEl = this.container.createDiv({ cls: 'codexdian-verbosity-control' });
-    this.currentEl = this.controlEl.createDiv({ cls: 'codexdian-verbosity-current' });
-    this.optionsEl = this.controlEl.createDiv({ cls: 'codexdian-verbosity-options' });
-    this.updateDisplay();
-  }
-
-  updateDisplay(): void {
-    const current = this.callbacks.getSettings().verbosity ?? 'medium';
-    const currentOption = VERBOSITY_OPTIONS.find(option => option.value === current) ?? VERBOSITY_OPTIONS[1];
-    this.currentEl?.setText(currentOption.label);
-    this.currentEl?.setAttribute('title', currentOption.title);
-    this.renderOptions();
-  }
-
-  private renderOptions(): void {
-    if (!this.optionsEl) return;
-    this.optionsEl.empty();
-    const current = this.callbacks.getSettings().verbosity ?? 'medium';
-    for (const option of VERBOSITY_OPTIONS) {
-      const optionEl = this.optionsEl.createDiv({ cls: 'codexdian-verbosity-option' });
-      optionEl.setText(option.label);
-      optionEl.setAttribute('title', option.title);
-      if (option.value === current) {
-        optionEl.addClass('selected');
-      }
-      optionEl.addEventListener('click', async (event) => {
-        event.stopPropagation();
-        await this.callbacks.onVerbosityChange?.(option.value);
-        this.updateDisplay();
-      });
-    }
+    this.buttonEl?.toggleClass('active', current === 'fast');
+    this.buttonEl?.setAttribute(
+      'title',
+      current === 'fast' ? 'Fast mode is on. Click to return to normal mode.' : 'Fast mode is off. Click to enable fast mode.'
+    );
   }
 }
 
@@ -1279,7 +1197,6 @@ export function createInputToolbar(
   modelSelector: ModelSelector;
   thinkingBudgetSelector: ThinkingBudgetSelector;
   serviceTierSelector: ServiceTierSelector;
-  verbositySelector: VerbositySelector;
   runningIndicator: RunningIndicator;
   overflowMenu: ToolbarOverflowMenu;
   contextUsageMeter: ContextUsageMeter | null;
@@ -1290,7 +1207,6 @@ export function createInputToolbar(
   const modelSelector = new ModelSelector(parentEl, callbacks);
   const thinkingBudgetSelector = new ThinkingBudgetSelector(parentEl, callbacks);
   const serviceTierSelector = new ServiceTierSelector(parentEl, callbacks);
-  const verbositySelector = new VerbositySelector(parentEl, callbacks);
   const runningIndicator = new RunningIndicator(parentEl);
   const contextUsageMeter = new ContextUsageMeter(parentEl);
   const externalContextSelector = new ExternalContextSelector(parentEl, callbacks);
@@ -1314,14 +1230,8 @@ export function createInputToolbar(
     {
       id: 'service-tier',
       label: 'Mode',
-      description: 'Auto, Fast, or Flex service tier.',
+      description: 'Toggle fast mode on or off.',
       element: serviceTierSelector.getElement(),
-    },
-    {
-      id: 'verbosity',
-      label: 'Verbosity',
-      description: 'Brief, Normal, or Detailed responses.',
-      element: verbositySelector.getElement(),
     },
     {
       id: 'running',
@@ -1359,7 +1269,6 @@ export function createInputToolbar(
     modelSelector,
     thinkingBudgetSelector,
     serviceTierSelector,
-    verbositySelector,
     runningIndicator,
     overflowMenu,
     contextUsageMeter,
