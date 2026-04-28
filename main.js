@@ -56373,6 +56373,16 @@ var ToolbarOverflowMenu = class {
     this.hiddenIds = /* @__PURE__ */ new Set();
     this.resizeObserver = null;
     this.scheduled = false;
+    this.fallbackWidthById = {
+      model: 142,
+      thinking: 78,
+      "service-tier": 28,
+      running: 82,
+      context: 72,
+      "external-context": 36,
+      mcp: 36,
+      permission: 90
+    };
     this.parentEl = parentEl;
     this.items = items;
     this.container = parentEl.createDiv({ cls: "codexdian-toolbar-overflow" });
@@ -56402,14 +56412,15 @@ var ToolbarOverflowMenu = class {
     });
   }
   update() {
-    if (!this.parentEl.clientWidth) {
+    const availableWidth = this.parentEl.clientWidth;
+    if (!availableWidth) {
       this.container.style.display = "none";
       return;
     }
     this.restoreItems();
     this.container.style.display = "none";
     this.hiddenIds.clear();
-    if (!this.isToolbarOverflowing()) {
+    if (this.getRequiredWidth() <= availableWidth) {
       this.dropdownEl.empty();
       this.container.removeClass("open");
       return;
@@ -56417,7 +56428,7 @@ var ToolbarOverflowMenu = class {
     const candidates = this.items.filter((item) => item.canOverflow !== false && this.isRenderable(item.element));
     this.container.style.display = "flex";
     for (const item of [...candidates].reverse()) {
-      if (!this.isToolbarOverflowing()) break;
+      if (this.getRequiredWidth() <= availableWidth) break;
       this.hiddenIds.add(item.id);
       this.renderDropdown();
     }
@@ -56450,8 +56461,37 @@ var ToolbarOverflowMenu = class {
   isRenderable(element) {
     return element.style.display !== "none";
   }
-  isToolbarOverflowing() {
-    return this.parentEl.scrollWidth > this.parentEl.clientWidth + 1;
+  getRequiredWidth() {
+    const visibleItems = this.items.filter(
+      (item) => !this.hiddenIds.has(item.id) && this.isRenderable(item.element)
+    );
+    const overflowWidth = this.hiddenIds.size > 0 ? this.measureElement(this.container, "overflow") : 0;
+    const gap = this.getToolbarGap();
+    const visibleGapCount = Math.max(0, visibleItems.length + (this.hiddenIds.size > 0 ? 1 : 0) - 1);
+    const contentWidth = visibleItems.reduce(
+      (sum, item) => sum + this.measureElement(item.element, item.id),
+      0
+    );
+    return contentWidth + overflowWidth + visibleGapCount * gap;
+  }
+  measureElement(element, itemId) {
+    var _a3, _b, _c;
+    const rectWidth = (_b = (_a3 = element.getBoundingClientRect) == null ? void 0 : _a3.call(element).width) != null ? _b : 0;
+    const width = element.offsetWidth || rectWidth || this.fallbackWidthById[itemId] || 44;
+    const style = typeof window !== "undefined" ? (_c = window.getComputedStyle) == null ? void 0 : _c.call(window, element) : null;
+    const marginLeft = this.parseNonAutoSize(style == null ? void 0 : style.marginLeft);
+    const marginRight = this.parseNonAutoSize(style == null ? void 0 : style.marginRight);
+    return width + marginLeft + marginRight;
+  }
+  getToolbarGap() {
+    var _a3;
+    const style = typeof window !== "undefined" ? (_a3 = window.getComputedStyle) == null ? void 0 : _a3.call(window, this.parentEl) : null;
+    return this.parseNonAutoSize((style == null ? void 0 : style.columnGap) || (style == null ? void 0 : style.gap)) || 4;
+  }
+  parseNonAutoSize(value) {
+    if (!value || value === "auto") return 0;
+    const parsed = parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : 0;
   }
 };
 function createInputToolbar(parentEl, callbacks) {

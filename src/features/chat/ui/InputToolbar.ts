@@ -1087,6 +1087,16 @@ class ToolbarOverflowMenu {
   private hiddenIds = new Set<string>();
   private resizeObserver: ResizeObserver | null = null;
   private scheduled = false;
+  private readonly fallbackWidthById: Record<string, number> = {
+    model: 142,
+    thinking: 78,
+    'service-tier': 28,
+    running: 82,
+    context: 72,
+    'external-context': 36,
+    mcp: 36,
+    permission: 90,
+  };
 
   constructor(parentEl: HTMLElement, items: ToolbarOverflowItem[]) {
     this.parentEl = parentEl;
@@ -1126,7 +1136,8 @@ class ToolbarOverflowMenu {
   }
 
   update(): void {
-    if (!this.parentEl.clientWidth) {
+    const availableWidth = this.parentEl.clientWidth;
+    if (!availableWidth) {
       this.container.style.display = 'none';
       return;
     }
@@ -1135,7 +1146,7 @@ class ToolbarOverflowMenu {
     this.container.style.display = 'none';
     this.hiddenIds.clear();
 
-    if (!this.isToolbarOverflowing()) {
+    if (this.getRequiredWidth() <= availableWidth) {
       this.dropdownEl.empty();
       this.container.removeClass('open');
       return;
@@ -1145,7 +1156,7 @@ class ToolbarOverflowMenu {
     this.container.style.display = 'flex';
 
     for (const item of [...candidates].reverse()) {
-      if (!this.isToolbarOverflowing()) break;
+      if (this.getRequiredWidth() <= availableWidth) break;
       this.hiddenIds.add(item.id);
       this.renderDropdown();
     }
@@ -1185,8 +1196,39 @@ class ToolbarOverflowMenu {
     return element.style.display !== 'none';
   }
 
-  private isToolbarOverflowing(): boolean {
-    return this.parentEl.scrollWidth > this.parentEl.clientWidth + 1;
+  private getRequiredWidth(): number {
+    const visibleItems = this.items.filter(item =>
+      !this.hiddenIds.has(item.id) &&
+      this.isRenderable(item.element)
+    );
+    const overflowWidth = this.hiddenIds.size > 0 ? this.measureElement(this.container, 'overflow') : 0;
+    const gap = this.getToolbarGap();
+    const visibleGapCount = Math.max(0, visibleItems.length + (this.hiddenIds.size > 0 ? 1 : 0) - 1);
+    const contentWidth = visibleItems.reduce((sum, item) =>
+      sum + this.measureElement(item.element, item.id),
+      0
+    );
+    return contentWidth + overflowWidth + visibleGapCount * gap;
+  }
+
+  private measureElement(element: HTMLElement, itemId: string): number {
+    const rectWidth = element.getBoundingClientRect?.().width ?? 0;
+    const width = element.offsetWidth || rectWidth || this.fallbackWidthById[itemId] || 44;
+    const style = typeof window !== 'undefined' ? window.getComputedStyle?.(element) : null;
+    const marginLeft = this.parseNonAutoSize(style?.marginLeft);
+    const marginRight = this.parseNonAutoSize(style?.marginRight);
+    return width + marginLeft + marginRight;
+  }
+
+  private getToolbarGap(): number {
+    const style = typeof window !== 'undefined' ? window.getComputedStyle?.(this.parentEl) : null;
+    return this.parseNonAutoSize(style?.columnGap || style?.gap) || 4;
+  }
+
+  private parseNonAutoSize(value?: string | null): number {
+    if (!value || value === 'auto') return 0;
+    const parsed = parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : 0;
   }
 }
 

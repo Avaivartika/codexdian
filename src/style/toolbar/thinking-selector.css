@@ -133,18 +133,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
+  width: 30px;
   height: 24px;
   padding: 0;
   border: 0;
   border-radius: 999px;
-  background: transparent;
-  color: color-mix(in srgb, var(--text-muted) 80%, var(--text-normal));
+  background: color-mix(in srgb, var(--codexdian-glass-bg) 50%, transparent);
+  color: color-mix(in srgb, var(--text-muted) 82%, var(--text-normal));
   cursor: pointer;
   font-size: 14px;
   line-height: 1;
-  opacity: 0.55;
-  transition: color 0.15s ease, background 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
+  opacity: 0.58;
+  transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
 }
 
 .codexdian-service-tier-button:hover {
@@ -154,7 +154,9 @@
 }
 
 .codexdian-service-tier-button.active {
-  color: var(--codexdian-brand);
+  background: var(--codexdian-brand);
+  color: var(--background-primary);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--codexdian-brand) 55%, transparent), 0 0 10px rgba(var(--codexdian-brand-rgb), 0.38);
   opacity: 1;
   transform: translateY(-1px);
 }
