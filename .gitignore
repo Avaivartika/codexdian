@@ -83,7 +83,10 @@ test-results/
 # Development files
 sandbox/
 dev
-generated/
+generated/**
+!generated/
+!generated/**/
+!generated/**/*.ts
 backups/
 
 # Lock files (uncomment based on package manager)
